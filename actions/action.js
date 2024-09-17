@@ -3,8 +3,10 @@
 import Product from "@/models/Product";
 
 const addProduct = async (productData) => {
-  const name = productData.get("name");
-  const enabled = productData.get("enabled");
+  console.log("productData", productData);
+  console.log("productData name", productData.name);
+  const name = productData.name;
+  const enabled = productData.enabled;
 
   const newProduct = new Product({ name, enabled });
   const savedProduct = await newProduct.save();
