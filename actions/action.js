@@ -7,7 +7,12 @@ const addProduct = async (productData) => {
   const enabled = productData.get("enabled");
 
   const newProduct = new Product({ name, enabled });
-  return newProduct.save();
+  const savedProduct = await newProduct.save();
+
+  // Conversion to plain js object
+  const plainProduct = savedProduct.toObject();
+
+  return plainProduct;
 };
 const getProduct = async () => {
   return Product.find();

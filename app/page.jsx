@@ -1,5 +1,4 @@
 import { Button } from "@mui/material";
-
 import { addProduct, getProduct } from "@/actions/action";
 
 export default async function Home() {
@@ -7,12 +6,10 @@ export default async function Home() {
 
   return (
     <>
-      <Button>Hello</Button>
-
       <div className="bg-green-400">
         {products.map((product) => (
-          <div key={product._id}>
-            <h1>{product.name}</h1>
+          <div key={product._id} className="my-2">
+            <h1 className="font-bold">{product.name}</h1>
             <p>{product.enabled}</p>
           </div>
         ))}
@@ -26,7 +23,7 @@ export default async function Home() {
             <label>enabled</label>
             <textarea name="enabled" />
           </div>
-          <button>Submit</button>
+          <Button type="submit">Submit</Button>
         </form>
       </div>
     </>
