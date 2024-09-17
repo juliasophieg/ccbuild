@@ -13,7 +13,7 @@ export const ProductSchema = z.object({
     height: z.number(),
     width: z.number(),
   }),
-  product_info: z.object({
+  productInfo: z.object({
     manufacturer: z.string(),
     yearOfManufacturing: z.number(),
     articleNumber: z.number(),

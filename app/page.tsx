@@ -10,11 +10,20 @@ export default async function Home() {
         {products.map((product) => (
           <div key={product._id} className="my-2">
             <h1 className="font-bold">{product.name}</h1>
-            <p>{product.enabled}</p>
+            <p>
+              Category: {product.category.mainCategory} »{" "}
+              {product.category.subCategory} » {product.category.subSubCategory}
+            </p>
+            <p>
+              Modell: {product.productInfo.manufacturer} (
+              {product.productInfo.yearOfManufacturing})
+            </p>
+            <p>Condition: {product.condition}/5</p>
           </div>
         ))}
 
-        <form action={addProduct}>
+        {/* FORM TO ADD PRODUCT, NEEDS TO BE UPDATED TO WORK WITH NEW DB SCHEMA */}
+        <form>
           <div>
             <label>Title</label>
             <input name="name" type="text" />
