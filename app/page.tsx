@@ -1,5 +1,6 @@
 import { Button } from "@mui/material";
 import { addProduct, getProduct } from "@/actions/productAction";
+import Link from 'next/link';
 
 export default async function Home() {
   const products = await getProduct();
@@ -19,22 +20,15 @@ export default async function Home() {
               {product.productInfo.yearOfManufacturing})
             </p>
             <p>Condition: {product.condition}/5</p>
+            
           </div>
         ))}
-
-        {/* FORM TO ADD PRODUCT, NEEDS TO BE UPDATED TO WORK WITH NEW DB SCHEMA */}
-        <form>
-          <div>
-            <label>Title</label>
-            <input name="name" type="text" />
-          </div>
-          <div>
-            <label>enabled</label>
-            <textarea name="enabled" />
-          </div>
-          <Button type="submit">Submit</Button>
-        </form>
       </div>
+      <Link href={`/product`}>
+              <Button variant="contained" color="primary">
+                Create Product
+              </Button>
+            </Link>
     </>
   );
 }
