@@ -1,33 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
-import { registerSchema } from "@/schemas";
-import { z } from "zod";
-import mongoose from "mongoose";
+import { getLocation, addLocation } from "@/actions/locationAction";
 
-export async function registerUser(req: NextRequest) {
-  try {
-    const body: z.infer<typeof registerSchema> = await req.json();
+export async function GET(req: NextRequest) {
+  const locations = await getLocation();
 
-    if (!registerSchema.safeParse(body).success) {
-      return NextResponse.json(
-        { success: false, error: new Error("Invalid data") },
-        { status: 403 }
-      );
-    }
+  const locationsJson = locations.map((location) => {
+    return location;
+  });
 
-    const { name, email, password } = body;
+  return NextResponse.json(locationsJson);
+}
 
-    //const hashPass = await bcrypt.hash(password, 10);
+export async function POST(req: NextRequest) {
+  const locationData = await req.json();
+  addLocation(locationData);
 
-    //INSERT LOGIC
-
-    return NextResponse.json({
-      success: true,
-      data: { name, email },
-    });
-  } catch {
-    return NextResponse.json(
-      { success: false, error: new Error("Internal server error") },
-      { status: 500 }
-    );
-  }
+  return NextResponse.json({ message: "Location added successfully" });
 }

@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 
 // USER SCHEMA
 
-export const registerSchema = z.object({
+export const UserSchema = z.object({
   name: z
     .string()
     .min(2, { message: "Name must be at least 2 characters long" })
