@@ -1,15 +1,19 @@
 "use server";
 
 import ProductLogistic from "@/models/productLogistic";
-import { ProductLogisticSchema } from "@/app/api/productLogistics/schema";
+import { ProductLogisticSchema } from "@/schemas";
 import { z } from "zod";
 
 type ProductLogisticData = z.infer<typeof ProductLogisticSchema>;
 
 const addProductLogistic = async (productLogisticData: ProductLogisticData) => {
+  const parsedDate = productLogisticData.date
+    ? new Date(productLogisticData.date)
+    : undefined;
+
   const parsedData = ProductLogisticSchema.safeParse({
     ...productLogisticData,
-    date: new Date(productLogisticData.date),
+    date: parsedDate,
   });
 
   if (!parsedData.success) {

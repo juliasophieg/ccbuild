@@ -1,7 +1,7 @@
 "use server";
 
 import Product from "@/models/Product";
-import { ProductSchema } from "@/app/api/products/schema";
+import { ProductSchema } from "@/schemas";
 import { z } from "zod";
 
 type ProductData = z.infer<typeof ProductSchema>;
