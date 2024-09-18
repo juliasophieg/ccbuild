@@ -1,5 +1,7 @@
-import { z } from 'zod';
+import { z } from "zod";
+import mongoose from "mongoose";
 
+// PRODUCT SCHEMA
 export const ProductSchema = z.object({
   name: z.string().optional(),
   category: z
@@ -31,6 +33,31 @@ export const ProductSchema = z.object({
       thirdLocation: z.string().optional(),
     })
     .optional(),
+});
+
+// PRODUCT LOGISTICS SCHEMA
+
+// Validation for ObjectId
+const objectIdSchema = z
+  .string()
+  .refine((value) => mongoose.Types.ObjectId.isValid(value), {
+    message: "Invalid ObjectId",
+  });
+
+export const ProductLogisticSchema = z.object({
+  quantity: z.number().optional(),
+  date: z.date().optional(),
+  status: z.string().optional(),
+  location: objectIdSchema.optional(),
+  productId: objectIdSchema.optional(),
+});
+
+// LOCATION SCHEMA
+
+export const LocationSchema = z.object({
+  firstLocation: z.string().optional(),
+  secondLocation: z.string().optional(),
+  thirdLocation: z.string().optional(),
 });
 
 export type ProductFormData = z.infer<typeof ProductSchema>;

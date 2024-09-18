@@ -1,7 +1,7 @@
 "use server";
 
 import Location from "@/models/Location";
-import { LocationSchema } from "@/app/api/locations/schema";
+import { LocationSchema } from "@/schemas";
 import { z } from "zod";
 
 type LocationData = z.infer<typeof LocationSchema>;
