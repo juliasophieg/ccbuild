@@ -1,5 +1,12 @@
-import { z } from "zod";
-import mongoose from "mongoose";
+import { z } from 'zod'
+import mongoose from 'mongoose'
+
+// Validation for ObjectId
+const objectIdSchema = z
+  .string()
+  .refine(value => mongoose.Types.ObjectId.isValid(value), {
+    message: 'Invalid ObjectId',
+  })
 
 // PRODUCT SCHEMA
 export const ProductSchema = z.object({
@@ -19,7 +26,7 @@ export const ProductSchema = z.object({
       width: z.number().optional(),
     })
     .optional(),
-     productInfo: z
+  productInfo: z
     .object({
       manufacturer: z.string().optional(),
       yearOfManufacturing: z.number().optional(),
@@ -33,16 +40,10 @@ export const ProductSchema = z.object({
       thirdLocation: z.string().optional(),
     })
     .optional(),
-});
+  projectId: objectIdSchema.optional(),
+})
 
 // PRODUCT LOGISTICS SCHEMA
-
-// Validation for ObjectId
-const objectIdSchema = z
-  .string()
-  .refine((value) => mongoose.Types.ObjectId.isValid(value), {
-    message: "Invalid ObjectId",
-  });
 
 export const ProductLogisticSchema = z.object({
   quantity: z.number().optional(),
@@ -50,7 +51,7 @@ export const ProductLogisticSchema = z.object({
   status: z.string().optional(),
   location: objectIdSchema.optional(),
   productId: objectIdSchema.optional(),
-});
+})
 
 // LOCATION SCHEMA
 
@@ -58,6 +59,12 @@ export const LocationSchema = z.object({
   firstLocation: z.string().optional(),
   secondLocation: z.string().optional(),
   thirdLocation: z.string().optional(),
-});
+})
 
-export type ProductFormData = z.infer<typeof ProductSchema>;
+export type ProductFormData = z.infer<typeof ProductSchema>
+
+export const ProjectSchema = z.object({
+  name: z.string().optional(),
+  date: z.date().optional(),
+  description: z.string().optional(),
+})
