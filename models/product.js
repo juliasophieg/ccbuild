@@ -5,8 +5,53 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  enabled: {
-    type: String,
+  category: {
+    mainCategory: {
+      type: String,
+      required: true,
+    },
+    subCategory: {
+      type: String,
+      required: true,
+    },
+    subSubCategory: {
+      type: String,
+      required: true,
+    },
+  },
+  condition: {
+    type: Number,
+    min: 1,
+    max: 5,
+    required: true,
+  },
+  format: {
+    length: {
+      type: Number,
+      required: true,
+    },
+    height: {
+      type: Number,
+      required: true,
+    },
+    width: {
+      type: Number,
+      required: true,
+    },
+  },
+  productInfo: {
+    manufacturer: {
+      type: String,
+      required: true,
+    },
+    yearOfManufacturing: {
+      type: Number,
+      required: true,
+    },
+    articleNumber: {
+      type: Number,
+      required: true,
+    },
   },
 });
 
