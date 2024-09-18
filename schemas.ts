@@ -19,7 +19,7 @@ export const ProductSchema = z.object({
       width: z.number().optional(),
     })
     .optional(),
-  productInfo: z
+     productInfo: z
     .object({
       manufacturer: z.string().optional(),
       yearOfManufacturing: z.number().optional(),
