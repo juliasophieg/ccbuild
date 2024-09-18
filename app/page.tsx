@@ -1,5 +1,6 @@
 import { Button } from "@mui/material";
 import { addProduct, getProduct } from "@/actions/productAction";
+import Link from 'next/link';
 
 export default async function Home() {
   const products = await getProduct();
