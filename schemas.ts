@@ -1,6 +1,19 @@
 import { z } from "zod";
 import mongoose from "mongoose";
 
+// USER SCHEMA
+
+export const registerSchema = z.object({
+  name: z
+    .string()
+    .min(2, { message: "Name must be at least 2 characters long" })
+    .max(100, { message: "Name can't be longer then 250 characters long" }),
+  email: z.string().email({ message: "Please provide a valid email" }),
+  password: z
+    .string()
+    .min(8, { message: "Password must be at least 8 characters long" }),
+});
+
 // PRODUCT SCHEMA
 export const ProductSchema = z.object({
   name: z.string().optional(),
