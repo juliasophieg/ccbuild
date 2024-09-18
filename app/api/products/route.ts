@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getProduct, addProduct } from "@/actions/action";
+import { getProduct, addProduct } from "@/actions/productAction";
 
 export async function GET(req: NextRequest) {
   const products = await getProduct();
