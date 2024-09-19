@@ -2,14 +2,10 @@
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  useForm,
-  FormProvider,
-  SubmitHandler,
-  FieldPath,
-} from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { UserSchema } from "@/schemas";
 import { useRouter } from "next/navigation";
+import { Button, TextField } from "@mui/material";
 
 type RegisterForm = z.infer<typeof UserSchema>;
 
@@ -22,6 +18,12 @@ export default function Register() {
       password: "",
     },
   });
+
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = form;
 
   const router = useRouter();
 
@@ -59,22 +61,48 @@ export default function Register() {
     <div>
       <h2>Register</h2>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div>
+        <div className="my-1">
           <label htmlFor="name">Name</label>
-          <input id="name" type="text" {...form.register("name")} />
+          <TextField
+            id="name"
+            type="text"
+            className="mx-1"
+            size="small"
+            {...form.register("name")}
+            error={!!errors.name}
+            helperText={errors.name ? errors.name.message : ""}
+          />
         </div>
 
-        <div>
+        <div className="my-1">
           <label htmlFor="email">Email</label>
-          <input id="email" type="email" {...form.register("email")} />
+          <TextField
+            id="email"
+            type="email"
+            className=" mx-1"
+            size="small"
+            {...form.register("email")}
+            error={!!errors.email}
+            helperText={errors.email ? errors.email.message : ""}
+          />
         </div>
 
-        <div>
+        <div className="my-1">
           <label htmlFor="password">Password</label>
-          <input id="password" type="password" {...form.register("password")} />
+          <TextField
+            id="password"
+            type="password"
+            className=" mx-1"
+            size="small"
+            {...form.register("password")}
+            error={!!errors.password}
+            helperText={errors.password ? errors.password.message : ""}
+          />
         </div>
 
-        <button type="submit">Register</button>
+        <Button type="submit" variant="outlined" className="my-1">
+          Register
+        </Button>
       </form>
     </div>
   );
