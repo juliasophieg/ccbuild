@@ -8,11 +8,12 @@ type PageProps = {
 
 export default function Product({ params }: PageProps) {
   const { slug } = params
+  console.log('create' + slug)
 
   return (
     <>
-      <div className='text-red-400'>
-        <ProductForm projectSlug={slug} />
+      <div className='text-blue-400'>
+        <ProductForm projectId={slug} />
       </div>
     </>
   )

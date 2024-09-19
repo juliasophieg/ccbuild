@@ -47,7 +47,7 @@ const Page: FC<PageProps> = async ({ params }) => {
         <p>Date: {project.date}</p>
         <p>{project.description}</p>
       </div>
-      <Link href={`/product?projectSlug=${params.slug}`}>
+      <Link href={`/product/${params.slug}/product/create`}>
         <Button variant='contained' color='primary'>
           Create Product
         </Button>
