@@ -53,10 +53,10 @@ const productSchema = new mongoose.Schema({
       required: true,
     },
   },
-  projectId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'projects',
-    required: false,
+  project: {
+    type: mongoose.Schema.Types.ObjectId, // This should reference the Project model
+    ref: 'Project',
+    required: true,
   },
 })
 
