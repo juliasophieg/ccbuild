@@ -49,6 +49,8 @@ export default function Login() {
           <TextField
             id="email"
             type="email"
+            className=" mx-1"
+            size="small"
             {...register("email")}
             error={!!errors.email}
             helperText={errors.email ? errors.email.message : ""}
@@ -60,6 +62,8 @@ export default function Login() {
           <TextField
             id="password"
             type="password"
+            className=" mx-1"
+            size="small"
             {...register("password")}
             error={!!errors.password}
             helperText={errors.password ? errors.password.message : ""}
