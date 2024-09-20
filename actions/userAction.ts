@@ -1,5 +1,5 @@
 "use server";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import User from "@/models/user";
 import bcrypt from "bcryptjs";
 import { UserSchema } from "@/schemas";
@@ -33,14 +33,6 @@ const registerUser = async (userData: UserData) => {
   } catch (error) {
     throw new Error(`Error saving user`);
   }
-
-  /*
-  } catch {
-    return NextResponse.json(
-      { success: false, error: new Error("Internal server error") },
-      { status: 500 }
-    );
-  }*/
 };
 
 const getUser = async () => {
