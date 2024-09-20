@@ -38,12 +38,6 @@ export default async function Home() {
           ))}
         </div>
       </div>
-
-      <Link href={`/product`}>
-        <Button variant='contained' color='primary'>
-          Create Product
-        </Button>
-      </Link>
     </>
   )
 }
