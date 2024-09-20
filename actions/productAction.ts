@@ -53,4 +53,17 @@ const getProduct = async () => {
   }
 }
 
-export { addProduct, getProduct }
+const getProductByProject = async (projectId: string) => {
+  try {
+    const objectId = new mongoose.Types.ObjectId(projectId)
+
+    const products = await Product.find({ project: objectId })
+
+    return products
+  } catch (error) {
+    console.error('Error fetching products:', error)
+    throw new Error('Error fetching products')
+  }
+}
+
+export { addProduct, getProduct, getProductByProject }
