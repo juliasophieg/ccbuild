@@ -15,7 +15,6 @@ export async function POST(req: NextRequest) {
   try {
     const productData = await req.json()
 
-    console.log(productData)
     const savedProduct = await addProduct(productData)
 
     return NextResponse.json({

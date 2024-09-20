@@ -16,11 +16,8 @@ const addProduct = async (productData: ProductData) => {
     )
   }
 
-  const { name, category, condition, format, productInfo, projectId } =
+  const { name, category, condition, format, productInfo, project } =
     parsedData.data
-
-  console.log('parsedData', parsedData)
-  console.log('slug', projectId)
 
   const newProduct = new Product({
     name,
@@ -28,7 +25,7 @@ const addProduct = async (productData: ProductData) => {
     condition,
     format,
     productInfo,
-    projectId,
+    project: project,
   })
 
   console.log('newProduct', newProduct)
@@ -38,7 +35,12 @@ const addProduct = async (productData: ProductData) => {
     const plainProduct = savedProduct.toObject()
     return plainProduct
   } catch (error) {
-    throw new Error(`Error saving product`)
+    if (error instanceof Error) {
+      console.error('Error saving product:', error) // Log the exact error
+      throw new Error(`Error saving product: ${error.message}`) // Access the message safely
+    } else {
+      throw new Error('Unknown error occurred')
+    }
   }
 }
 

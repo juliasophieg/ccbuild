@@ -39,10 +39,10 @@ const stepFields: { [key: number]: FieldPath<ProductFormData>[] } = {
 }
 
 type ProductFormProps = {
-  projectSlug: string
+  projectId: string
 }
 
-const ProductForm: React.FC<ProductFormProps> = ({ projectSlug }) => {
+const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
   const methods = useForm<ProductFormData>({
     resolver: zodResolver(ProductSchema),
     mode: 'all',
@@ -52,11 +52,19 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectSlug }) => {
   const totalSteps = steps.length
 
   const { handleSubmit, trigger } = methods
+  let project = projectId
+
+  const { watch } = methods
+  const watchedData = watch() // This will return all form values
+
+  console.log('Watched Data:', watchedData)
 
   const onSubmit: SubmitHandler<ProductFormData> = async data => {
+    console.log('Data:', data)
+
     const productData = {
       ...data,
-      projectSlug,
+      project: project,
     }
 
     console.log('onSubmit function called')
