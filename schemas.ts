@@ -1,12 +1,12 @@
-import { z } from 'zod'
-import mongoose from 'mongoose'
+import { z } from "zod";
+import mongoose from "mongoose";
 
 // Validation for ObjectId
 const objectIdSchema = z
   .string()
-  .refine(value => mongoose.Types.ObjectId.isValid(value), {
-    message: 'Invalid ObjectId',
-  })
+  .refine((value) => mongoose.Types.ObjectId.isValid(value), {
+    message: "Invalid ObjectId",
+  });
 
 // USER SCHEMA
 
@@ -21,8 +21,17 @@ export const UserSchema = z.object({
     .min(8, { message: 'Password must be at least 8 characters long' }),
 })
 
+// LOGIN SCHEMA
+
+export const LoginSchema = z.object({
+  email: z.string().email({ message: "Please provide a valid email" }),
+  password: z
+    .string()
+    .min(8, { message: "Password must be at least 8 characters long" }),
+});
+
 // PRODUCT SCHEMA
-export const ProductSchema = z.object({
+const ProductSchema = z.object({
   name: z.string().optional(),
   category: z
     .object({
@@ -64,7 +73,7 @@ export const ProductLogisticSchema = z.object({
   status: z.string().optional(),
   location: objectIdSchema.optional(),
   productId: objectIdSchema.optional(),
-})
+});
 
 // LOCATION SCHEMA
 
@@ -72,12 +81,12 @@ export const LocationSchema = z.object({
   firstLocation: z.string().optional(),
   secondLocation: z.string().optional(),
   thirdLocation: z.string().optional(),
-})
+});
 
-export type ProductFormData = z.infer<typeof ProductSchema>
+export type ProductFormData = z.infer<typeof ProductSchema>;
 
 export const ProjectSchema = z.object({
   name: z.string().optional(),
   date: z.date().optional(),
   description: z.string().optional(),
-})
+});
