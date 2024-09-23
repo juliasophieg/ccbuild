@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
 const projectSchema = new mongoose.Schema({
   name: {
@@ -13,9 +13,14 @@ const projectSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-})
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
+});
 
 export default mongoose.models.Project ||
-  mongoose.model('Project', projectSchema)
+  mongoose.model("Project", projectSchema);
 
 //add user id to project schema
