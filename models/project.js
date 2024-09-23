@@ -22,5 +22,3 @@ const projectSchema = new mongoose.Schema({
 
 export default mongoose.models.Project ||
   mongoose.model("Project", projectSchema);
-
-//add user id to project schema
