@@ -7,28 +7,47 @@ import { z } from 'zod'
 
 type ProductData = z.infer<typeof ProductSchema>
 
-const addProduct = async (productData: ProductData) => {
-  const parsedData = ProductSchema.safeParse(productData)
+// const addProduct = async (productData: ProductData) => {
+//   const parsedData = ProductSchema.safeParse(productData)
 
-  if (!parsedData.success) {
-    throw new Error(
-      `Validation failed: ${JSON.stringify(parsedData.error.errors)}`,
-    )
-  }
+//   if (!parsedData.success) {
+//     throw new Error(
+//       `Validation failed: ${JSON.stringify(parsedData.error.errors)}`,
+//     )
+//   }
 
-  const { name, category, condition, format, productInfo, project } =
-    parsedData.data
+//   const { name, category, condition, format, productInfo, project } =
+//     parsedData.data
 
+//   const newProduct = new Product({
+//     name,
+//     category,
+//     condition,
+//     format,
+//     productInfo,
+//     project: project,
+//   })
+
+//   console.log('newProduct', newProduct)
+
+//   try {
+//     const savedProduct = await newProduct.save()
+//     const plainProduct = savedProduct.toObject()
+//     return plainProduct
+//   } catch (error) {
+//     if (error instanceof Error) {
+//       console.error('Error saving product:', error) // Log the exact error
+//       throw new Error(`Error saving product: ${error.message}`) // Access the message safely
+//     } else {
+//       throw new Error('Unknown error occurred')
+//     }
+//   }
+// }
+
+const addProduct = async (projectId: string) => {
   const newProduct = new Product({
-    name,
-    category,
-    condition,
-    format,
-    productInfo,
-    project: project,
+    project: projectId,
   })
-
-  console.log('newProduct', newProduct)
 
   try {
     const savedProduct = await newProduct.save()
@@ -36,8 +55,8 @@ const addProduct = async (productData: ProductData) => {
     return plainProduct
   } catch (error) {
     if (error instanceof Error) {
-      console.error('Error saving product:', error) // Log the exact error
-      throw new Error(`Error saving product: ${error.message}`) // Access the message safely
+      console.error('Error saving product:', error)
+      throw new Error(`Error saving product: ${error.message}`)
     } else {
       throw new Error('Unknown error occurred')
     }
@@ -66,4 +85,35 @@ const getProductByProject = async (projectId: string) => {
   }
 }
 
-export { addProduct, getProduct, getProductByProject }
+const patchProduct = async (productId: string, productData: ProductData) => {
+  const parsedData = ProductSchema.safeParse(productData)
+
+  if (!parsedData.success) {
+    throw new Error(
+      `Validation failed: ${JSON.stringify(parsedData.error.errors)}`,
+    )
+  }
+
+  try {
+    const updatedProduct = await Product.findByIdAndUpdate(
+      productId,
+      { $set: parsedData.data },
+      { new: true, runValidators: true },
+    )
+
+    if (!updatedProduct) {
+      throw new Error('Product not found')
+    }
+
+    return updatedProduct.toObject()
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error('Error updating product:', error)
+      throw new Error(`Error updating product: ${error.message}`)
+    } else {
+      throw new Error('Unknown error occurred')
+    }
+  }
+}
+
+export { addProduct, getProduct, getProductByProject, patchProduct }

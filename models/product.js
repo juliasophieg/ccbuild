@@ -3,54 +3,54 @@ import mongoose from 'mongoose'
 const productSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
+    required: false,
   },
   category: {
     mainCategory: {
       type: String,
-      required: true,
+      required: false,
     },
     subCategory: {
       type: String,
-      required: true,
+      required: false,
     },
     subSubCategory: {
       type: String,
-      required: true,
+      required: false,
     },
   },
   condition: {
     type: Number,
     min: 1,
     max: 5,
-    required: true,
+    required: false,
   },
   format: {
     length: {
       type: Number,
-      required: true,
+      required: false,
     },
     height: {
       type: Number,
-      required: true,
+      required: false,
     },
     width: {
       type: Number,
-      required: true,
+      required: false,
     },
   },
   productInfo: {
     manufacturer: {
       type: String,
-      required: true,
+      required: false,
     },
     yearOfManufacturing: {
       type: Number,
-      required: true,
+      required: false,
     },
     articleNumber: {
       type: Number,
-      required: true,
+      required: false,
     },
   },
   project: {

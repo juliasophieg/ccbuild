@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import {
   useForm,
   FormProvider,
@@ -12,6 +12,7 @@ import { ProductSchema, ProductFormData } from '../schemas'
 import Step1 from './steps/Step1'
 import Step2 from './steps/Step2'
 import Step3 from './steps/Step3'
+import { useRouter } from 'next/navigation'
 
 const steps = [
   { id: 1, component: Step1, label: 'Location' },
@@ -50,34 +51,73 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
       project: projectId,
     },
   })
-
   const [currentStep, setCurrentStep] = useState(1)
   const totalSteps = steps.length
-
   const { handleSubmit, trigger } = methods
+  const [productId, setProductId] = useState<string | null>(null)
+  const router = useRouter()
+  const isCreatingProduct = useRef(false)
+
+  useEffect(() => {
+    const existingProductId = sessionStorage.getItem('productId')
+
+    if (existingProductId) {
+      setProductId(existingProductId)
+      console.log('Product ID from session storage:', existingProductId)
+    } else if (!isCreatingProduct.current) {
+      // Guard clause to ensure product creation is not triggered multiple times
+      isCreatingProduct.current = true // Mark that the creation process is starting
+      const createBlankProduct = async () => {
+        try {
+          const response = await fetch('/api/products', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ projectId }),
+          })
+          if (response.ok) {
+            const data = await response.json()
+            setProductId(data.product._id)
+            sessionStorage.setItem('productId', data.product._id)
+            console.log('Blank product created:', data.product._id)
+            isCreatingProduct.current = false // Reset after creation is done
+          } else {
+            const errorData = await response.json()
+            console.error('Error creating blank product:', errorData)
+            isCreatingProduct.current = false // Reset on failure
+          }
+        } catch (error) {
+          console.error('Network error:', error)
+          isCreatingProduct.current = false // Reset on failure
+        }
+      }
+
+      createBlankProduct()
+    }
+  }, [projectId])
 
   const onSubmit: SubmitHandler<ProductFormData> = async data => {
-    console.log('Data:', data)
-
-    const productData = {
-      ...data,
+    if (!productId) {
+      console.error('Product ID is not available')
+      return
     }
 
-    console.log('onSubmit function called')
-    console.log('Submitted Data:', productData)
-
     try {
-      const response = await fetch('/api/products', {
-        method: 'POST',
+      console.log('patch id', productId)
+      const response = await fetch(`/api/products/${productId}`, {
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(productData),
+        body: JSON.stringify(data),
       })
 
       if (response.ok) {
         const result = await response.json()
         console.log('Success:', result.message)
+        sessionStorage.removeItem('productId')
+        router.push(`/projects/${projectId}`)
       } else {
         const errorData = await response.json()
         console.error('Server Error:', errorData)
@@ -102,6 +142,10 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
   const CurrentStepComponent = steps.find(
     step => step.id === currentStep,
   )?.component
+
+  if (!productId) {
+    return <div>Loading...</div>
+  }
 
   return (
     <FormProvider {...methods}>

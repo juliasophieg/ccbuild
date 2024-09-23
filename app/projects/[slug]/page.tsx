@@ -106,15 +106,15 @@ const Page: FC<PageProps> = async ({ params }) => {
               >
                 <h3 className='text-xl font-bold'>{product.name}</h3>
                 <p>Condition: {product.condition}</p>
-                <p>Main Category: {product.category.mainCategory}</p>
-                <p>Sub Category: {product.category.subCategory}</p>
+                <p>Main Category: {product.category?.mainCategory}</p>
+                <p>Sub Category: {product.category?.subCategory}</p>
                 <p>
-                  Dimensions: {product.format.length} x {product.format.height}{' '}
-                  x {product.format.width}
+                  Dimensions: {product.format?.length} x{' '}
+                  {product.format?.height} x {product.format?.width}
                 </p>
-                <p>Manufacturer: {product.productInfo.manufacturer}</p>
-                <p>Year: {product.productInfo.yearOfManufacturing}</p>
-                <p>Article Number: {product.productInfo.articleNumber}</p>
+                <p>Manufacturer: {product.productInfo?.manufacturer}</p>
+                <p>Year: {product.productInfo?.yearOfManufacturing}</p>
+                <p>Article Number: {product.productInfo?.articleNumber}</p>
               </div>
             ))}
           </div>
