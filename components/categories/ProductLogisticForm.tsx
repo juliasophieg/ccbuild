@@ -32,14 +32,18 @@ const ProductLogisticForm: React.FC<ProductLogisticFormProps> = ({
     formState: { errors },
   } = methods
 
-  const submitHandler: SubmitHandler<ProductLogisticData> = data => {
+  const submitHandler: SubmitHandler<ProductLogisticData> = (data, event) => {
+    event?.preventDefault()
     onSubmit(data)
   }
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(submitHandler)}>
-        {/* Pickup Fields */}
+      <form
+        onSubmit={handleSubmit(submitHandler)}
+        noValidate
+        onClick={e => e.stopPropagation()}
+      >
         <fieldset>
           <legend>Pickup</legend>
           <div>
@@ -60,7 +64,6 @@ const ProductLogisticForm: React.FC<ProductLogisticFormProps> = ({
           </div>
         </fieldset>
 
-        {/* Location Fields */}
         <fieldset>
           <legend>Location</legend>
           <div>
@@ -109,7 +112,6 @@ const ProductLogisticForm: React.FC<ProductLogisticFormProps> = ({
           </div>
         </fieldset>
 
-        {/* Decision Fields */}
         <fieldset>
           <legend>Decision</legend>
           <div>
@@ -174,7 +176,9 @@ const ProductLogisticForm: React.FC<ProductLogisticFormProps> = ({
           <button type='button' onClick={onCancel}>
             Cancel
           </button>
-          <button type='submit'>Submit</button>
+          <button type='button' onClick={handleSubmit(submitHandler)}>
+            Submit
+          </button>{' '}
         </div>
       </form>
     </FormProvider>

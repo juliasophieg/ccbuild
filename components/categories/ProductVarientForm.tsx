@@ -35,10 +35,7 @@ const ProductVarientForm: React.FC = () => {
         body: JSON.stringify({ ...data, productId }),
       })
       if (response.ok) {
-        // Successfully saved
-        // Optionally, fetch the updated product logistics
         setOpen(false)
-        // Refresh the product logistics data
         fetchProductLogistics()
       } else {
         console.error('Failed to save product logistics')

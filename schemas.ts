@@ -102,7 +102,6 @@ export const ProductLogisticSchema = z.object({
     })
     .optional(),
   quantity: z.number().default(1),
-
   status: z
     .enum([
       'Inventerad',

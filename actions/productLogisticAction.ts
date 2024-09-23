@@ -8,13 +8,8 @@ import mongoose from 'mongoose'
 type ProductLogisticData = z.infer<typeof ProductLogisticSchema>
 
 const addProductLogistic = async (productLogisticData: ProductLogisticData) => {
-  const parsedDate = productLogisticData.date
-    ? new Date(productLogisticData.date)
-    : undefined
-
   const parsedData = ProductLogisticSchema.safeParse({
     ...productLogisticData,
-    date: parsedDate,
   })
 
   if (!parsedData.success) {
@@ -23,14 +18,24 @@ const addProductLogistic = async (productLogisticData: ProductLogisticData) => {
     )
   }
 
-  const { quantity, date, status, location, productId } = parsedData.data
+  const {
+    pickup,
+    location,
+    decision,
+    quantity,
+    status,
+    marketplaces,
+    productId,
+  } = parsedData.data
 
   const newProductLogistic = new ProductLogistic({
-    quantity,
-    date,
-    status,
+    pickup,
     location,
-    productId,
+    decision,
+    quantity,
+    status,
+    marketplaces,
+    productId: new mongoose.Types.ObjectId(productId),
   })
 
   try {
