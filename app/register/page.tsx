@@ -62,11 +62,12 @@ export default function Register() {
       <h2>Register</h2>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div className="my-1">
-          <label htmlFor="name">Name</label>
+          <label htmlFor="name" className="mx-1">
+            Name
+          </label>
           <TextField
             id="name"
             type="text"
-            className="mx-1"
             size="small"
             {...form.register("name")}
             error={!!errors.name}
@@ -75,11 +76,12 @@ export default function Register() {
         </div>
 
         <div className="my-1">
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email" className=" mx-1">
+            Email
+          </label>
           <TextField
             id="email"
             type="email"
-            className=" mx-1"
             size="small"
             {...form.register("email")}
             error={!!errors.email}
@@ -88,11 +90,12 @@ export default function Register() {
         </div>
 
         <div className="my-1">
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password" className=" mx-1">
+            Password
+          </label>
           <TextField
             id="password"
             type="password"
-            className=" mx-1"
             size="small"
             {...form.register("password")}
             error={!!errors.password}
@@ -101,8 +104,14 @@ export default function Register() {
         </div>
 
         <Button type="submit" variant="outlined" className="my-1">
-          Register
+          Sign up
         </Button>
+        <p>
+          Already have an account?{" "}
+          <a href="/login" className="underline underline-offset-3">
+            Sign in
+          </a>
+        </p>
       </form>
     </div>
   );

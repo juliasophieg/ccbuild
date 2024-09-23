@@ -44,12 +44,13 @@ export default function Login() {
     <div>
       <h2>Login</h2>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div>
-          <label htmlFor="email">Email</label>
+        <div className="my-1">
+          <label htmlFor="email" className=" mx-1">
+            Email
+          </label>
           <TextField
             id="email"
             type="email"
-            className=" mx-1"
             size="small"
             {...register("email")}
             error={!!errors.email}
@@ -57,12 +58,13 @@ export default function Login() {
           />
         </div>
 
-        <div>
-          <label htmlFor="password">Password</label>
+        <div className="my-1">
+          <label htmlFor="password" className=" mx-1">
+            Password
+          </label>
           <TextField
             id="password"
             type="password"
-            className=" mx-1"
             size="small"
             {...register("password")}
             error={!!errors.password}
@@ -73,6 +75,12 @@ export default function Login() {
         <Button type="submit" variant="outlined">
           Login
         </Button>
+        <p>
+          Don't have an account?{" "}
+          <a href="/register" className="underline underline-offset-3">
+            Sign up
+          </a>
+        </p>
       </form>
     </div>
   );
