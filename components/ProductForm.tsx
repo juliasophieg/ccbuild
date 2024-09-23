@@ -12,12 +12,14 @@ import { ProductSchema, ProductFormData } from '../schemas'
 import Step1 from './steps/Step1'
 import Step2 from './steps/Step2'
 import Step3 from './steps/Step3'
+import Step4 from './steps/Step4'
 import { useRouter } from 'next/navigation'
 
 const steps = [
   { id: 1, component: Step1, label: 'Location' },
   { id: 2, component: Step2, label: 'Product Info' },
   { id: 3, component: Step3, label: 'Format' },
+  { id: 4, component: Step4, label: 'Product Varient' },
 ]
 
 const stepFields: { [key: number]: FieldPath<ProductFormData>[] } = {
@@ -37,6 +39,7 @@ const stepFields: { [key: number]: FieldPath<ProductFormData>[] } = {
     'condition',
   ],
   3: ['format.length', 'format.height', 'format.width'],
+  4: [],
 }
 
 type ProductFormProps = {

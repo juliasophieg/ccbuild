@@ -68,13 +68,72 @@ export const ProductSchema = z.object({
 // PRODUCT LOGISTICS SCHEMA
 
 export const ProductLogisticSchema = z.object({
-  quantity: z.number().optional(),
-  date: z.date().optional(),
-  status: z.string().optional(),
-  location: objectIdSchema.optional(),
+  pickup: z.object({
+    availableDate: z.date().optional(),
+    firstDeliveryDate: z.date().optional(),
+  }),
+  location: z
+    .object({
+      house: z.string().optional(),
+      room: z.string().optional(),
+      location: z.string().optional(),
+      accesaibility: z
+        .enum([
+          'Lätt Åtkomlig',
+          'Åtkomlig men planering och specialverktyg kan krävas',
+          'Begränsad åtkomlighet',
+        ])
+        .optional(),
+      dismantling: z
+        .enum([
+          'Enkel att demontera/demontering krävs ej',
+          'Demonterbar men specialverktyg kan krävas',
+          'Begränsad demonterbarhet',
+        ])
+        .optional(),
+    })
+    .optional(),
+  decision: z
+    .object({
+      location1: z.string().optional(),
+      location2: z.string().optional(),
+      location3: z.string().optional(),
+      location4: z.string().optional(),
+    })
+    .optional(),
+  quantity: z.number().default(1),
+
+  status: z
+    .enum([
+      'Inventerad',
+      'Inventerad - i byggnad',
+      'Inventerad - i lager/förråd',
+      'Mängdad',
+      'Mängdad - i byggnad',
+      'Mängdad - i lager/förråd',
+      'På rekonditionering',
+      'I lager',
+      'Bevarad (slutstatus)',
+      'Återbrukad i projektet (slutstatus)',
+      'Återbrukad inom organisationen (slutstatus)',
+      'Återbrukad externt av annan aktör (slutstatus)',
+      'Avfallshanterad (slutstatus)',
+    ])
+    .optional(),
+  marketplaces: z
+    .enum([
+      'Ej publicerad',
+      'Publicerad som intern annons',
+      'Publicerad som extern annons',
+      'Reserverad',
+      'Såld',
+      'Avpublicerad',
+      'Automatiskt avpublicerad',
+    ])
+    .optional()
+    .default('Ej publicerad'),
   productId: objectIdSchema.optional(),
 })
-
 // LOCATION SCHEMA
 
 export const LocationSchema = z.object({
