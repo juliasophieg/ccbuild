@@ -13,9 +13,16 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    const productData = await req.json()
+    const { projectId } = await req.json()
 
-    const savedProduct = await addProduct(productData)
+    if (!projectId) {
+      return NextResponse.json(
+        { message: 'Missing projectId in request body' },
+        { status: 400 },
+      )
+    }
+
+    const savedProduct = await addProduct(projectId)
 
     return NextResponse.json({
       message: 'Product added successfully',
