@@ -65,8 +65,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
       setProductId(existingProductId)
       console.log('Product ID from session storage:', existingProductId)
     } else if (!isCreatingProduct.current) {
-      // Guard clause to ensure product creation is not triggered multiple times
-      isCreatingProduct.current = true // Mark that the creation process is starting
+      isCreatingProduct.current = true
       const createBlankProduct = async () => {
         try {
           const response = await fetch('/api/products', {
@@ -81,15 +80,15 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
             setProductId(data.product._id)
             sessionStorage.setItem('productId', data.product._id)
             console.log('Blank product created:', data.product._id)
-            isCreatingProduct.current = false // Reset after creation is done
+            isCreatingProduct.current = false
           } else {
             const errorData = await response.json()
             console.error('Error creating blank product:', errorData)
-            isCreatingProduct.current = false // Reset on failure
+            isCreatingProduct.current = false
           }
         } catch (error) {
           console.error('Network error:', error)
-          isCreatingProduct.current = false // Reset on failure
+          isCreatingProduct.current = false
         }
       }
 
