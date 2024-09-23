@@ -10,7 +10,6 @@ const addProject = async (projectData: projectData) => {
   const parsedData = ProjectSchema.safeParse(projectData)
 
   if (!parsedData.success) {
-    //If validation fails
     throw new Error(
       `Validation failed: ${JSON.stringify(parsedData.error.errors)}`,
     )
@@ -26,7 +25,6 @@ const addProject = async (projectData: projectData) => {
 
   try {
     const savedProject = await newProject.save()
-    // Conversion to plain js object
     const plainProject = savedProject.toObject()
     return plainProject
   } catch (error) {
@@ -43,4 +41,13 @@ const getProject = async () => {
   }
 }
 
-export { addProject, getProject }
+const getProjectById = async (id: string) => {
+  try {
+    const project = await Project.findById(id)
+    return project
+  } catch (error) {
+    throw new Error(`Error fetching project`)
+  }
+}
+
+export { addProject, getProject, getProjectById }

@@ -13,13 +13,13 @@ const objectIdSchema = z
 export const UserSchema = z.object({
   name: z
     .string()
-    .min(2, { message: "Name must be at least 2 characters long" })
+    .min(2, { message: 'Name must be at least 2 characters long' })
     .max(100, { message: "Name can't be longer then 250 characters long" }),
-  email: z.string().email({ message: "Please provide a valid email" }),
+  email: z.string().email({ message: 'Please provide a valid email' }),
   password: z
     .string()
-    .min(8, { message: "Password must be at least 8 characters long" }),
-});
+    .min(8, { message: 'Password must be at least 8 characters long' }),
+})
 
 // LOGIN SCHEMA
 
@@ -62,8 +62,8 @@ const ProductSchema = z.object({
       thirdLocation: z.string().optional(),
     })
     .optional(),
-  projectId: objectIdSchema.optional(),
-});
+  project: objectIdSchema,
+})
 
 // PRODUCT LOGISTICS SCHEMA
 
