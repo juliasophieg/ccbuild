@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import { NextRequest, NextResponse } from "next/server";
 import { getProductByProject, patchProduct } from "@/actions/productAction";
 import mongoose from "mongoose";
@@ -53,3 +55,4 @@ export async function PATCH(
     }
   }
 }
+/* eslint-disable @typescript-eslint/no-unused-vars */

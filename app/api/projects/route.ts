@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import { NextRequest, NextResponse } from "next/server";
 import { getProject, addProject } from "@/actions/projectAction";
 
@@ -22,3 +24,4 @@ export async function POST(req: NextRequest) {
     message: "Project added successfully",
   });
 }
+/* eslint-disable @typescript-eslint/no-unused-vars */

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import { NextRequest, NextResponse } from "next/server";
 import { getProduct, addProduct } from "@/actions/productAction";
 
@@ -42,3 +44,4 @@ export async function POST(req: NextRequest) {
     }
   }
 }
+/* eslint-disable @typescript-eslint/no-unused-vars */

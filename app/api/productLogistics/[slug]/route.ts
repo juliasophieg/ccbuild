@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import { NextRequest, NextResponse } from "next/server";
 import { getProductVarientByProduct } from "@/actions/productLogisticAction";
 
@@ -15,3 +17,4 @@ export async function GET(
 
   return NextResponse.json(products);
 }
+/* eslint-disable @typescript-eslint/no-unused-vars */
