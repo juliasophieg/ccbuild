@@ -27,13 +27,13 @@ function Navbar() {
           <div className="flex flex-row items-center gap-3">
             <a
               href="/login"
-              className="font-semibold text-xs bg-gray-100 rounded-2xl py-2 px-4 "
+              className="font-semibold text-xs bg-gray-100 hover:bg-gray-200 rounded-2xl py-2 px-4 "
             >
               LOGGA IN
             </a>
             <a
               href="/"
-              className="font-semibold text-xs cursor-not-allowed  bg-gray-100 rounded-2xl py-2 px-4"
+              className="font-semibold text-xs cursor-not-allowed  bg-gray-100  hover:bg-gray-200  rounded-2xl py-2 px-4"
             >
               SV ▾
             </a>

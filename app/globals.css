@@ -30,3 +30,8 @@ h2 {
   font-size: 2rem;
   font-weight: 600;
 }
+
+/* styles.css */
+.MuiInputBase-input {
+  font-weight: normal !important; /* Use !important to ensure it overrides default styles */
+}
