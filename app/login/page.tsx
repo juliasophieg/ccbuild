@@ -46,23 +46,25 @@ export default function Login() {
         <h2 className="text-center mb-4">Logga in</h2>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className="flex flex-col items-center gap-4">
-            <div className="my-1 flex flex-col">
+            <div className="my-1 flex w-full">
               <TextField
                 className="w-full"
-                id="email"
+                label="Mailadress"
+                id="outlined-size-small"
                 type="email"
                 size="small"
-                placeholder="Mailadress"
+                placeholder="exempel@mail.se"
                 {...register("email")}
                 error={!!errors.email}
                 helperText={errors.email ? errors.email.message : ""}
               />
             </div>
 
-            <div className="my-1 flex flex-col">
+            <div className="my-1 flex w-full">
               <TextField
                 className="w-full"
-                id="password"
+                label="Lösenord"
+                id="outlined-size-small"
                 type="password"
                 size="small"
                 placeholder="Lösenord"
@@ -72,7 +74,7 @@ export default function Login() {
               />
             </div>
 
-            <Button type="submit" variant="outlined" className="w-full">
+            <Button type="submit" variant="contained" className="w-full mt-2">
               Login
             </Button>
             <p>
