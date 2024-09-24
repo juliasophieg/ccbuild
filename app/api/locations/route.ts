@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getLocation, addLocation } from "@/actions/locationAction";
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   const locations = await getLocation();
 
   const locationsJson = locations.map((location) => {

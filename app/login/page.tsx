@@ -20,7 +20,6 @@ export default function Login() {
   });
 
   const {
-    handleSubmit,
     register,
     formState: { errors },
   } = form;
