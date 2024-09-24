@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { getProductVarientByProduct } from "@/actions/productLogisticAction";
 
 export async function GET({

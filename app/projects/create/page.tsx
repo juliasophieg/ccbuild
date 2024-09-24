@@ -31,7 +31,7 @@ const CreateProject: React.FC<ProjectFormProps> = ({ userId }) => {
     },
   });
 
-  const { register, handleSubmit, formState } = form;
+  const { register, handleSubmit } = form;
   const router = useRouter();
 
   const onSubmit: SubmitHandler<ProjectFormData> = async (data) => {
