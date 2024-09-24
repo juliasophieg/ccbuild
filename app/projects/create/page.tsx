@@ -7,11 +7,7 @@ import { ProjectSchema, ProjectFormData } from "@/schemas";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
 
-type ProjectFormProps = {
-  userId: string;
-};
-
-const CreateProject: React.FC<ProjectFormProps> = ({ userId }) => {
+const CreateProject: React.FC = () => {
   const { session, isAuthenticated } = useAuth();
 
   if (!isAuthenticated || !session) {
@@ -19,6 +15,8 @@ const CreateProject: React.FC<ProjectFormProps> = ({ userId }) => {
   } else {
     console.log("User authenticated:", session.user);
   }
+
+  const userId = session?.user?.id;
 
   const form = useForm<ProjectFormData>({
     resolver: zodResolver(ProjectSchema),
