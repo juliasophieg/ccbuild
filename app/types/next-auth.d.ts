@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import NextAuth from "next-auth";
 
 declare module "next-auth" {
@@ -10,6 +12,7 @@ declare module "next-auth" {
   }
 
   interface User {
-    id: string; // Ensure User also has an id property
+    id: string;
   }
 }
+/* eslint-disable @typescript-eslint/no-unused-vars */

@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
-import { useFormContext, useFieldArray, Controller } from 'react-hook-form'
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React, { useState } from "react";
+import { useFormContext, useFieldArray, Controller } from "react-hook-form";
 import {
   TextField,
   Button,
@@ -9,25 +10,25 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-} from '@mui/material'
+} from "@mui/material";
 
 const Step4: React.FC = () => {
-  const { control, register, setValue, getValues } = useFormContext()
+  const { control, register, setValue, getValues } = useFormContext();
 
   const { fields, append, remove } = useFieldArray({
     control,
     name: "variations",
   });
 
-  const [open, setOpen] = useState<number | null>(null)
+  const [open, setOpen] = useState<number | null>(null);
 
   const handleOpenDialog = (index: number) => {
-    setOpen(index)
-  }
+    setOpen(index);
+  };
 
   const handleCloseDialog = () => {
-    setOpen(null)
-  }
+    setOpen(null);
+  };
 
   return (
     <Box>
@@ -39,10 +40,10 @@ const Step4: React.FC = () => {
             render={({ field }) => (
               <TextField
                 {...field}
-                label='Quantity'
-                variant='outlined'
+                label="Quantity"
+                variant="outlined"
                 fullWidth
-                type='number'
+                type="number"
               />
             )}
           />
@@ -52,32 +53,32 @@ const Step4: React.FC = () => {
             render={({ field }) => (
               <TextField
                 {...field}
-                label='Status'
+                label="Status"
                 select
-                variant='outlined'
+                variant="outlined"
                 fullWidth
               >
-                <MenuItem value='Inventerad'>Inventerad</MenuItem>
-                <MenuItem value='Inventerad - i byggnad'>
+                <MenuItem value="Inventerad">Inventerad</MenuItem>
+                <MenuItem value="Inventerad - i byggnad">
                   Inventerad - i byggnad
                 </MenuItem>
-                <MenuItem value='Inventerad - i lager/förråd'>
+                <MenuItem value="Inventerad - i lager/förråd">
                   Inventerad - i lager/förråd
                 </MenuItem>
-                <MenuItem value='På rekonditionering'>
+                <MenuItem value="På rekonditionering">
                   På rekonditionering
                 </MenuItem>
-                <MenuItem value='I lager'>I lager</MenuItem>
-                <MenuItem value='Bevarad (slutstatus)'>
+                <MenuItem value="I lager">I lager</MenuItem>
+                <MenuItem value="Bevarad (slutstatus)">
                   Bevarad (slutstatus)
                 </MenuItem>
-                <MenuItem value='Återbrukad i projektet (slutstatus)'>
+                <MenuItem value="Återbrukad i projektet (slutstatus)">
                   Återbrukad i projektet (slutstatus)
                 </MenuItem>
-                <MenuItem value='Återbrukad externt av annan aktör (slutstatus)'>
+                <MenuItem value="Återbrukad externt av annan aktör (slutstatus)">
                   Återbrukad externt av annan aktör (slutstatus)
                 </MenuItem>
-                <MenuItem value='Avfallshanterad (slutstatus)'>
+                <MenuItem value="Avfallshanterad (slutstatus)">
                   Avfallshanterad (slutstatus)
                 </MenuItem>
               </TextField>
@@ -90,22 +91,22 @@ const Step4: React.FC = () => {
             render={({ field }) => (
               <TextField
                 {...field}
-                label='Marketplaces'
+                label="Marketplaces"
                 select
-                variant='outlined'
+                variant="outlined"
                 fullWidth
               >
-                <MenuItem value='Ej publicerad'>Ej publicerad</MenuItem>
-                <MenuItem value='Publicerad som intern annons'>
+                <MenuItem value="Ej publicerad">Ej publicerad</MenuItem>
+                <MenuItem value="Publicerad som intern annons">
                   Publicerad som intern annons
                 </MenuItem>
-                <MenuItem value='Publicerad som extern annons'>
+                <MenuItem value="Publicerad som extern annons">
                   Publicerad som extern annons
                 </MenuItem>
-                <MenuItem value='Reserverad'>Reserverad</MenuItem>
-                <MenuItem value='Såld'>Såld</MenuItem>
-                <MenuItem value='Avpublicerad'>Avpublicerad</MenuItem>
-                <MenuItem value='Automatiskt avpublicerad'>
+                <MenuItem value="Reserverad">Reserverad</MenuItem>
+                <MenuItem value="Såld">Såld</MenuItem>
+                <MenuItem value="Avpublicerad">Avpublicerad</MenuItem>
+                <MenuItem value="Automatiskt avpublicerad">
                   Automatiskt avpublicerad
                 </MenuItem>
               </TextField>
@@ -117,11 +118,11 @@ const Step4: React.FC = () => {
             render={({ field }) => (
               <TextField
                 {...field}
-                label='Accesability'
+                label="Accesability"
                 select
                 variant="outlined"
                 fullWidth
-                value={field.value || ''}
+                value={field.value || ""}
               >
                 <MenuItem value="Lätt Åtkomlig">Lätt Åtkomlig</MenuItem>
                 <MenuItem value="Åtkomlig men planering och specialverktyg kan krävas">
@@ -139,8 +140,8 @@ const Step4: React.FC = () => {
             render={({ field }) => (
               <TextField
                 {...field}
-                label='Location'
-                variant='outlined'
+                label="Location"
+                variant="outlined"
                 fullWidth
               />
             )}
@@ -152,8 +153,8 @@ const Step4: React.FC = () => {
             render={({ field }) => (
               <TextField
                 {...field}
-                label='House'
-                variant='outlined'
+                label="House"
+                variant="outlined"
                 fullWidth
               />
             )}
@@ -163,13 +164,13 @@ const Step4: React.FC = () => {
             control={control}
             name={`variations.${index}.location.room`}
             render={({ field }) => (
-              <TextField {...field} label='Room' variant='outlined' fullWidth />
+              <TextField {...field} label="Room" variant="outlined" fullWidth />
             )}
           />
 
           <Button
-            variant='contained'
-            color='primary'
+            variant="contained"
+            color="primary"
             onClick={() => handleOpenDialog(index)}
           >
             Edit Additional Fields
@@ -179,7 +180,7 @@ const Step4: React.FC = () => {
             open={open === index}
             onClose={handleCloseDialog}
             fullWidth
-            maxWidth='sm'
+            maxWidth="sm"
           >
             <DialogTitle>Edit Variation Details</DialogTitle>
             <DialogContent>
@@ -189,12 +190,12 @@ const Step4: React.FC = () => {
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label='First Delivery Date'
-                    type='date'
-                    variant='outlined'
+                    label="First Delivery Date"
+                    type="date"
+                    variant="outlined"
                     InputLabelProps={{ shrink: true }}
                     fullWidth
-                    margin='normal'
+                    margin="normal"
                   />
                 )}
               />
@@ -204,12 +205,12 @@ const Step4: React.FC = () => {
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label='Available Date'
-                    type='date'
-                    variant='outlined'
+                    label="Available Date"
+                    type="date"
+                    variant="outlined"
                     InputLabelProps={{ shrink: true }}
                     fullWidth
-                    margin='normal'
+                    margin="normal"
                   />
                 )}
               />
@@ -220,8 +221,8 @@ const Step4: React.FC = () => {
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label='Location'
-                    variant='outlined'
+                    label="Location"
+                    variant="outlined"
                     fullWidth
                   />
                 )}
@@ -233,8 +234,8 @@ const Step4: React.FC = () => {
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label='House'
-                    variant='outlined'
+                    label="House"
+                    variant="outlined"
                     fullWidth
                   />
                 )}
@@ -246,8 +247,8 @@ const Step4: React.FC = () => {
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label='Room'
-                    variant='outlined'
+                    label="Room"
+                    variant="outlined"
                     fullWidth
                   />
                 )}
@@ -259,17 +260,17 @@ const Step4: React.FC = () => {
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label='Accesability'
+                    label="Accesability"
                     select
-                    variant='outlined'
+                    variant="outlined"
                     fullWidth
-                    value={field.value || ''}
+                    value={field.value || ""}
                   >
-                    <MenuItem value='Lätt Åtkomlig'>Lätt Åtkomlig</MenuItem>
-                    <MenuItem value='Åtkomlig men planering och specialverktyg kan krävas'>
+                    <MenuItem value="Lätt Åtkomlig">Lätt Åtkomlig</MenuItem>
+                    <MenuItem value="Åtkomlig men planering och specialverktyg kan krävas">
                       Åtkomlig men planering och specialverktyg kan krävas
                     </MenuItem>
-                    <MenuItem value='Begränsad åtkomlighet'>
+                    <MenuItem value="Begränsad åtkomlighet">
                       Begränsad åtkomlighet
                     </MenuItem>
                   </TextField>
@@ -282,18 +283,18 @@ const Step4: React.FC = () => {
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label='Dismantling'
+                    label="Dismantling"
                     select
-                    variant='outlined'
+                    variant="outlined"
                     fullWidth
                   >
-                    <MenuItem value='Enkel att demontera/demontering krävs ej'>
+                    <MenuItem value="Enkel att demontera/demontering krävs ej">
                       Enkel att demontera/demontering krävs ej
                     </MenuItem>
-                    <MenuItem value='Demonterbar men specialverktyg kan krävas'>
+                    <MenuItem value="Demonterbar men specialverktyg kan krävas">
                       Demonterbar men specialverktyg kan krävas
                     </MenuItem>
-                    <MenuItem value='Begränsad demonterbarhet'>
+                    <MenuItem value="Begränsad demonterbarhet">
                       Begränsad demonterbarhet
                     </MenuItem>
                   </TextField>
@@ -305,10 +306,10 @@ const Step4: React.FC = () => {
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label='Decision Location 1'
-                    variant='outlined'
+                    label="Decision Location 1"
+                    variant="outlined"
                     fullWidth
-                    margin='normal'
+                    margin="normal"
                   />
                 )}
               />
@@ -318,10 +319,10 @@ const Step4: React.FC = () => {
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label='Decision Location 2'
-                    variant='outlined'
+                    label="Decision Location 2"
+                    variant="outlined"
                     fullWidth
-                    margin='normal'
+                    margin="normal"
                   />
                 )}
               />
@@ -331,10 +332,10 @@ const Step4: React.FC = () => {
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label='Decision Location 3'
-                    variant='outlined'
+                    label="Decision Location 3"
+                    variant="outlined"
                     fullWidth
-                    margin='normal'
+                    margin="normal"
                   />
                 )}
               />
@@ -344,16 +345,16 @@ const Step4: React.FC = () => {
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label='Decision Location 4'
-                    variant='outlined'
+                    label="Decision Location 4"
+                    variant="outlined"
                     fullWidth
-                    margin='normal'
+                    margin="normal"
                   />
                 )}
               />
             </DialogContent>
             <DialogActions>
-              <Button onClick={handleCloseDialog} color='primary'>
+              <Button onClick={handleCloseDialog} color="primary">
                 Close
               </Button>
             </DialogActions>
@@ -368,8 +369,7 @@ const Step4: React.FC = () => {
         </Box>
       ))}
 
-      <Button variant='contained' onClick={() => append({})}>
-
+      <Button variant="contained" onClick={() => append({})}>
         Add Variation
       </Button>
     </Box>
@@ -377,3 +377,4 @@ const Step4: React.FC = () => {
 };
 
 export default Step4;
+/* eslint-disable @typescript-eslint/no-unused-vars */
