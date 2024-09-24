@@ -37,6 +37,7 @@ export default function Login() {
       console.error("Login failed", result.error);
     } else {
       router.push("/");
+      console.log("Login successful:", result);
     }
   };
 

@@ -1,11 +1,8 @@
-import type { Metadata } from "next";
+"use client";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
-
-export const metadata: Metadata = {
-  title: "CCBuild",
-};
+import { SessionProvider } from "next-auth/react";
 
 export default function RootLayout({
   children,
@@ -28,8 +25,10 @@ export default function RootLayout({
       </head>
 
       <body>
-        <Navbar />
-        {children}
+        <SessionProvider>
+          <Navbar />
+          {children}
+        </SessionProvider>
       </body>
     </html>
   );
