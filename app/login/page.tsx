@@ -75,7 +75,7 @@ export default function Login() {
             </div>
 
             <Button type="submit" variant="contained" className="w-full mt-2">
-              Login
+              Logga in
             </Button>
             <p>
               Har du inget konto?{" "}

@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ProjectSchema, ProjectFormData } from "@/schemas";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
+import { Button } from "@mui/material";
 
 const CreateProject: React.FC = () => {
   const { session, isAuthenticated } = useAuth();
@@ -64,9 +65,9 @@ const CreateProject: React.FC = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto p-4">
-      <h1 className="text-2xl font-bold text-blue-500 mb-4">
-        Create New Project
+    <div className="max-w-lg mx-auto p-4 my-7">
+      <h1 className="text-2xl font-bold text-custom-blue mb-4">
+        Skapa nytt projekt
       </h1>
       <FormProvider {...form}>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -75,13 +76,13 @@ const CreateProject: React.FC = () => {
               htmlFor="name"
               className="block text-sm font-medium text-gray-700"
             >
-              Project Name
+              Projektnamn
             </label>
             <input
               id="name"
               {...register("name", { required: "Project name is required" })}
               className={`w-full border p-2 rounded-md`}
-              placeholder="Enter project name"
+              placeholder="Vad heter projektet?"
             />
           </div>
 
@@ -90,7 +91,7 @@ const CreateProject: React.FC = () => {
               htmlFor="description"
               className="block text-sm font-medium text-gray-700"
             >
-              Project Description
+              Beskrivning
             </label>
             <textarea
               id="description"
@@ -98,19 +99,16 @@ const CreateProject: React.FC = () => {
                 required: "Project description is required",
               })}
               className={`w-full border p-2 rounded-md`}
-              placeholder="Enter project description"
+              placeholder="Beskriv projektet"
             />
           </div>
 
           <input type="hidden" {...register("date")} />
 
           <div>
-            <button
-              type="submit"
-              className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
-            >
-              Create Project
-            </button>
+            <Button type="submit" variant="contained" className="w-full mt-2">
+              Skapa projekt
+            </Button>
           </div>
         </form>
       </FormProvider>
