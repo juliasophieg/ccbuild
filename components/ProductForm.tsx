@@ -79,6 +79,8 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
     const { variations, ...productData } = data
 
     try {
+      console.log('Product data:', productData)
+      console.log('date', typeof productData.pickup?.availableDate)
       const productResponse = await fetch(`/api/products/${productId}`, {
         method: 'PATCH',
         headers: {

@@ -170,7 +170,7 @@ export const ProductLogisticSchema = z.object({
       location4: z.string().optional(),
     })
     .optional(),
-  quantity: z.number().default(1),
+  quantity: z.number().optional(),
   status: z
     .enum([
       'Inventerad',
