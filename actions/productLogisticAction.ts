@@ -6,9 +6,13 @@ import { z } from 'zod'
 import mongoose from 'mongoose'
 
 type ProductLogisticData = z.infer<typeof ProductLogisticSchema>
-
 const addProductLogistic = async (productLogisticData: ProductLogisticData) => {
+  // Convert quantity to number
+  productLogisticData.quantity = Number(productLogisticData.quantity)
+
   const parsedData = ProductLogisticSchema.safeParse(productLogisticData)
+
+  console.log('parsedData!!!!!!!!', parsedData)
 
   if (!parsedData.success) {
     throw new Error(
@@ -25,6 +29,9 @@ const addProductLogistic = async (productLogisticData: ProductLogisticData) => {
     marketplaces,
     productId,
   } = parsedData.data
+
+  console.log('quantity', quantity)
+  console.log('typeof quantity', typeof quantity)
 
   const newProductLogistic = new ProductLogistic({
     pickup,

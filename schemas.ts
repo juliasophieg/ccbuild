@@ -13,13 +13,13 @@ const objectIdSchema = z
 export const UserSchema = z.object({
   name: z
     .string()
-    .min(2, { message: "Name must be at least 2 characters long" })
+    .min(2, { message: 'Name must be at least 2 characters long' })
     .max(100, { message: "Name can't be longer then 250 characters long" }),
-  email: z.string().email({ message: "Please provide a valid email" }),
+  email: z.string().email({ message: 'Please provide a valid email' }),
   password: z
     .string()
-    .min(8, { message: "Password must be at least 8 characters long" }),
-});
+    .min(8, { message: 'Password must be at least 8 characters long' }),
+})
 
 // LOGIN SCHEMA
 
@@ -30,41 +30,109 @@ export const LoginSchema = z.object({
     .min(8, { message: "Password must be at least 8 characters long" }),
 });
 
-// PRODUCT SCHEMA
 export const ProductSchema = z.object({
-  name: z.string().optional(),
-  category: z
+  generalInformation: z.object({
+    productName: z.string().optional(),
+    productCategory1: z.string().optional(),
+    productCategory2: z.string().optional(),
+    productCategory3: z.string().optional(),
+    productDescription: z.string().optional(),
+  }),
+
+  location: z
     .object({
-      mainCategory: z.string().optional(),
-      subCategory: z.string().optional(),
-      subSubCategory: z.string().optional(),
+      premises: z.string().optional(), // Corresponds to 'Lokal'
+      room: z.string().optional(), // Corresponds to 'Rum'
+      place: z.string().optional(), // Corresponds to 'Plats'
+      accessibility: z
+        .enum([
+          'Lätt Åtkomlig',
+          'Åtkomlig men planering och specialverktyg kan krävas',
+          'Begränsad åtkomlighet',
+        ])
+        .optional(),
+      dismantling: z
+        .enum([
+          'Enkel att demontera/demontering krävs ej',
+          'Demonterbar men specialverktyg kan krävas',
+          'Begränsad demonterbarhet',
+        ])
+        .optional(),
     })
     .optional(),
-  condition: z.number().min(1).max(5).optional(),
-  format: z
+
+  condition: z
     .object({
-      length: z.number().optional(),
-      height: z.number().optional(),
+      aestheticCondition: z.number().min(1).max(5).optional(),
+      functionalCondition: z.string().optional(),
+    })
+    .optional(),
+
+  properties: z
+    .object({
+      material: z.string().optional(),
+      color: z.string().optional(),
+      surfaceTreatment: z.string().optional(),
+    })
+    .optional(),
+
+  dimensions: z
+    .object({
+      measurementUnit: z.enum(['mm', 'cm', 'm', 'in', 'ft']).optional(),
       width: z.number().optional(),
+      height: z.number().optional(),
+      depth: z.number().optional(),
+      weightUnit: z.enum(['kg', 'g', 'lbs']).optional(),
+      weightPerUnit: z.number().optional(),
     })
     .optional(),
-  productInfo: z
+
+  specialProperties: z.record(z.any()).optional(),
+
+  productInformation: z
     .object({
       manufacturer: z.string().optional(),
-      yearOfManufacturing: z.number().optional(),
-      articleNumber: z.number().optional(),
+      articleNumber: z.string().optional(),
+      manufacturingYear: z.number().optional(),
+      purchaseYear: z.number().optional(),
+      GTIN: z.string().optional(),
+      RSK: z.string().optional(),
+      ENR: z.string().optional(),
+      BSAB: z.string().optional(),
+      BK04: z.string().optional(),
     })
     .optional(),
-  locationInfo: z
+
+  price: z
     .object({
-      firstLocation: z.string().optional(),
-      secondLocation: z.string().optional(),
-      thirdLocation: z.string().optional(),
+      internalPrice: z.number().optional(),
+      externalPrice: z.number().optional(),
+      buyerPrice: z.boolean().optional(),
     })
     .optional(),
+
+  address: z
+    .object({
+      address: z.string().optional(),
+      postalCode: z.string().optional(),
+      city: z.string().optional(),
+    })
+    .optional(),
+
+  pickup: z
+    .object({
+      availableDate: z.date().optional(),
+      firstDeliveryDate: z.date().optional(),
+      canBeSent: z.boolean().optional(),
+      canBePickedUp: z.boolean().optional(),
+      contactPerson: z.string().optional(),
+      description: z.string().optional(),
+    })
+    .optional(),
+
   variations: z.array(z.record(z.any())).optional(),
   project: objectIdSchema,
-});
+})
 
 // PRODUCT LOGISTICS SCHEMA
 
@@ -102,7 +170,7 @@ export const ProductLogisticSchema = z.object({
       location4: z.string().optional(),
     })
     .optional(),
-  quantity: z.number().default(1),
+  quantity: z.number().optional(),
   status: z
     .enum([
       "Inventerad",
@@ -151,11 +219,12 @@ export const ProjectSchema = z.object({
   name: z.string().optional(),
   date: z.date().optional(),
   description: z.string().optional(),
-});
+})
 
 export type ProjectFormData = {
-  userId: string;
-  name: string;
-  description: string;
-  date: Date;
-};
+  userId: string
+  name: string
+  description: string
+  date: Date
+}
+

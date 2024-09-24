@@ -35,7 +35,21 @@ export async function PATCH(
   try {
     const productData = await req.json();
 
-    const updatedProduct = await patchProduct(productId, productData);
+    if (productData.pickup) {
+      if (productData.pickup.availableDate) {
+        productData.pickup.availableDate = new Date(
+          productData.pickup.availableDate,
+        )
+      }
+      if (productData.pickup.firstDeliveryDate) {
+        productData.pickup.firstDeliveryDate = new Date(
+          productData.pickup.firstDeliveryDate,
+        )
+      }
+    }
+
+    const updatedProduct = await patchProduct(productId, productData)
+
 
     return NextResponse.json({
       message: "Product updated successfully",

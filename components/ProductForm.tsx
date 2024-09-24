@@ -78,6 +78,8 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
     const { variations, ...productData } = data;
 
     try {
+      console.log('Product data:', productData)
+      console.log('date', typeof productData.pickup?.availableDate)
       const productResponse = await fetch(`/api/products/${productId}`, {
         method: "PATCH",
         headers: {
@@ -109,9 +111,10 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
               if (logisticResponse.ok) {
                 const logisticResult = await logisticResponse.json();
                 console.log(
-                  "Logistic data added for variation:",
-                  logisticResult
-                );
+                  'Logistic data added for variation:',
+                  logisticResult,
+                )
+
               } else {
                 const logisticError = await logisticResponse.json();
                 console.error("Error adding logistic data:", logisticError);
