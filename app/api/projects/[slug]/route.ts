@@ -3,7 +3,11 @@ import { getProjectById } from "@/actions/projectAction";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { slug: string } }
+  {
+    params,
+  }: {
+    params: { slug: string };
+  }
 ): Promise<NextResponse> {
   const slug = params.slug;
 

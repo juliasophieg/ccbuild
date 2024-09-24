@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
   }
 }
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
     const users = await getUser();
     const usersJson = users.map((user) => {

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getProject, addProject } from "@/actions/projectAction";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   const projects = await getProject();
 
   const projectsJson = projects.map((projects) => {

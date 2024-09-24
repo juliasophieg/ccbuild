@@ -4,7 +4,7 @@ import {
   addProductLogistic,
 } from "@/actions/productLogisticAction";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   const productLogistics = await getProductLogistic();
 
   const productLogisticsJson = productLogistics.map((productLogistic) => {
