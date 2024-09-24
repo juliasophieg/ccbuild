@@ -1,7 +1,7 @@
 import { FC } from "react";
 import Link from "next/link";
 import { Button } from "@mui/material";
-import { ProductSchema, ProductFormData } from "@/schemas";
+import { ProductFormData } from "@/schemas";
 
 type PageProps = {
   params: {
