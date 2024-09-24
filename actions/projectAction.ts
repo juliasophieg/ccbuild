@@ -4,7 +4,7 @@ import Project from "@/models/project";
 import { ProjectSchema } from "@/schemas";
 import { z } from "zod";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/lib/auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { Session } from "next-auth";
 
 type projectData = z.infer<typeof ProjectSchema>;

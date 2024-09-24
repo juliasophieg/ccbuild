@@ -13,11 +13,10 @@ import {
 
 const Step4: React.FC = () => {
   const { control, register, setValue, getValues } = useFormContext()
-
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "variations",
-  });
+    name: 'variations',
+  })
 
   const [open, setOpen] = useState<number | null>(null)
 
@@ -119,15 +118,15 @@ const Step4: React.FC = () => {
                 {...field}
                 label='Accesability'
                 select
-                variant="outlined"
+                variant='outlined'
                 fullWidth
                 value={field.value || ''}
               >
-                <MenuItem value="Lätt Åtkomlig">Lätt Åtkomlig</MenuItem>
-                <MenuItem value="Åtkomlig men planering och specialverktyg kan krävas">
+                <MenuItem value='Lätt Åtkomlig'>Lätt Åtkomlig</MenuItem>
+                <MenuItem value='Åtkomlig men planering och specialverktyg kan krävas'>
                   Åtkomlig men planering och specialverktyg kan krävas
                 </MenuItem>
-                <MenuItem value="Begränsad åtkomlighet">
+                <MenuItem value='Begränsad åtkomlighet'>
                   Begränsad åtkomlighet
                 </MenuItem>
               </TextField>
@@ -358,9 +357,10 @@ const Step4: React.FC = () => {
               </Button>
             </DialogActions>
           </Dialog>
+
           <Button
-            variant="contained"
-            color="secondary"
+            variant='contained'
+            color='secondary'
             onClick={() => remove(index)}
           >
             Remove Variation
@@ -369,11 +369,10 @@ const Step4: React.FC = () => {
       ))}
 
       <Button variant='contained' onClick={() => append({})}>
-
         Add Variation
       </Button>
     </Box>
-  );
-};
+  )
+}
 
-export default Step4;
+export default Step4
