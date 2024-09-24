@@ -1,6 +1,6 @@
 "use server";
 
-import Location from "@/models/Location";
+import Location from "@/models/location";
 import { LocationSchema } from "@/schemas";
 import { z } from "zod";
 
