@@ -17,5 +17,8 @@ export async function POST(req: NextRequest) {
   console.log(projectData);
   addProject(projectData);
 
-  return NextResponse.json({ message: "Project added successfully" });
+  return NextResponse.json({
+    success: true,
+    message: "Project added successfully",
+  });
 }

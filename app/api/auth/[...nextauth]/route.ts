@@ -12,7 +12,7 @@ interface CustomSession extends Session {
   user: CustomUser;
 }
 
-const authOptions: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -64,7 +64,5 @@ const authOptions: NextAuthOptions = {
 };
 
 const handler = NextAuth(authOptions);
-
-export default authOptions;
 
 export { handler as GET, handler as POST };

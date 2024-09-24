@@ -5,25 +5,41 @@ import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ProjectSchema, ProjectFormData } from "@/schemas";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/hooks/useAuth";
 
 type ProjectFormProps = {
   userId: string;
 };
 
 const CreateProject: React.FC<ProjectFormProps> = ({ userId }) => {
+  const { session, isAuthenticated } = useAuth();
+
+  if (!isAuthenticated || !session) {
+    console.log("User not authenticated");
+  } else {
+    console.log("User authenticated:", session.user);
+  }
+
   const form = useForm<ProjectFormData>({
     resolver: zodResolver(ProjectSchema),
     mode: "all",
     defaultValues: {
       userId: userId,
+      date: new Date(),
+      name: "",
+      description: "",
     },
   });
 
-  const { handleSubmit, trigger } = form;
-  const [projectId, setProjectId] = useState<string | null>(null);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = form;
   const router = useRouter();
 
   const onSubmit: SubmitHandler<ProjectFormData> = async (data) => {
+    console.log("Form Data Submitted:", data);
     try {
       const response = await fetch("/api/projects", {
         method: "POST",
@@ -46,7 +62,7 @@ const CreateProject: React.FC<ProjectFormProps> = ({ userId }) => {
       if (result.success) {
         router.push("/projects");
       } else {
-        throw new Error(result.message || "Project failed to add");
+        throw new Error(result.message || "Failed to add project");
       }
     } catch (error) {
       console.error("Error in onSubmit:", error);
@@ -69,6 +85,7 @@ const CreateProject: React.FC<ProjectFormProps> = ({ userId }) => {
             </label>
             <input
               id="name"
+              {...register("name", { required: "Project name is required" })}
               className={`w-full border p-2 rounded-md`}
               placeholder="Enter project name"
             />
@@ -83,10 +100,15 @@ const CreateProject: React.FC<ProjectFormProps> = ({ userId }) => {
             </label>
             <textarea
               id="description"
+              {...register("description", {
+                required: "Project description is required",
+              })}
               className={`w-full border p-2 rounded-md`}
               placeholder="Enter project description"
             />
           </div>
+
+          <input type="hidden" {...register("date")} />
 
           <div>
             <button

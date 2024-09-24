@@ -93,4 +93,9 @@ export const ProjectSchema = z.object({
   description: z.string().optional(),
 });
 
-export type ProjectFormData = z.infer<typeof ProjectSchema>;
+export type ProjectFormData = {
+  userId: string;
+  name: string;
+  description: string;
+  date: Date;
+};

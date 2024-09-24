@@ -1,6 +1,11 @@
 import mongoose from "mongoose";
 
 const projectSchema = new mongoose.Schema({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
   name: {
     type: String,
     required: true,
@@ -11,11 +16,6 @@ const projectSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    required: true,
-  },
-  userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
     required: true,
   },
 });

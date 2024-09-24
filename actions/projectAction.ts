@@ -4,6 +4,7 @@ import Project from "@/models/project";
 import { ProjectSchema } from "@/schemas";
 import { z } from "zod";
 import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { Session } from "next-auth";
 
 type projectData = z.infer<typeof ProjectSchema>;
@@ -18,11 +19,15 @@ interface CustomSession extends Session {
 }
 
 const addProject = async (projectData: projectData) => {
-  const session: CustomSession | null = await getServerSession();
+  const session: CustomSession | null = await getServerSession(authOptions);
 
-  if (!session || !session.user || !session.user.id) {
+  if (!session) {
+    console.log("Session not found");
     throw new Error(`User not authenticated`);
+  } else {
+    console.log("Session found:", session); // Log session details
   }
+
   const parsedData = ProjectSchema.safeParse(projectData);
 
   if (!parsedData.success) {
@@ -31,21 +36,29 @@ const addProject = async (projectData: projectData) => {
     );
   }
 
-  const { name, description, date } = parsedData.data;
+  const { name, description } = parsedData.data;
+
+  console.log("User ID from form data:", session.user.id);
 
   const newProject = new Project({
     userId: session.user.id,
     name,
     description,
-    date,
+    date: new Date(),
   });
+
+  console.log("New project data:", newProject);
 
   try {
     const savedProject = await newProject.save();
     const plainProject = savedProject.toObject();
     return plainProject;
   } catch (error) {
-    throw new Error(`Error saving project`);
+    if (error instanceof Error) {
+      throw new Error(`Error saving project: ${error.message}`);
+    } else {
+      throw new Error(`Unknown error occurred while saving project`);
+    }
   }
 };
 
