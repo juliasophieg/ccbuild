@@ -13,13 +13,13 @@ const objectIdSchema = z
 export const UserSchema = z.object({
   name: z
     .string()
-    .min(2, { message: 'Name must be at least 2 characters long' })
+    .min(2, { message: "Name must be at least 2 characters long" })
     .max(100, { message: "Name can't be longer then 250 characters long" }),
-  email: z.string().email({ message: 'Please provide a valid email' }),
+  email: z.string().email({ message: "Please provide a valid email" }),
   password: z
     .string()
-    .min(8, { message: 'Password must be at least 8 characters long' }),
-})
+    .min(8, { message: "Password must be at least 8 characters long" }),
+});
 
 // LOGIN SCHEMA
 
@@ -31,6 +31,8 @@ export const LoginSchema = z.object({
 });
 
 export const ProductSchema = z.object({
+  //generated id
+  _id: objectIdSchema.optional(),
   generalInformation: z.object({
     productName: z.string().optional(),
     productCategory1: z.string().optional(),
@@ -46,16 +48,16 @@ export const ProductSchema = z.object({
       place: z.string().optional(), // Corresponds to 'Plats'
       accessibility: z
         .enum([
-          'Lätt Åtkomlig',
-          'Åtkomlig men planering och specialverktyg kan krävas',
-          'Begränsad åtkomlighet',
+          "Lätt Åtkomlig",
+          "Åtkomlig men planering och specialverktyg kan krävas",
+          "Begränsad åtkomlighet",
         ])
         .optional(),
       dismantling: z
         .enum([
-          'Enkel att demontera/demontering krävs ej',
-          'Demonterbar men specialverktyg kan krävas',
-          'Begränsad demonterbarhet',
+          "Enkel att demontera/demontering krävs ej",
+          "Demonterbar men specialverktyg kan krävas",
+          "Begränsad demonterbarhet",
         ])
         .optional(),
     })
@@ -78,11 +80,11 @@ export const ProductSchema = z.object({
 
   dimensions: z
     .object({
-      measurementUnit: z.enum(['mm', 'cm', 'm', 'in', 'ft']).optional(),
+      measurementUnit: z.enum(["mm", "cm", "m", "in", "ft"]).optional(),
       width: z.number().optional(),
       height: z.number().optional(),
       depth: z.number().optional(),
-      weightUnit: z.enum(['kg', 'g', 'lbs']).optional(),
+      weightUnit: z.enum(["kg", "g", "lbs"]).optional(),
       weightPerUnit: z.number().optional(),
     })
     .optional(),
@@ -132,7 +134,7 @@ export const ProductSchema = z.object({
 
   variations: z.array(z.record(z.any())).optional(),
   project: objectIdSchema,
-})
+});
 
 // PRODUCT LOGISTICS SCHEMA
 
@@ -219,12 +221,11 @@ export const ProjectSchema = z.object({
   name: z.string().optional(),
   date: z.date().optional(),
   description: z.string().optional(),
-})
+});
 
 export type ProjectFormData = {
-  userId: string
-  name: string
-  description: string
-  date: Date
-}
-
+  userId: string;
+  name: string;
+  description: string;
+  date: Date;
+};
