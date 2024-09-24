@@ -62,6 +62,7 @@ export const ProductSchema = z.object({
       thirdLocation: z.string().optional(),
     })
     .optional(),
+  variations: z.array(z.record(z.any())).optional(),
   project: objectIdSchema,
 })
 

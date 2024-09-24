@@ -8,9 +8,7 @@ import mongoose from 'mongoose'
 type ProductLogisticData = z.infer<typeof ProductLogisticSchema>
 
 const addProductLogistic = async (productLogisticData: ProductLogisticData) => {
-  const parsedData = ProductLogisticSchema.safeParse({
-    ...productLogisticData,
-  })
+  const parsedData = ProductLogisticSchema.safeParse(productLogisticData)
 
   if (!parsedData.success) {
     throw new Error(
@@ -35,15 +33,19 @@ const addProductLogistic = async (productLogisticData: ProductLogisticData) => {
     quantity,
     status,
     marketplaces,
-    productId: new mongoose.Types.ObjectId(productId),
+    productId: productId ? new mongoose.Types.ObjectId(productId) : null,
   })
 
   try {
     const savedProductLogistic = await newProductLogistic.save()
-    const plainProductLogistic = savedProductLogistic.toObject()
-    return plainProductLogistic
+    return savedProductLogistic.toObject()
   } catch (error) {
-    throw new Error(`Error saving product logistics`)
+    if (error instanceof Error) {
+      console.error('Error updating product:', error)
+      throw new Error(`Error updating product: ${error.message}`)
+    } else {
+      throw new Error('Unknown error occurred')
+    }
   }
 }
 
