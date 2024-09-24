@@ -113,7 +113,6 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
                   'Logistic data added for variation:',
                   logisticResult,
                 )
-                na
               } else {
                 const logisticError = await logisticResponse.json()
                 console.error('Error adding logistic data:', logisticError)
