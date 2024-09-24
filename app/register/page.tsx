@@ -20,8 +20,6 @@ export default function Register() {
   });
 
   const {
-    handleSubmit,
-    register,
     formState: { errors },
   } = form;
 

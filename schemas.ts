@@ -1,12 +1,12 @@
-import { z } from 'zod'
-import mongoose from 'mongoose'
+import { z } from "zod";
+import mongoose from "mongoose";
 
 // Validation for ObjectId
 const objectIdSchema = z
   .string()
-  .refine(value => mongoose.Types.ObjectId.isValid(value), {
-    message: 'Invalid ObjectId',
-  })
+  .refine((value) => mongoose.Types.ObjectId.isValid(value), {
+    message: "Invalid ObjectId",
+  });
 
 // USER SCHEMA
 
@@ -24,11 +24,11 @@ export const UserSchema = z.object({
 // LOGIN SCHEMA
 
 export const LoginSchema = z.object({
-  email: z.string().email({ message: 'Please provide a valid email' }),
+  email: z.string().email({ message: "Please provide a valid email" }),
   password: z
     .string()
-    .min(8, { message: 'Password must be at least 8 characters long' }),
-})
+    .min(8, { message: "Password must be at least 8 characters long" }),
+});
 
 export const ProductSchema = z.object({
   generalInformation: z.object({
@@ -148,16 +148,16 @@ export const ProductLogisticSchema = z.object({
       location: z.string().optional(),
       accesaibility: z
         .enum([
-          'Lätt Åtkomlig',
-          'Åtkomlig men planering och specialverktyg kan krävas',
-          'Begränsad åtkomlighet',
+          "Lätt Åtkomlig",
+          "Åtkomlig men planering och specialverktyg kan krävas",
+          "Begränsad åtkomlighet",
         ])
         .optional(),
       dismantling: z
         .enum([
-          'Enkel att demontera/demontering krävs ej',
-          'Demonterbar men specialverktyg kan krävas',
-          'Begränsad demonterbarhet',
+          "Enkel att demontera/demontering krävs ej",
+          "Demonterbar men specialverktyg kan krävas",
+          "Begränsad demonterbarhet",
         ])
         .optional(),
     })
@@ -173,45 +173,45 @@ export const ProductLogisticSchema = z.object({
   quantity: z.number().optional(),
   status: z
     .enum([
-      'Inventerad',
-      'Inventerad - i byggnad',
-      'Inventerad - i lager/förråd',
-      'Mängdad',
-      'Mängdad - i byggnad',
-      'Mängdad - i lager/förråd',
-      'På rekonditionering',
-      'I lager',
-      'Bevarad (slutstatus)',
-      'Återbrukad i projektet (slutstatus)',
-      'Återbrukad inom organisationen (slutstatus)',
-      'Återbrukad externt av annan aktör (slutstatus)',
-      'Avfallshanterad (slutstatus)',
+      "Inventerad",
+      "Inventerad - i byggnad",
+      "Inventerad - i lager/förråd",
+      "Mängdad",
+      "Mängdad - i byggnad",
+      "Mängdad - i lager/förråd",
+      "På rekonditionering",
+      "I lager",
+      "Bevarad (slutstatus)",
+      "Återbrukad i projektet (slutstatus)",
+      "Återbrukad inom organisationen (slutstatus)",
+      "Återbrukad externt av annan aktör (slutstatus)",
+      "Avfallshanterad (slutstatus)",
     ])
     .optional(),
   marketplaces: z
     .enum([
-      'Ej publicerad',
-      'Publicerad som intern annons',
-      'Publicerad som extern annons',
-      'Reserverad',
-      'Såld',
-      'Avpublicerad',
-      'Automatiskt avpublicerad',
+      "Ej publicerad",
+      "Publicerad som intern annons",
+      "Publicerad som extern annons",
+      "Reserverad",
+      "Såld",
+      "Avpublicerad",
+      "Automatiskt avpublicerad",
     ])
     .optional()
-    .default('Ej publicerad'),
+    .default("Ej publicerad"),
   productId: objectIdSchema.optional(),
-})
+});
 // LOCATION SCHEMA
 
 export const LocationSchema = z.object({
   firstLocation: z.string().optional(),
   secondLocation: z.string().optional(),
   thirdLocation: z.string().optional(),
-})
+});
 
-export type ProductFormData = z.infer<typeof ProductSchema>
-export type ProductLogisticData = z.infer<typeof ProductLogisticSchema>
+export type ProductFormData = z.infer<typeof ProductSchema>;
+export type ProductLogisticData = z.infer<typeof ProductLogisticSchema>;
 
 // PROJECT SCHEMA
 export const ProjectSchema = z.object({
@@ -227,3 +227,4 @@ export type ProjectFormData = {
   description: string
   date: Date
 }
+

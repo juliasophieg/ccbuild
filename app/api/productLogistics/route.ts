@@ -1,51 +1,54 @@
-import { NextRequest, NextResponse } from 'next/server'
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
+import { NextRequest, NextResponse } from "next/server";
 import {
   getProductLogistic,
   addProductLogistic,
-} from '@/actions/productLogisticAction'
+} from "@/actions/productLogisticAction";
 
 export async function GET(req: NextRequest) {
-  const productLogistics = await getProductLogistic()
+  const productLogistics = await getProductLogistic();
 
-  const productLogisticsJson = productLogistics.map(productLogistic => {
-    return productLogistic
-  })
+  const productLogisticsJson = productLogistics.map((productLogistic) => {
+    return productLogistic;
+  });
 
-  return NextResponse.json(productLogisticsJson)
+  return NextResponse.json(productLogisticsJson);
 }
 
 export async function POST(req: NextRequest) {
   try {
-    const productLogisticData = await req.json()
+    const productLogisticData = await req.json();
 
     if (productLogisticData.pickup?.availableDate) {
       productLogisticData.pickup.availableDate = new Date(
-        productLogisticData.pickup.availableDate,
-      )
+        productLogisticData.pickup.availableDate
+      );
     }
     if (productLogisticData.pickup?.firstDeliveryDate) {
       productLogisticData.pickup.firstDeliveryDate = new Date(
-        productLogisticData.pickup.firstDeliveryDate,
-      )
+        productLogisticData.pickup.firstDeliveryDate
+      );
     }
 
-    const savedProductLogistic = await addProductLogistic(productLogisticData)
+    const savedProductLogistic = await addProductLogistic(productLogisticData);
 
     return NextResponse.json({
-      message: 'Product logistic added successfully',
+      message: "Product logistic added successfully",
       data: savedProductLogistic,
-    })
+    });
   } catch (error) {
     if (error instanceof Error) {
       return NextResponse.json(
-        { message: 'Failed to add productvar', error: error.message },
-        { status: 500 },
-      )
+        { message: "Failed to add productvar", error: error.message },
+        { status: 500 }
+      );
     } else {
       return NextResponse.json(
-        { message: 'Failed to add productvar', error: 'Unknown error' },
-        { status: 500 },
-      )
+        { message: "Failed to add productvar", error: "Unknown error" },
+        { status: 500 }
+      );
     }
   }
 }
+/* eslint-disable @typescript-eslint/no-unused-vars */

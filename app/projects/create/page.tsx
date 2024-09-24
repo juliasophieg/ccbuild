@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ProjectSchema, ProjectFormData } from "@/schemas";
@@ -31,11 +31,7 @@ const CreateProject: React.FC<ProjectFormProps> = ({ userId }) => {
     },
   });
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = form;
+  const { register, handleSubmit } = form;
   const router = useRouter();
 
   const onSubmit: SubmitHandler<ProjectFormData> = async (data) => {

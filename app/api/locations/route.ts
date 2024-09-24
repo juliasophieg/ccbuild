@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { NextRequest, NextResponse } from "next/server";
 import { getLocation, addLocation } from "@/actions/locationAction";
 
@@ -17,3 +18,4 @@ export async function POST(req: NextRequest) {
 
   return NextResponse.json({ message: "Location added successfully" });
 }
+/* eslint-enable @typescript-eslint/no-unused-vars */
