@@ -12,7 +12,7 @@ interface CustomSession extends Session {
   user: CustomUser;
 }
 
-const authOptions: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -36,12 +36,14 @@ const authOptions: NextAuthOptions = {
       },
     }),
   ],
+  secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/login",
     //signOut: "/logout",
   },
   session: {
     strategy: "jwt",
+    maxAge: 30 * 60, // 30 minutes
   },
   callbacks: {
     async jwt({ token, user }) {
