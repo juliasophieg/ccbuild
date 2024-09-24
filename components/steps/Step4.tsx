@@ -37,6 +37,7 @@ const Step4: React.FC = () => {
           <Controller
             control={control}
             name={`variations.${index}.quantity`}
+            defaultValue={1}
             render={({ field }) => (
               <TextField
                 {...field}
@@ -50,6 +51,7 @@ const Step4: React.FC = () => {
           <Controller
             control={control}
             name={`variations.${index}.status`}
+            defaultValue=""
             render={({ field }) => (
               <TextField
                 {...field}
@@ -88,6 +90,7 @@ const Step4: React.FC = () => {
           <Controller
             control={control}
             name={`variations.${index}.marketplaces`}
+            defaultValue=""
             render={({ field }) => (
               <TextField
                 {...field}
@@ -115,6 +118,7 @@ const Step4: React.FC = () => {
           <Controller
             control={control}
             name={`variations.${index}.accesability`}
+            defaultValue=""
             render={({ field }) => (
               <TextField
                 {...field}
@@ -137,6 +141,7 @@ const Step4: React.FC = () => {
           <Controller
             control={control}
             name={`variations.${index}.location.location`}
+            defaultValue=""
             render={({ field }) => (
               <TextField
                 {...field}
@@ -150,6 +155,7 @@ const Step4: React.FC = () => {
           <Controller
             control={control}
             name={`variations.${index}.location.house`}
+            defaultValue=""
             render={({ field }) => (
               <TextField
                 {...field}
@@ -163,6 +169,7 @@ const Step4: React.FC = () => {
           <Controller
             control={control}
             name={`variations.${index}.location.room`}
+            defaultValue=""
             render={({ field }) => (
               <TextField {...field} label="Room" variant="outlined" fullWidth />
             )}
@@ -187,6 +194,7 @@ const Step4: React.FC = () => {
               <Controller
                 control={control}
                 name={`variations.${index}.pickup.firstDeliveryDate`}
+                defaultValue=""
                 render={({ field }) => (
                   <TextField
                     {...field}
@@ -202,6 +210,7 @@ const Step4: React.FC = () => {
               <Controller
                 control={control}
                 name={`variations.${index}.pickup.availableDate`}
+                defaultValue=""
                 render={({ field }) => (
                   <TextField
                     {...field}
@@ -218,6 +227,7 @@ const Step4: React.FC = () => {
               <Controller
                 control={control}
                 name={`variations.${index}.location.location`}
+                defaultValue=""
                 render={({ field }) => (
                   <TextField
                     {...field}
@@ -231,6 +241,7 @@ const Step4: React.FC = () => {
               <Controller
                 control={control}
                 name={`variations.${index}.location.house`}
+                defaultValue=""
                 render={({ field }) => (
                   <TextField
                     {...field}
@@ -244,6 +255,7 @@ const Step4: React.FC = () => {
               <Controller
                 control={control}
                 name={`variations.${index}.location.room`}
+                defaultValue=""
                 render={({ field }) => (
                   <TextField
                     {...field}
@@ -257,6 +269,7 @@ const Step4: React.FC = () => {
               <Controller
                 control={control}
                 name={`variations.${index}.accesability`}
+                defaultValue=""
                 render={({ field }) => (
                   <TextField
                     {...field}
@@ -280,6 +293,7 @@ const Step4: React.FC = () => {
               <Controller
                 control={control}
                 name={`variations.${index}.dismantling`}
+                defaultValue=""
                 render={({ field }) => (
                   <TextField
                     {...field}
@@ -303,6 +317,7 @@ const Step4: React.FC = () => {
               <Controller
                 control={control}
                 name={`variations.${index}.decision.location1`}
+                defaultValue=""
                 render={({ field }) => (
                   <TextField
                     {...field}
@@ -316,6 +331,7 @@ const Step4: React.FC = () => {
               <Controller
                 control={control}
                 name={`variations.${index}.decision.location2`}
+                defaultValue=""
                 render={({ field }) => (
                   <TextField
                     {...field}
@@ -329,6 +345,7 @@ const Step4: React.FC = () => {
               <Controller
                 control={control}
                 name={`variations.${index}.decision.location3`}
+                defaultValue=""
                 render={({ field }) => (
                   <TextField
                     {...field}
@@ -342,6 +359,7 @@ const Step4: React.FC = () => {
               <Controller
                 control={control}
                 name={`variations.${index}.decision.location4`}
+                defaultValue=""
                 render={({ field }) => (
                   <TextField
                     {...field}
