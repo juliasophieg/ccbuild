@@ -16,8 +16,10 @@ export default function Product({ params }: PageProps) {
     <>
       <div className='text-blue-400'>
         <CategoryProvider>
-          <ProgressBar />
-          <ProductForm projectId={slug} />
+          <div className='flex flex-row'>
+            <ProgressBar />
+            <ProductForm projectId={slug} />
+          </div>
         </CategoryProvider>
       </div>
     </>

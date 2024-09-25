@@ -1,5 +1,4 @@
 'use client'
-
 import React, { useState, useEffect, useRef } from 'react'
 import { useForm, FormProvider, SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -14,6 +13,7 @@ import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import Button from '@mui/material/Button'
+import Typography from '@mui/material/Typography'
 
 type ProductFormProps = {
   projectId: string
@@ -22,6 +22,10 @@ type ProductFormProps = {
 const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
   const [productId, setProductId] = useState<string | null>(null)
   const isCreatingProduct = useRef(false)
+
+  const [expanded, setExpanded] = useState<string | false>(false)
+  const [expandAll, setExpandAll] = useState(false)
+
   const methodsForm1 = useForm<ProductFormData>({
     resolver: zodResolver(ProductSchema),
     mode: 'all',
@@ -42,16 +46,13 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
       isCreatingProduct.current = true
       const createBlankProduct = async () => {
         try {
-          const response = await fetch(
-            'https://ccbuild-project.vercel.app/api/products',
-            {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({ projectId }),
+          const response = await fetch('http://localhost:3000/api/products', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
             },
-          )
+            body: JSON.stringify({ projectId }),
+          })
           if (response.ok) {
             const data = await response.json()
             setProductId(data.product._id)
@@ -72,6 +73,17 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
       createBlankProduct()
     }
   }, [projectId])
+
+  const handleChange =
+    (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+      setExpanded(isExpanded ? panel : false)
+    }
+
+  const toggleExpandAll = () => {
+    setExpandAll(!expandAll)
+    setExpanded(!expandAll ? 'panel1' : false)
+  }
+
   const onSubmitForm1: SubmitHandler<ProductFormData> = async data => {
     if (!productId) {
       console.error('Product ID is not available')
@@ -84,7 +96,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
       console.log('Product data:', productData)
       console.log('date', typeof productData.pickup?.availableDate)
       const productResponse = await fetch(
-        `https://ccbuild-project.vercel.app/api/products/${productId}`,
+        `http://localhost:3000/api/products/${productId}`,
         {
           method: 'PATCH',
           headers: {
@@ -107,7 +119,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
 
             try {
               const logisticResponse = await fetch(
-                'https://ccbuild-project.vercel.app/api/productLogistics',
+                'http://localhost:3000/api/productLogistics',
                 {
                   method: 'POST',
                   headers: {
@@ -149,64 +161,97 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
   }
 
   return (
-    <>
+    <div className='basis-4/5'>
       <FormProvider {...methodsForm1}>
         <form onSubmit={handleSubmitForm1(onSubmitForm1)}>
-          <Accordion defaultExpanded>
+          <Button onClick={toggleExpandAll} variant='contained'>
+            {expandAll ? 'Collapse All' : 'Expand All'}
+          </Button>
+          <Accordion
+            expanded={expandAll || expanded === 'panel1'}
+            onChange={handleChange('panel1')}
+          >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls='panel1-content'
               id='panel1-header'
             >
-              Header1
+              <Typography sx={{ width: '33%', flexShrink: 0 }}>
+                Header1
+              </Typography>
+              <Typography sx={{ color: 'text.secondary' }}>
+                General Information
+              </Typography>
             </AccordionSummary>
             <AccordionDetails>
               <Step1 />
             </AccordionDetails>
           </Accordion>
-          <Accordion>
+          <Accordion
+            expanded={expandAll || expanded === 'panel2'}
+            onChange={handleChange('panel2')}
+          >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls='panel2-content'
               id='panel2-header'
             >
-              Header2
+              <Typography sx={{ width: '33%', flexShrink: 0 }}>
+                Header2
+              </Typography>
+              <Typography sx={{ color: 'text.secondary' }}>Details</Typography>
             </AccordionSummary>
             <AccordionDetails>
               <Step2 />
             </AccordionDetails>
           </Accordion>
-          <Accordion>
+          <Accordion
+            expanded={expandAll || expanded === 'panel3'}
+            onChange={handleChange('panel3')}
+          >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls='panel3-content'
               id='panel3-header'
             >
-              Header3
+              <Typography sx={{ width: '33%', flexShrink: 0 }}>
+                Header3
+              </Typography>
+              <Typography sx={{ color: 'text.secondary' }}>
+                More Info
+              </Typography>
             </AccordionSummary>
             <AccordionDetails>
               <Step3 />
             </AccordionDetails>
           </Accordion>
-          <Button type='submit' variant='contained'>
-            Submit
-          </Button>
-          <Accordion>
+          <Accordion
+            expanded={expandAll || expanded === 'panel4'}
+            onChange={handleChange('panel4')}
+          >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls='panel4-content'
               id='panel4-header'
             >
-              Header4
+              <Typography sx={{ width: '33%', flexShrink: 0 }}>
+                Header4
+              </Typography>
+              <Typography sx={{ color: 'text.secondary' }}>
+                Final Details
+              </Typography>
             </AccordionSummary>
             <AccordionDetails>
               <Step4 />
             </AccordionDetails>
             <AccordionActions></AccordionActions>
           </Accordion>
+          <Button type='submit' variant='contained'>
+            Submit
+          </Button>
         </form>
       </FormProvider>
-    </>
+    </div>
   )
 }
 
