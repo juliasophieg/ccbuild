@@ -1,4 +1,5 @@
-"use client";
+'use client'
+
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -7,53 +8,53 @@ import { UserSchema } from "@/schemas";
 import { useRouter } from "next/navigation";
 import { Button, Box, TextField } from "@mui/material";
 
-type RegisterForm = z.infer<typeof UserSchema>;
+type RegisterForm = z.infer<typeof UserSchema>
 
 export default function Register() {
   const form = useForm<RegisterForm>({
     resolver: zodResolver(UserSchema),
     defaultValues: {
-      name: "",
-      email: "",
-      password: "",
+      name: '',
+      email: '',
+      password: '',
     },
-  });
+  })
 
   const {
     formState: { errors },
-  } = form;
+  } = form
 
-  const router = useRouter();
+  const router = useRouter()
 
   const onSubmit = async (data: RegisterForm) => {
     try {
-      const response = await fetch("/api/users", {
-        method: "POST",
+      const response = await fetch('http://localhost:3000/api/users', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
-      });
+      })
 
       if (!response.ok) {
-        const errorData = await response.json();
-        console.error("Error from API:", errorData);
+        const errorData = await response.json()
+        console.error('Error from API:', errorData)
         throw new Error(
-          errorData.message || "An error occurred while registering"
-        );
+          errorData.message || 'An error occurred while registering',
+        )
       }
 
-      const result = await response.json();
+      const result = await response.json()
 
       if (result.success) {
-        router.push("/login");
+        router.push('/login')
       } else {
-        throw new Error(result.message || "Registration failed");
+        throw new Error(result.message || 'Registration failed')
       }
     } catch (error) {
-      console.error("Error in onSubmit:", error);
+      console.error('Error in onSubmit:', error)
     }
-  };
+  }
 
   return (
     <div className="flex justify-center items-center w-full my-14">
@@ -130,5 +131,5 @@ export default function Register() {
         </form>
       </div>
     </div>
-  );
+  )
 }
