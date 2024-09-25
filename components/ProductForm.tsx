@@ -1,30 +1,34 @@
-"use client";
-import React, { useState, useEffect, useRef } from "react";
-import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { ProductSchema, ProductFormData } from "../schemas";
-import Step1 from "./steps/Step1";
-import Step2 from "./steps/Step2";
-import Step3 from "./steps/Step3";
-import Step4 from "./steps/Step4";
-import Accordion from "@mui/material/Accordion";
-import AccordionActions from "@mui/material/AccordionActions";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+'use client'
+import React, { useState, useEffect, useRef } from 'react'
+import { useForm, FormProvider, SubmitHandler } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { ProductSchema, ProductFormData } from '../schemas'
+import Step1 from './steps/Step1'
+import Step2 from './steps/Step2'
+import Step3 from './steps/Step3'
+import Step4 from './steps/Step4'
+import Accordion from '@mui/material/Accordion'
+import AccordionActions from '@mui/material/AccordionActions'
+import AccordionSummary from '@mui/material/AccordionSummary'
+import AccordionDetails from '@mui/material/AccordionDetails'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import Button from '@mui/material/Button'
+import Typography from '@mui/material/Typography'
+import { useCategoryContext } from '../context/CategoryContext'
+
 
 type ProductFormProps = {
   projectId: string;
 };
 
 const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
-  const [productId, setProductId] = useState<string | null>(null);
-  const isCreatingProduct = useRef(false);
+  const [productId, setProductId] = useState<string | null>(null)
+  const isCreatingProduct = useRef(false)
+  const { setSelectedStep } = useCategoryContext()
 
-  const [expanded, setExpanded] = useState<string | false>(false);
-  const [expandAll, setExpandAll] = useState(false);
+  const [expanded, setExpanded] = useState<string | false>(false)
+
+  const [expandAll, setExpandAll] = useState(false)
 
   const methodsForm1 = useForm<ProductFormData>({
     resolver: zodResolver(ProductSchema),
@@ -76,8 +80,10 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
 
   const handleChange =
     (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
-      setExpanded(isExpanded ? panel : false);
-    };
+      setExpanded(isExpanded ? panel : false)
+      setSelectedStep(isExpanded ? panel : '')
+    }
+
 
   const toggleExpandAll = () => {
     setExpandAll(!expandAll);
