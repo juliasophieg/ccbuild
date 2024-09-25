@@ -21,7 +21,6 @@ const Page: FC<PageProps> = async ({ params }) => {
   let products: ProductFormData[] = []
   let errorMessage = ''
 
-  // Fetch project data based on slug
   try {
     const res = await fetch(
       `https://ccbuild-project.vercel.app/api/projects/${params.slug}`,
@@ -44,7 +43,6 @@ const Page: FC<PageProps> = async ({ params }) => {
     return <p>{errorMessage || 'Project not found'}</p>
   }
 
-  // Fetch products related to the projectId (project._id)
   try {
     const resProducts = await fetch(
       `https://ccbuild-project.vercel.app/api/products/${project._id}`,
@@ -94,7 +92,9 @@ const Page: FC<PageProps> = async ({ params }) => {
         )}
       </div>
 
-      <Link href={`/projects/${params.slug}/product/create`}>
+      <Link
+        href={`https://ccbuild-project.vercel.app/projects/${params.slug}/product/create`}
+      >
         <Button variant='contained' color='primary' className='mt-8'>
           Create Product
         </Button>
