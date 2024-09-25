@@ -66,9 +66,7 @@ const CreateProject: React.FC = () => {
 
   return (
     <div className="max-w-lg mx-auto p-4 my-7">
-      <h1 className="text-2xl font-bold text-custom-blue mb-4">
-        Skapa nytt projekt
-      </h1>
+      <h1 className="text-custom-blue mb-4">Skapa nytt projekt</h1>
       <FormProvider {...form}>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div>
