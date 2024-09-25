@@ -23,9 +23,12 @@ const Page: FC<PageProps> = async ({ params }) => {
 
   // Fetch project data based on slug
   try {
-    const res = await fetch(`/api/projects/${params.slug}`, {
-      cache: 'no-store',
-    })
+    const res = await fetch(
+      `https://ccbuild-project.vercel.app/api/projects/${params.slug}`,
+      {
+        cache: 'no-store',
+      },
+    )
 
     if (!res.ok) {
       throw new Error('Failed to fetch project data')
@@ -43,9 +46,12 @@ const Page: FC<PageProps> = async ({ params }) => {
 
   // Fetch products related to the projectId (project._id)
   try {
-    const resProducts = await fetch(`/api/products/${project._id}`, {
-      cache: 'no-store',
-    })
+    const resProducts = await fetch(
+      `https://ccbuild-project.vercel.app/api/products/${project._id}`,
+      {
+        cache: 'no-store',
+      },
+    )
 
     if (!resProducts.ok) {
       throw new Error('Failed to fetch products')

@@ -1,6 +1,6 @@
 export default async function Home() {
   const fetchProducts = async () => {
-    const res = await fetch('/api/products')
+    const res = await fetch('https://ccbuild-project.vercel.app/api/products')
     if (!res.ok) {
       throw new Error('Failed to fetch products')
     }
@@ -8,7 +8,7 @@ export default async function Home() {
   }
 
   const fetchProjects = async () => {
-    const res = await fetch('/api/projects')
+    const res = await fetch('https://ccbuild-project.vercel.app/api/projects')
     if (!res.ok) {
       throw new Error('Failed to fetch projects')
     }

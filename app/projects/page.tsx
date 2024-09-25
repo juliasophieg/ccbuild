@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export default async function Projects() {
   const fetchProjects = async () => {
-    const res = await fetch('/api/projects')
+    const res = await fetch('https://ccbuild-project.vercel.app/api/projects')
     if (!res.ok) {
       throw new Error('Failed to fetch projects')
     }
