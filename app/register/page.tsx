@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { UserSchema } from "@/schemas";
 import { useRouter } from "next/navigation";
-import { Button, TextField } from "@mui/material";
+import { Button, Box, TextField } from "@mui/material";
 
 type RegisterForm = z.infer<typeof UserSchema>;
 
@@ -56,61 +56,79 @@ export default function Register() {
   };
 
   return (
-    <div>
-      <h2>Register</h2>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="my-1">
-          <label htmlFor="name" className="mx-1">
-            Name
-          </label>
-          <TextField
-            id="name"
-            type="text"
-            size="small"
-            {...form.register("name")}
-            error={!!errors.name}
-            helperText={errors.name ? errors.name.message : ""}
-          />
-        </div>
+    <div className="flex justify-center items-center w-full my-14">
+      <div className="w-96 border-solid border rounded-md border-gray-200 py-7 px-12">
+        <h2 className="text-center mb-4">Skapa konto</h2>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <div className="flex flex-col items-center gap-4">
+            <div className="my-1 flex flex-col w-full">
+              <label
+                htmlFor="name"
+                className="text-sm font-medium text-gray-700"
+              >
+                Namn
+              </label>{" "}
+              <TextField
+                id="outlined-size-small"
+                placeholder="För- och efternamn"
+                type="text"
+                size="small"
+                {...form.register("name")}
+                error={!!errors.name}
+                helperText={errors.name ? errors.name.message : ""}
+                className="w-full"
+              />
+            </div>
+            <div className="my-1 flex flex-col w-full">
+              <label
+                htmlFor="email"
+                className="text-sm font-medium text-gray-700"
+              >
+                Mailadress
+              </label>
+              <TextField
+                id="outlined-size-small"
+                placeholder="exempel@mail.se"
+                type="email"
+                size="small"
+                {...form.register("email")}
+                error={!!errors.email}
+                helperText={errors.email ? errors.email.message : ""}
+                className="w-full"
+              />
+            </div>
 
-        <div className="my-1">
-          <label htmlFor="email" className=" mx-1">
-            Email
-          </label>
-          <TextField
-            id="email"
-            type="email"
-            size="small"
-            {...form.register("email")}
-            error={!!errors.email}
-            helperText={errors.email ? errors.email.message : ""}
-          />
-        </div>
+            <div className="my-1 flex flex-col w-full">
+              <label
+                htmlFor="password"
+                className="text-sm font-medium text-gray-700"
+              >
+                Lösenord
+              </label>
+              <TextField
+                id="outlined-size-small"
+                placeholder="Lösenord"
+                type="password"
+                size="small"
+                {...form.register("password")}
+                error={!!errors.password}
+                helperText={errors.password ? errors.password.message : ""}
+                className="w-full"
+              />
+            </div>
 
-        <div className="my-1">
-          <label htmlFor="password" className=" mx-1">
-            Password
-          </label>
-          <TextField
-            id="password"
-            type="password"
-            size="small"
-            {...form.register("password")}
-            error={!!errors.password}
-            helperText={errors.password ? errors.password.message : ""}
-          />
-        </div>
-
-        <Button type="submit" variant="outlined" className="my-1">
-          Sign up
-        </Button>
-        <p>
-          Already have an account?{" "}
-          <a href="/login" className="underline underline-offset-3">
-            Sign in
-          </a>
-        </p>
-      </form>
+            <Button type="submit" variant="contained" className="w-full mt-2">
+              Skapa konto
+            </Button>
+            <p>
+              Har du redan ett konto?{" "}
+              <a href="/login" className="underline underline-offset-3">
+                Logga in
+              </a>
+            </p>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

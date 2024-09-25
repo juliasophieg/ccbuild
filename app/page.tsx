@@ -1,8 +1,10 @@
-import { getProduct } from "@/actions/productAction";
-import { getProject } from "@/actions/projectAction";
+import { redirect } from "next/navigation";
 
 export default async function Home() {
-  const products = await getProduct();
+  redirect("/projects");
+
+  /* 
+ const products = await getProduct();
   const projects = await getProject();
 
   return (
@@ -33,5 +35,5 @@ export default async function Home() {
         </div>
       </div>
     </>
-  );
+  );*/
 }
