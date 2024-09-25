@@ -77,7 +77,7 @@ export default function Login() {
                 id="outlined-size-small"
                 type="password"
                 size="small"
-                placeholder="Lösenord"
+                placeholder="•••••••••"
                 {...register("password")}
                 error={!!errors.password}
                 helperText={errors.password ? errors.password.message : ""}

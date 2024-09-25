@@ -107,7 +107,7 @@ export default function Register() {
               </label>
               <TextField
                 id="outlined-size-small"
-                placeholder="Lösenord"
+                placeholder="•••••••••"
                 type="password"
                 size="small"
                 {...form.register("password")}
