@@ -14,6 +14,7 @@ import AccordionDetails from '@mui/material/AccordionDetails'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
+import { useCategoryContext } from '../context/CategoryContext'
 
 type ProductFormProps = {
   projectId: string
@@ -22,8 +23,10 @@ type ProductFormProps = {
 const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
   const [productId, setProductId] = useState<string | null>(null)
   const isCreatingProduct = useRef(false)
+  const { setSelectedStep } = useCategoryContext()
 
   const [expanded, setExpanded] = useState<string | false>(false)
+
   const [expandAll, setExpandAll] = useState(false)
 
   const methodsForm1 = useForm<ProductFormData>({
@@ -77,6 +80,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
   const handleChange =
     (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
       setExpanded(isExpanded ? panel : false)
+      setSelectedStep(isExpanded ? panel : '')
     }
 
   const toggleExpandAll = () => {
