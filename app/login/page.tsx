@@ -46,10 +46,15 @@ export default function Login() {
         <h2 className="text-center mb-4">Logga in</h2>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className="flex flex-col items-center gap-4">
-            <div className="my-1 flex w-full">
+            <div className="my-1 flex flex-col w-full">
+              <label
+                htmlFor="email"
+                className="text-sm font-medium text-gray-700"
+              >
+                Mailadress
+              </label>{" "}
               <TextField
                 className="w-full"
-                label="Mailadress"
                 id="outlined-size-small"
                 type="email"
                 size="small"
@@ -60,10 +65,15 @@ export default function Login() {
               />
             </div>
 
-            <div className="my-1 flex w-full">
+            <div className="my-1 flex flex-col w-full">
+              <label
+                htmlFor="password"
+                className="text-sm font-medium text-gray-700"
+              >
+                Lösenord
+              </label>{" "}
               <TextField
                 className="w-full"
-                label="Lösenord"
                 id="outlined-size-small"
                 type="password"
                 size="small"

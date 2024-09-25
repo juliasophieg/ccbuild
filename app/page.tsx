@@ -1,8 +1,10 @@
-import { getProduct } from "@/actions/productAction";
-import { getProject } from "@/actions/projectAction";
+import { redirect } from "next/navigation";
 
 export default async function Home() {
-  const products = await getProduct();
+  redirect("/projects");
+
+  /* 
+ const products = await getProduct();
   const projects = await getProject();
 
   return (
@@ -11,17 +13,13 @@ export default async function Home() {
         <div className="flex-grow bg-green-400">
           {products.map((product) => (
             <div key={product._id} className="my-2">
-              <h1 className="font-bold">{product.name}</h1>
+              <h1 className="font-bold">
+                {product.generalInformation.productName}
+              </h1>
               <p>
-                Category: {product.category.mainCategory} »{" "}
-                {product.category.subCategory} »{" "}
-                {product.category.subSubCategory}
+                Category: {product.generalInformation.productName} »{" "}
+                {product.generalInformation.productCategory1} »{" "}
               </p>
-              <p>
-                Modell: {product.productInfo.manufacturer} (
-                {product.productInfo.yearOfManufacturing})
-              </p>
-              <p>Condition: {product.condition}/5</p>
             </div>
           ))}
         </div>
@@ -37,5 +35,5 @@ export default async function Home() {
         </div>
       </div>
     </>
-  );
+  );*/
 }

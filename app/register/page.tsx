@@ -61,9 +61,14 @@ export default function Register() {
         <h2 className="text-center mb-4">Skapa konto</h2>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className="flex flex-col items-center gap-4">
-            <div className="my-1 flex w-full">
+            <div className="my-1 flex flex-col w-full">
+              <label
+                htmlFor="name"
+                className="text-sm font-medium text-gray-700"
+              >
+                Namn
+              </label>{" "}
               <TextField
-                label="Namn"
                 id="outlined-size-small"
                 placeholder="För- och efternamn"
                 type="text"
@@ -74,9 +79,14 @@ export default function Register() {
                 className="w-full"
               />
             </div>
-            <div className="my-1 flex w-full">
+            <div className="my-1 flex flex-col w-full">
+              <label
+                htmlFor="email"
+                className="text-sm font-medium text-gray-700"
+              >
+                Mailadress
+              </label>
               <TextField
-                label="Mailadress"
                 id="outlined-size-small"
                 placeholder="exempel@mail.se"
                 type="email"
@@ -88,9 +98,14 @@ export default function Register() {
               />
             </div>
 
-            <div className="my-1 flex w-full">
+            <div className="my-1 flex flex-col w-full">
+              <label
+                htmlFor="password"
+                className="text-sm font-medium text-gray-700"
+              >
+                Lösenord
+              </label>
               <TextField
-                label="Lösenord"
                 id="outlined-size-small"
                 placeholder="Lösenord"
                 type="password"
