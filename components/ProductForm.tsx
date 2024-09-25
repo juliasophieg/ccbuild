@@ -168,8 +168,8 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
             {expandAll ? "Collapse All" : "Expand All"}
           </Button>
           <Accordion
-            expanded={expandAll || expanded === "panel1"}
-            onChange={handleChange("panel1")}
+            expanded={expandAll || expanded === "Generell information"}
+            onChange={handleChange("Generell information")}
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -188,8 +188,8 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
             </AccordionDetails>
           </Accordion>
           <Accordion
-            expanded={expandAll || expanded === "panel2"}
-            onChange={handleChange("panel2")}
+            expanded={expandAll || expanded === "Egenskaper"}
+            onChange={handleChange("Egenskaper")}
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -208,8 +208,8 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
             </AccordionDetails>
           </Accordion>
           <Accordion
-            expanded={expandAll || expanded === "panel3"}
-            onChange={handleChange("panel3")}
+            expanded={expandAll || expanded === "Marknadsplats"}
+            onChange={handleChange("Marknadsplats")}
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -228,8 +228,8 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
             </AccordionDetails>
           </Accordion>
           <Accordion
-            expanded={expandAll || expanded === "panel4"}
-            onChange={handleChange("panel4")}
+            expanded={expandAll || expanded === "Plats/Status/Antal"}
+            onChange={handleChange("Plats/Status/Antal")}
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -237,10 +237,10 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
               id="panel4-header"
             >
               <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                Plats/status/Antal
+                Plats/Status/Antal
               </Typography>
               <Typography sx={{ color: "text.secondary" }}>
-                Plats/status/Antal
+                Plats/Status/Antal
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
@@ -252,8 +252,8 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
             ""
           ) : (
             <Accordion
-              expanded={expandAll || expanded === "panel5"}
-              onChange={handleChange("panel5")}
+              expanded={expandAll || expanded === "Överblick"}
+              onChange={handleChange("Överblick")}
               onClick={toggleExpandAll}
             >
               <AccordionSummary
