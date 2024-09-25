@@ -11,6 +11,10 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        "custom-blue": "#112f5f",
+      },
+      width: {
+        "1280": "1280px", // Add this line for custom width
       },
     },
   },

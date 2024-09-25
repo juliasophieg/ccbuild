@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import { NextRequest, NextResponse } from "next/server";
 import {
   getProductLogistic,
@@ -15,8 +17,38 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-  const productLogisticData = await req.json();
-  addProductLogistic(productLogisticData);
+  try {
+    const productLogisticData = await req.json();
 
-  return NextResponse.json({ message: "Product logistic added successfully" });
+    if (productLogisticData.pickup?.availableDate) {
+      productLogisticData.pickup.availableDate = new Date(
+        productLogisticData.pickup.availableDate
+      );
+    }
+    if (productLogisticData.pickup?.firstDeliveryDate) {
+      productLogisticData.pickup.firstDeliveryDate = new Date(
+        productLogisticData.pickup.firstDeliveryDate
+      );
+    }
+
+    const savedProductLogistic = await addProductLogistic(productLogisticData);
+
+    return NextResponse.json({
+      message: "Product logistic added successfully",
+      data: savedProductLogistic,
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      return NextResponse.json(
+        { message: "Failed to add productvar", error: error.message },
+        { status: 500 }
+      );
+    } else {
+      return NextResponse.json(
+        { message: "Failed to add productvar", error: "Unknown error" },
+        { status: 500 }
+      );
+    }
+  }
 }
+/* eslint-disable @typescript-eslint/no-unused-vars */

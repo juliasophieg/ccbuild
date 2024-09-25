@@ -20,7 +20,6 @@ export default function Login() {
   });
 
   const {
-    handleSubmit,
     register,
     formState: { errors },
   } = form;
@@ -77,7 +76,7 @@ export default function Login() {
           Login
         </Button>
         <p>
-          Don't have an account?{" "}
+          Don&apos;t have an account?{" "}
           <a href="/register" className="underline underline-offset-3">
             Sign up
           </a>
