@@ -44,25 +44,31 @@ export default function Projects() {
 
   return (
     <>
-      <Link href={`/projects/create`}>
-        <Button variant="contained" color="primary" className="mt-8">
-          Create project
-        </Button>
-      </Link>
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {projects.map((project) => (
-          <Link
-            href={`/projects/${project._id}`}
-            key={project._id}
-            className="flex aspect-square flex-col justify-between rounded-lg bg-white p-6 text-black shadow-lg"
-          >
-            <div className="my-2">
-              <h1>{project._id}</h1>
-              <h1 className="font-bold">{project.name}</h1>
-              <p>{project.description}</p>
-            </div>
+
+      <div className="flex flex-col items-center w-screen px-4 ">
+        <div className="flex flex-col w-full max-w-6xl py-7">
+          <h1 className="text-custom-blue">Mina projekt</h1>
+          <Link href={`/projects/create`} className="self-end">
+            <Button variant="outlined" color="primary" className="mb-5">
+              + Lägg till projekt
+            </Button>
           </Link>
-        ))}
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {projects.reverse().map((project) => (
+              <Link
+                href={`/projects/${project.id}`}
+                key={project._id}
+                className="flex aspect-square flex-col justify-between rounded-lg bg-white p-6 text-black shadow-lg hover:scale-105"
+              >
+                <div className="my-2">
+                  <h2 className="font-bold">{project.name}</h2>
+                  <p>{project.description}</p>
+                  <p>{project.date.toLocaleDateString()}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
       </div>
     </>
   );

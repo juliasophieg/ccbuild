@@ -41,47 +41,61 @@ export default function Login() {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="my-1">
-          <label htmlFor="email" className=" mx-1">
-            Email
-          </label>
-          <TextField
-            id="email"
-            type="email"
-            size="small"
-            {...register("email")}
-            error={!!errors.email}
-            helperText={errors.email ? errors.email.message : ""}
-          />
-        </div>
+    <div className="flex justify-center items-center w-full my-14">
+      <div className="w-96 border-solid border rounded-md border-gray-200 py-7 px-12">
+        <h1 className="text-center mb-4">Logga in</h1>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <div className="flex flex-col items-center gap-4">
+            <div className="my-1 flex flex-col w-full">
+              <label
+                htmlFor="email"
+                className="text-sm font-medium text-gray-700"
+              >
+                Mailadress
+              </label>{" "}
+              <TextField
+                className="w-full"
+                id="outlined-size-small"
+                type="email"
+                size="small"
+                placeholder="exempel@mail.se"
+                {...register("email")}
+                error={!!errors.email}
+                helperText={errors.email ? errors.email.message : ""}
+              />
+            </div>
 
-        <div className="my-1">
-          <label htmlFor="password" className=" mx-1">
-            Password
-          </label>
-          <TextField
-            id="password"
-            type="password"
-            size="small"
-            {...register("password")}
-            error={!!errors.password}
-            helperText={errors.password ? errors.password.message : ""}
-          />
-        </div>
+            <div className="my-1 flex flex-col w-full">
+              <label
+                htmlFor="password"
+                className="text-sm font-medium text-gray-700"
+              >
+                Lösenord
+              </label>{" "}
+              <TextField
+                className="w-full"
+                id="outlined-size-small"
+                type="password"
+                size="small"
+                placeholder="•••••••••"
+                {...register("password")}
+                error={!!errors.password}
+                helperText={errors.password ? errors.password.message : ""}
+              />
+            </div>
 
-        <Button type="submit" variant="outlined">
-          Login
-        </Button>
-        <p>
-          Don&apos;t have an account?{" "}
-          <a href="/register" className="underline underline-offset-3">
-            Sign up
-          </a>
-        </p>
-      </form>
+            <Button type="submit" variant="contained" className="w-full mt-2">
+              Logga in
+            </Button>
+            <p>
+              Har du inget konto?{" "}
+              <a href="/register" className="underline underline-offset-3">
+                Skapa konto
+              </a>
+            </p>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
