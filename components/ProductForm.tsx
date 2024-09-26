@@ -14,7 +14,6 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import Textfield from "@mui/material/TextField";
 import { useCategoryContext } from "../context/CategoryContext";
 
 type ProductFormProps = {
@@ -170,12 +169,10 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
     <div className="basis-4/5">
       <FormProvider {...methodsForm1}>
         <form onSubmit={handleSubmitForm1(onSubmitForm1)}>
-          <h1 className="text-black font-normal">
+          <h1 className="text-black font-normal mb-4 mx-4">
             {selectedStep === "Överblick" ? "Överblick" : "Ny produkt"}
           </h1>
-          <Button onClick={toggleExpandAll} variant="contained">
-            {expandAll ? "Collapse All" : "Expand All"}
-          </Button>
+
           <Accordion
             expanded={expandAll || expanded === "Generell information"}
             onChange={handleChange("Generell information")}
@@ -186,7 +183,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
               id="panel1-header"
             >
               <Typography
-                sx={{ width: "33%", flexShrink: 0, fontSize: "1.5rem" }}
+                sx={{ width: "33%", flexShrink: 0, fontSize: "1.25rem" }}
               >
                 Generell information
               </Typography>
@@ -204,11 +201,10 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
               aria-controls="panel2-content"
               id="panel2-header"
             >
-              <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                Egenskaper
-              </Typography>
-              <Typography sx={{ color: "text.secondary" }}>
-                Egenskaper
+              <Typography
+                sx={{ width: "33%", flexShrink: 0, fontSize: "1.25rem" }}
+              >
+                Egenskaper{" "}
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
@@ -224,10 +220,9 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
               aria-controls="panel3-content"
               id="panel3-header"
             >
-              <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                Marknadsplats
-              </Typography>
-              <Typography sx={{ color: "text.secondary" }}>
+              <Typography
+                sx={{ width: "33%", flexShrink: 0, fontSize: "1.25rem" }}
+              >
                 Marknadsplats{" "}
               </Typography>
             </AccordionSummary>
@@ -244,11 +239,10 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
               aria-controls="panel4-content"
               id="panel4-header"
             >
-              <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                Plats/Status/Antal
-              </Typography>
-              <Typography sx={{ color: "text.secondary" }}>
-                Plats/Status/Antal
+              <Typography
+                sx={{ width: "33%", flexShrink: 0, fontSize: "1.25rem" }}
+              >
+                Plats/Status/Antal{" "}
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
@@ -269,11 +263,15 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
                 aria-controls="panel5-content"
                 id="panel5-header"
               >
-                <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                  Överblick/Publicera
-                </Typography>
-                <Typography sx={{ color: "text.secondary" }}>
-                  Överblick/Publicera
+                <Typography
+                  sx={{
+                    width: "33%",
+                    flexShrink: 0,
+                    fontSize: "1.25rem",
+                    fontWeight: "400",
+                  }}
+                >
+                  Överblick/Publicera{" "}
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>

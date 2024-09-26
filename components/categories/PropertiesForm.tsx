@@ -1,56 +1,70 @@
-'use client'
+"use client";
 
-import React from 'react'
-import { useFormContext } from 'react-hook-form'
-import { ProductFormData } from '@/schemas'
+import React from "react";
+import { useFormContext } from "react-hook-form";
+import { ProductFormData } from "@/schemas";
+import TextField from "@mui/material/TextField";
 
 const PropertiesForm: React.FC = React.memo(() => {
   const {
     register,
     formState: { errors },
-  } = useFormContext<ProductFormData>()
+  } = useFormContext<ProductFormData>();
 
   return (
-    <fieldset>
-      <legend>Properties</legend>
-      <div>
-        <label htmlFor='material'>Material:</label>
-        <input
-          id='material'
-          type='text'
-          {...register('properties.material')}
-          aria-invalid={errors.properties?.material ? 'true' : 'false'}
-        />
-        {errors.properties?.material && (
-          <p className='error'>{errors.properties.material.message}</p>
-        )}
-      </div>
-      <div>
-        <label htmlFor='color'>Color:</label>
-        <input
-          id='color'
-          type='text'
-          {...register('properties.color')}
-          aria-invalid={errors.properties?.color ? 'true' : 'false'}
-        />
-        {errors.properties?.color && (
-          <p className='error'>{errors.properties.color.message}</p>
-        )}
-      </div>
-      <div>
-        <label htmlFor='surfaceTreatment'>Surface Treatment:</label>
-        <input
-          id='surfaceTreatment'
-          type='text'
-          {...register('properties.surfaceTreatment')}
-          aria-invalid={errors.properties?.surfaceTreatment ? 'true' : 'false'}
-        />
-        {errors.properties?.surfaceTreatment && (
-          <p className='error'>{errors.properties.surfaceTreatment.message}</p>
-        )}
-      </div>
-    </fieldset>
-  )
-})
+    <fieldset className="flex gap-4">
+      {/* Material */}
+      <TextField
+        className="w-1/3"
+        required
+        label="Material"
+        variant="outlined"
+        size="small"
+        id="material"
+        {...register("properties.material")}
+        aria-invalid={errors.properties?.material ? "true" : "false"}
+        error={!!errors.properties?.material}
+        helperText={errors.properties?.material?.message}
+        slotProps={{
+          inputLabel: { shrink: true },
+        }}
+      />
 
-export default PropertiesForm
+      {/* Color */}
+      <TextField
+        className="w-1/3"
+        required
+        label="Färg"
+        variant="outlined"
+        size="small"
+        id="color"
+        {...register("properties.color")}
+        aria-invalid={errors.properties?.color ? "true" : "false"}
+        error={!!errors.properties?.color}
+        helperText={errors.properties?.color?.message}
+        slotProps={{
+          inputLabel: { shrink: true },
+        }}
+      />
+
+      {/* Surface Treatment */}
+      <TextField
+        className="w-1/3"
+        required
+        label="Ytbehandling"
+        variant="outlined"
+        size="small"
+        id="surfaceTreatment"
+        {...register("properties.surfaceTreatment")}
+        aria-invalid={errors.properties?.surfaceTreatment ? "true" : "false"}
+        error={!!errors.properties?.surfaceTreatment}
+        helperText={errors.properties?.surfaceTreatment?.message}
+        slotProps={{
+          inputLabel: { shrink: true },
+        }}
+      />
+    </fieldset>
+  );
+});
+
+export default PropertiesForm;
