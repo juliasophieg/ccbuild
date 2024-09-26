@@ -23,7 +23,7 @@ const Page: FC<PageProps> = async ({ params }) => {
 
   try {
     const res = await fetch(
-      `http://localhost:3000/api/projects/${params.slug}`,
+      `https://ccbuild-project.vercel.app/api/projects/${params.slug}`,
       {
         cache: 'no-store',
       },
@@ -45,7 +45,7 @@ const Page: FC<PageProps> = async ({ params }) => {
 
   try {
     const resProducts = await fetch(
-      `http://localhost:3000/api/products/${project._id}`,
+      `https://ccbuild-project.vercel.app/api/products/${project._id}`,
       {
         cache: 'no-store',
       },
@@ -93,7 +93,7 @@ const Page: FC<PageProps> = async ({ params }) => {
       </div>
 
       <Link
-        href={`http://localhost:3000/projects/${params.slug}/product/create`}
+        href={`https://ccbuild-project.vercel.app/projects/${params.slug}/product/create`}
       >
         <Button variant='contained' color='primary' className='mt-8'>
           Create Product

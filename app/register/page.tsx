@@ -1,12 +1,11 @@
 'use client'
 
-
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { UserSchema } from "@/schemas";
-import { useRouter } from "next/navigation";
-import { Button, Box, TextField } from "@mui/material";
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { UserSchema } from '@/schemas'
+import { useRouter } from 'next/navigation'
+import { Button, Box, TextField } from '@mui/material'
 
 type RegisterForm = z.infer<typeof UserSchema>
 
@@ -28,13 +27,16 @@ export default function Register() {
 
   const onSubmit = async (data: RegisterForm) => {
     try {
-      const response = await fetch('http://localhost:3000/api/users', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      const response = await fetch(
+        'https://ccbuild-project.vercel.app/api/users',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
         },
-        body: JSON.stringify(data),
-      })
+      )
 
       if (!response.ok) {
         const errorData = await response.json()
@@ -57,73 +59,73 @@ export default function Register() {
   }
 
   return (
-    <div className="flex justify-center items-center w-full my-14">
-      <div className="w-96 border-solid border rounded-md border-gray-200 py-7 px-12">
-        <h1 className="text-center mb-4">Skapa konto</h1>
+    <div className='my-14 flex w-full items-center justify-center'>
+      <div className='w-96 rounded-md border border-solid border-gray-200 px-12 py-7'>
+        <h1 className='mb-4 text-center'>Skapa konto</h1>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className="flex flex-col items-center gap-4">
-            <div className="my-1 flex flex-col w-full">
+          <div className='flex flex-col items-center gap-4'>
+            <div className='my-1 flex w-full flex-col'>
               <label
-                htmlFor="name"
-                className="text-sm font-medium text-gray-700"
+                htmlFor='name'
+                className='text-sm font-medium text-gray-700'
               >
                 Namn
-              </label>{" "}
+              </label>{' '}
               <TextField
-                id="outlined-size-small"
-                placeholder="För- och efternamn"
-                type="text"
-                size="small"
-                {...form.register("name")}
+                id='outlined-size-small'
+                placeholder='För- och efternamn'
+                type='text'
+                size='small'
+                {...form.register('name')}
                 error={!!errors.name}
-                helperText={errors.name ? errors.name.message : ""}
-                className="w-full"
+                helperText={errors.name ? errors.name.message : ''}
+                className='w-full'
               />
             </div>
-            <div className="my-1 flex flex-col w-full">
+            <div className='my-1 flex w-full flex-col'>
               <label
-                htmlFor="email"
-                className="text-sm font-medium text-gray-700"
+                htmlFor='email'
+                className='text-sm font-medium text-gray-700'
               >
                 Mailadress
               </label>
               <TextField
-                id="outlined-size-small"
-                placeholder="exempel@mail.se"
-                type="email"
-                size="small"
-                {...form.register("email")}
+                id='outlined-size-small'
+                placeholder='exempel@mail.se'
+                type='email'
+                size='small'
+                {...form.register('email')}
                 error={!!errors.email}
-                helperText={errors.email ? errors.email.message : ""}
-                className="w-full"
+                helperText={errors.email ? errors.email.message : ''}
+                className='w-full'
               />
             </div>
 
-            <div className="my-1 flex flex-col w-full">
+            <div className='my-1 flex w-full flex-col'>
               <label
-                htmlFor="password"
-                className="text-sm font-medium text-gray-700"
+                htmlFor='password'
+                className='text-sm font-medium text-gray-700'
               >
                 Lösenord
               </label>
               <TextField
-                id="outlined-size-small"
-                placeholder="•••••••••"
-                type="password"
-                size="small"
-                {...form.register("password")}
+                id='outlined-size-small'
+                placeholder='•••••••••'
+                type='password'
+                size='small'
+                {...form.register('password')}
                 error={!!errors.password}
-                helperText={errors.password ? errors.password.message : ""}
-                className="w-full"
+                helperText={errors.password ? errors.password.message : ''}
+                className='w-full'
               />
             </div>
 
-            <Button type="submit" variant="contained" className="w-full mt-2">
+            <Button type='submit' variant='contained' className='mt-2 w-full'>
               Skapa konto
             </Button>
             <p>
-              Har du redan ett konto?{" "}
-              <a href="/login" className="underline underline-offset-3">
+              Har du redan ett konto?{' '}
+              <a href='/login' className='underline-offset-3 underline'>
                 Logga in
               </a>
             </p>
