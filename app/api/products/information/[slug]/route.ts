@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getProductById } from '@/actions/productAction'
-import mongoose from 'mongoose'
 
 export async function GET(
   req: NextRequest,
