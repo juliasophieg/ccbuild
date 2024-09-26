@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ProductSchema, ProductFormData } from "../schemas";
+import Link from "next/link";
 import Step1 from "./steps/Step1";
 import Step2 from "./steps/Step2";
 import Step3 from "./steps/Step3";
@@ -22,14 +23,20 @@ type ProductFormProps = {
   projectId: string;
 };
 
+const steps = [
+  "Generell information",
+  "Egenskaper",
+  "Marknadsplats",
+  "Plats/Status/Antal",
+  "Överblick/Publicera",
+];
+
 const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
   const [productId, setProductId] = useState<string | null>(null);
   const isCreatingProduct = useRef(false);
   const { setSelectedStep } = useCategoryContext();
   const { selectedStep } = useCategoryContext();
-
   const [expanded, setExpanded] = useState<string | false>(false);
-
   const [expandAll, setExpandAll] = useState(false);
 
   const methodsForm1 = useForm<ProductFormData>({
@@ -85,6 +92,24 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
       setExpanded(isExpanded ? panel : false);
       setSelectedStep(isExpanded ? panel : "");
     };
+
+  const handleNext = () => {
+    const currentIndex = steps.indexOf(selectedStep);
+    if (currentIndex < steps.length - 1) {
+      const nextStep = steps[currentIndex + 1];
+      setSelectedStep(nextStep);
+      setExpanded(nextStep);
+    }
+  };
+
+  const handlePrevious = () => {
+    const currentIndex = steps.indexOf(selectedStep);
+    if (currentIndex > 0) {
+      const prevStep = steps[currentIndex - 1];
+      setSelectedStep(prevStep);
+      setExpanded(prevStep);
+    }
+  };
 
   const toggleExpandAll = () => {
     setExpandAll(!expandAll);
@@ -193,6 +218,11 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
             <AccordionDetails>
               <Step1 />
             </AccordionDetails>
+            <AccordionActions className="p-4">
+              <Button onClick={handleNext} variant="contained">
+                Nästa
+              </Button>
+            </AccordionActions>
           </Accordion>
           <Accordion
             expanded={expandAll || expanded === "Egenskaper"}
@@ -212,6 +242,11 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
             <AccordionDetails>
               <Step2 />
             </AccordionDetails>
+            <AccordionActions className="p-4">
+              <Button onClick={handleNext} variant="contained">
+                Nästa
+              </Button>
+            </AccordionActions>
           </Accordion>
           <Accordion
             expanded={expandAll || expanded === "Marknadsplats"}
@@ -231,6 +266,11 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
             <AccordionDetails>
               <Step3 />
             </AccordionDetails>
+            <AccordionActions className="p-4">
+              <Button onClick={handleNext} variant="contained">
+                Nästa
+              </Button>
+            </AccordionActions>
           </Accordion>
           <Accordion
             expanded={expandAll || expanded === "Plats/Status/Antal"}
@@ -250,6 +290,11 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
             <AccordionDetails>
               <Step4 />
             </AccordionDetails>
+            <AccordionActions className="p-4">
+              <Button onClick={handleNext} variant="contained">
+                Nästa
+              </Button>
+            </AccordionActions>
             <AccordionActions></AccordionActions>
           </Accordion>
           {expandAll ? (
@@ -283,10 +328,18 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
             </Accordion>
           )}
 
-          <div className="flex w-full flex-row justify-end">
-            <Button type="submit" variant="contained" sx={{ mt: 2 }}>
-              Spara
+          <div className="flex gap-2 my-3">
+            <Button variant="outlined" onClick={handlePrevious}>
+              Föregående
             </Button>
+            <div className="flex w-full flex-row gap-3 justify-end">
+              <Link href="/">
+                <Button variant="outlined">Avbryt</Button>
+              </Link>
+              <Button type="submit" variant="contained">
+                Spara
+              </Button>
+            </div>
           </div>
         </form>
       </FormProvider>
