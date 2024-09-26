@@ -96,7 +96,7 @@ const GeneralForm: React.FC = React.memo(() => {
         </div>
       </div>
       <div className="flex flex-col justify-center items-center border border-dotted  w-64 p-2">
-        <UploadFileIcon sx={{ color: "blue" }} />
+        <UploadFileIcon sx={{ color: "#2196F3" }} />
         <p>Ladda upp eller dra hit filer</p>
         <p className="text-xs text-gray-500">SVG, PNG, JPG or GIF (max. 3MB)</p>
       </div>

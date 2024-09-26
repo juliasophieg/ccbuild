@@ -17,7 +17,7 @@ const ProgressBar: React.FC = () => {
   const currentStepIndex = steps.indexOf(selectedStep);
 
   return (
-    <div className="flex flex-col gap-4 px-16">
+    <div className="flex flex-col gap-4 px-8 pt-16">
       {steps.map((step, index) => (
         <div key={index} className="flex flex-col items-center gap-2">
           <div
