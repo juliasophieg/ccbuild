@@ -6,6 +6,7 @@ import { ProductFormData } from "@/schemas";
 import TextField from "@mui/material/TextField";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 
 const PriceForm: React.FC = React.memo(() => {
   const {
@@ -15,7 +16,10 @@ const PriceForm: React.FC = React.memo(() => {
 
   return (
     <fieldset className="flex flex-col gap-4">
-      <h3 className="text-lg">Pris</h3>
+      <h3 className="text-lg">
+        <AccountBalanceWalletIcon sx={{ color: "gray", mr: 0.5 }} />
+        Pris
+      </h3>
       {/* Internal Price */}
       <div className="flex gap-4">
         <TextField

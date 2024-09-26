@@ -4,6 +4,7 @@ import React from "react";
 import { useFormContext } from "react-hook-form";
 import { ProductFormData } from "@/schemas";
 import TextField from "@mui/material/TextField";
+import StarSharpIcon from "@mui/icons-material/StarSharp";
 
 const ConditionForm: React.FC = React.memo(() => {
   const {
@@ -13,7 +14,10 @@ const ConditionForm: React.FC = React.memo(() => {
 
   return (
     <fieldset className="flex flex-col gap-4">
-      <h3 className="text-lg">Skick</h3>
+      <h3 className="text-lg">
+        <StarSharpIcon sx={{ color: "gray", mr: 0.5 }} />
+        Skick
+      </h3>
       <div className="flex gap-4 w-full">
         <TextField
           className="w-1/2"

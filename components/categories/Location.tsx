@@ -5,6 +5,7 @@ import { useFormContext } from "react-hook-form";
 import { ProductFormData } from "@/schemas";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 const LocationForm: React.FC = React.memo(() => {
   const {
@@ -14,7 +15,10 @@ const LocationForm: React.FC = React.memo(() => {
 
   return (
     <fieldset className="flex flex-col gap-4">
-      <h3 className="text-lg">Plats</h3>
+      <h3 className="text-lg">
+        <LocationOnIcon sx={{ color: "gray", mr: 0.5 }} />
+        Plats
+      </h3>
 
       <div className="flex flex-row gap-4">
         <TextField

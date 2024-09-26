@@ -5,7 +5,6 @@ import { useFormContext } from "react-hook-form";
 import { ProductFormData } from "@/schemas";
 import DynamicForm from "../DynamicForm";
 import TextField from "@mui/material/TextField";
-
 const GeneralForm: React.FC = React.memo(() => {
   const {
     register,
@@ -58,7 +57,7 @@ const GeneralForm: React.FC = React.memo(() => {
             variant="outlined"
             size="small"
             required
-            defaultValue="00000000" // LÄGG TILL NUVARANDE PRODUKT-ID
+            defaultValue="Sparas automatiskt" // LÄGG TILL NUVARANDE PRODUKT-ID
             disabled
             id="productId outlined-required"
             slotProps={{

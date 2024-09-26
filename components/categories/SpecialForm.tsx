@@ -2,6 +2,7 @@ import React from "react";
 import { useFormContext } from "react-hook-form";
 import { TextField, MenuItem } from "@mui/material";
 import { useCategoryContext } from "../../context/CategoryContext";
+import SettingsIcon from "@mui/icons-material/Settings";
 
 const DoorForm: React.FC = () => {
   const {
@@ -629,8 +630,11 @@ const SpecialForm: React.FC = React.memo(() => {
   };
 
   return (
-    <fieldset>
-      <legend>Special</legend>
+    <fieldset className="flex flex-col gap-4">
+      <h3 className="text-lg">
+        <SettingsIcon sx={{ color: "gray", mr: 0.5 }} />
+        Speciella egenskaper
+      </h3>
       {renderCategorySpecificForm()}
     </fieldset>
   );

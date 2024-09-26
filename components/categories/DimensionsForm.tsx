@@ -5,6 +5,7 @@ import { useFormContext } from "react-hook-form";
 import { ProductFormData } from "@/schemas";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
+import SquareFootIcon from "@mui/icons-material/SquareFoot";
 
 const DimensionsForm: React.FC = React.memo(() => {
   const {
@@ -14,7 +15,10 @@ const DimensionsForm: React.FC = React.memo(() => {
 
   return (
     <fieldset className="flex flex-col gap-4">
-      <h3 className="text-lg">Mått</h3>
+      <h3 className="text-lg">
+        <SquareFootIcon sx={{ color: "gray", mr: 0.5 }} />
+        Mått
+      </h3>
 
       {/* First Row - Four Fields */}
       <div className="flex gap-4 w-full">

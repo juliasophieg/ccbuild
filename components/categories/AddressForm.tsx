@@ -4,6 +4,7 @@ import React from "react";
 import { useFormContext } from "react-hook-form";
 import { ProductFormData } from "@/schemas";
 import TextField from "@mui/material/TextField";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 const AddressForm: React.FC = React.memo(() => {
   const {
@@ -13,7 +14,11 @@ const AddressForm: React.FC = React.memo(() => {
 
   return (
     <fieldset className="flex flex-col gap-4">
-      <h3 className="text-lg">Adress</h3>
+      <h3 className="text-lg">
+        {" "}
+        <LocationOnIcon sx={{ color: "gray", mr: 0.5 }} />
+        Adress
+      </h3>
       <div className="flex gap-4 w-full">
         {/* Address Field */}
         <TextField

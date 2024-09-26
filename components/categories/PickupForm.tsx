@@ -6,6 +6,7 @@ import { ProductFormData } from "@/schemas";
 import TextField from "@mui/material/TextField";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 
 const PickupForm: React.FC = React.memo(() => {
   const {
@@ -15,7 +16,11 @@ const PickupForm: React.FC = React.memo(() => {
 
   return (
     <fieldset className="flex flex-col gap-4">
-      <h3 className="text-lg">Upphämtning</h3>
+      <h3 className="text-lg">
+        {" "}
+        <CalendarTodayIcon sx={{ color: "gray", mr: 0.5 }} />
+        Upphämtning
+      </h3>
       {/* Available Date Field */}
       <div className="flex gap-4">
         <TextField
