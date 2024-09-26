@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
 import { useFormContext, Controller } from "react-hook-form";
 import { useCategoryContext } from "@/context/CategoryContext";
@@ -218,3 +219,4 @@ const DynamicForm: React.FC = () => {
 };
 
 export default DynamicForm;
+/* eslint-disable @typescript-eslint/no-unused-vars */

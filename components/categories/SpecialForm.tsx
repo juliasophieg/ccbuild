@@ -6,7 +6,7 @@ import { useCategoryContext } from "../../context/CategoryContext";
 const DoorForm: React.FC = () => {
   const {
     register,
-    formState: { errors },
+    formState: {},
   } = useFormContext();
 
   return (
@@ -316,7 +316,7 @@ const DoorForm: React.FC = () => {
 const WindowForm: React.FC = () => {
   const {
     register,
-    formState: { errors },
+    formState: {},
   } = useFormContext();
 
   return (
@@ -447,7 +447,7 @@ const WindowForm: React.FC = () => {
 const GallerForm: React.FC = () => {
   const {
     register,
-    formState: { errors },
+    formState: {},
   } = useFormContext();
 
   return (

@@ -3,12 +3,10 @@
 import React from "react";
 import { useFormContext } from "react-hook-form";
 import { ProductFormData } from "@/schemas";
-import { useCategoryContext } from "@/context/CategoryContext";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 
 const DimensionsForm: React.FC = React.memo(() => {
-  const { selectedCategory1 } = useCategoryContext();
   const {
     register,
     formState: { errors },
