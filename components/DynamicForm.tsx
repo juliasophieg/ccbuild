@@ -5,36 +5,106 @@ import { ProductFormData } from "@/schemas";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 
+
 const DynamicForm: React.FC = () => {
-  const { control, watch, setValue } = useFormContext<ProductFormData>();
-  const { setSelectedCategory1 } = useCategoryContext();
+  const { control, watch, setValue } = useFormContext<ProductFormData>()
+  const { setSelectedCategory1 } = useCategoryContext()
 
-  const [showSecondForm, setShowSecondForm] = useState(false);
-  const [showThirdForm, setShowThirdForm] = useState(false);
+  const [showSecondForm, setShowSecondForm] = useState(false)
+  const [showThirdForm, setShowThirdForm] = useState(false)
 
-  const firstCategory = watch("generalInformation.productCategory1");
-  const secondCategory = watch("generalInformation.productCategory2");
+  const firstCategory = watch('generalInformation.productCategory1')
+  const secondCategory = watch('generalInformation.productCategory2')
 
   const secondFormOptions = {
-    chair: ["Wooden Chair", "Plastic Chair", "Cushioned Chair"],
-    table: ["Coffee Table", "Dining Table", "Study Table"],
-    house: ["Apartment", "Villa", "Cottage"],
-  };
+    door: [
+      'Altandörr',
+      'Branddörr - glas',
+      'Entréparti',
+      'Innderdörr - glas',
+      'Innderdörr - trä',
+      'Skjutdörr',
+      'Ytterdörr',
+    ],
+    window: [
+      'Aluminiumbekklätt träfönster',
+      'Aluminiumfönster',
+      'Plast/PVC-fönster',
+      'Plåtbeklätt träfönster',
+      'Träfönster',
+      'Gjutjärnsfönster',
+      'Fönsterbänk',
+    ],
+    galler: [
+      'Entregaller',
+      'Fönstergaller',
+      'Förrådsgaller',
+      'Gallergrind',
+      'Tillgänglighetsramp',
+    ],
+  }
 
   const thirdFormOptions = {
-    "Wooden Chair": ["With Arms", "Without Arms"],
-    "Plastic Chair": ["Stackable", "Non-stackable"],
-    "Cushioned Chair": ["Leather Cushion", "Fabric Cushion"],
-    "Coffee Table": ["Round", "Square"],
-    "Dining Table": ["Wooden", "Glass"],
-    "Study Table": ["Small", "Large"],
-    Apartment: ["Studio", "2 Bedroom"],
-    Villa: ["Single Floor", "Double Floor"],
-    Cottage: ["Traditional", "Modern"],
-  };
+    Altandörr: ['Altandörr 1', 'Altandörr 2', 'Altandörr 3'],
+    'Branddörr - glas': [
+      'Branddörr - glas 1',
+      'Branddörr - glas 2',
+      'Branddörr - glas 3',
+    ],
+    Entréparti: ['Entréparti 1', 'Entréparti 2', 'Entréparti 3'],
+    'Innderdörr - glas': [
+      'Innderdörr - glas 1',
+      'Innderdörr - glas 2',
+      'Innderdörr - glas 3',
+    ],
+    'Innderdörr - trä': [
+      'Innderdörr - trä 1',
+      'Innderdörr - trä 2',
+      'Innderdörr - trä 3',
+    ],
+    Skjutdörr: ['Skjutdörr 1', 'Skjutdörr 2', 'Skjutdörr 3'],
+    Ytterdörr: ['Ytterdörr 1', 'Ytterdörr 2', 'Ytterdörr 3'],
+    'Aluminiumbekklätt träfönster': [
+      'Aluminiumbekklätt träfönster 1',
+      'Aluminiumbekklätt träfönster 2',
+      'Aluminiumbekklätt träfönster 3',
+    ],
+    Aluminiumfönster: [
+      'Aluminiumfönster 1',
+      'Aluminiumfönster 2',
+      'Aluminiumfönster 3',
+    ],
+    'Plast/PVC-fönster': [
+      'Plast/PVC-fönster 1',
+      'Plast/PVC-fönster 2',
+      'Plast/PVC-fönster 3',
+    ],
+    'Plåtbeklätt träfönster': [
+      'Plåtbeklätt träfönster 1',
+      'Plåtbeklätt träfönster 2',
+      'Plåtbeklätt träfönster 3',
+    ],
+    Träfönster: ['Träfönster 1', 'Träfönster 2', 'Träfönster 3'],
+    Gjutjärnsfönster: [
+      'Gjutjärnsfönster 1',
+      'Gjutjärnsfönster 2',
+      'Gjutjärnsfönster 3',
+    ],
+    Fönsterbänk: ['Fönsterbänk 1', 'Fönsterbänk 2', 'Fönsterbänk 3'],
+    Entregaller: ['Entregaller 1', 'Entregaller 2', 'Entregaller 3'],
+    Fönstergaller: ['Fönstergaller 1', 'Fönstergaller 2', 'Fönstergaller 3'],
+    Förrådsgaller: ['Förrådsgaller 1', 'Förrådsgaller 2', 'Förrådsgaller 3'],
+    Gallergrind: ['Gallergrind 1', 'Gallergrind 2', 'Gallergrind 3'],
+    Tillgänglighetsramp: [
+      'Tillgänglighetsramp 1',
+      'Tillgänglighetsramp 2',
+      'Tillgänglighetsramp 3',
+    ],
+  }
 
   return (
     <>
+
       <div className="flex gap-4">
         <Controller
           control={control}
@@ -64,9 +134,9 @@ const DynamicForm: React.FC = () => {
                 }}
               >
                 <MenuItem value="">Välj en kategori</MenuItem>
-                <MenuItem value="chair">Chair</MenuItem>
-                <MenuItem value="table">Table</MenuItem>
-                <MenuItem value="house">House</MenuItem>
+                <MenuItem value="door">Dörr</MenuItem>
+                <MenuItem value="window">Window</MenuItem>
+                <MenuItem value="galler">Galler & smide</MenuItem>
               </TextField>
             </div>
           )}
@@ -146,7 +216,7 @@ const DynamicForm: React.FC = () => {
         )}
       </div>
     </>
-  );
-};
+  )
+}
 
-export default DynamicForm;
+export default DynamicForm
