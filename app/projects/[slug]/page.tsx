@@ -1,7 +1,11 @@
 import { FC } from 'react'
-import Link from 'next/link'
+import NextLink from 'next/link' // Renamed to NextLink
 import { Button } from '@mui/material'
 import { ProductFormData } from '@/schemas'
+import Breadcrumbs from '@mui/material/Breadcrumbs'
+import Typography from '@mui/material/Typography'
+import Link from '@mui/material/Link'
+import HomeIcon from '@mui/icons-material/Home'
 
 type PageProps = {
   params: {
@@ -65,6 +69,16 @@ const Page: FC<PageProps> = async ({ params }) => {
 
   return (
     <>
+      <Breadcrumbs maxItems={2} aria-label='breadcrumb'>
+        <Link underline='hover' color='inherit' href='#'>
+          <HomeIcon sx={{ mr: 0.5 }} fontSize='inherit' />
+        </Link>
+        <Link underline='hover' color='inherit' href='#'>
+          Fill
+        </Link>
+
+        <Typography sx={{ color: 'text.primary' }}>Produkter</Typography>
+      </Breadcrumbs>
       <div className='mb-8'>
         <h1 className='text-4xl font-bold'>{project.name}</h1>
         <p className='mt-2 text-lg'>Date: {project.date}</p>
@@ -92,13 +106,13 @@ const Page: FC<PageProps> = async ({ params }) => {
         )}
       </div>
 
-      <Link
+      <NextLink
         href={`http://localhost:3000/projects/${params.slug}/product/create`}
       >
         <Button variant='contained' color='primary' className='mt-8'>
           Create Product
         </Button>
-      </Link>
+      </NextLink>
     </>
   )
 }
