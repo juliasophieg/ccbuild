@@ -13,6 +13,7 @@ const Step2: React.FC = React.memo(() => {
       <PropertiesForm />
       <SpecialForm />
       <DimensionsForm />
+      <SpecialForm />
       <ProductInformationForm />
     </div>
   )
