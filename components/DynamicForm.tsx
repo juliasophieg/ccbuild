@@ -1,7 +1,10 @@
-import React, { useState } from 'react'
-import { useFormContext, Controller } from 'react-hook-form'
-import { useCategoryContext } from '@/context/CategoryContext'
-import { ProductFormData } from '@/schemas'
+import React, { useState } from "react";
+import { useFormContext, Controller } from "react-hook-form";
+import { useCategoryContext } from "@/context/CategoryContext";
+import { ProductFormData } from "@/schemas";
+import TextField from "@mui/material/TextField";
+import MenuItem from "@mui/material/MenuItem";
+
 
 const DynamicForm: React.FC = () => {
   const { control, watch, setValue } = useFormContext<ProductFormData>()
@@ -101,81 +104,117 @@ const DynamicForm: React.FC = () => {
 
   return (
     <>
-      <Controller
-        control={control}
-        name='generalInformation.productCategory1'
-        render={({ field }) => (
-          <div>
-            <label>Product Category 1:</label>
-            <select
-              {...field}
-              onChange={e => {
-                field.onChange(e)
-                setShowSecondForm(true)
-                setShowThirdForm(false)
-                setValue('generalInformation.productCategory2', '')
-                setValue('generalInformation.productCategory3', '')
-                setSelectedCategory1(e.target.value)
-              }}
-            >
-              <option value=''>Select an option</option>
-              <option value='door'>Dörr</option>
-              <option value='window'>Fönster</option>
-              <option value='galler'>Galleri & smide</option>
-            </select>
-          </div>
-        )}
-      />
 
-      {showSecondForm && firstCategory && (
+      <div className="flex gap-4">
         <Controller
           control={control}
-          name='generalInformation.productCategory2'
+          name="generalInformation.productCategory1"
           render={({ field }) => (
-            <div>
-              <label>Product Category 2:</label>
-              <select
+            <div className="w-1/3">
+              <TextField
+                className="w-full"
+                size="small"
+                id="outlined-select-required"
+                required
+                select
+                label="Produktkategori 1"
+                slotProps={{
+                  inputLabel: {
+                    shrink: true,
+                  },
+                }}
                 {...field}
-                onChange={e => {
-                  field.onChange(e)
-                  setShowThirdForm(true)
-                  setValue('generalInformation.productCategory3', '')
+                onChange={(e) => {
+                  field.onChange(e);
+                  setShowSecondForm(true);
+                  setShowThirdForm(false);
+                  setValue("generalInformation.productCategory2", "");
+                  setValue("generalInformation.productCategory3", "");
+                  setSelectedCategory1(e.target.value);
                 }}
               >
-                <option value=''>Select an option</option>
-                {secondFormOptions[
-                  firstCategory as keyof typeof secondFormOptions
-                ]?.map(option => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
+                <MenuItem value="">Välj en kategori</MenuItem>
+                <MenuItem value="door">Dörr</MenuItem>
+                <MenuItem value="window">Window</MenuItem>
+                <MenuItem value="galler">Galler & smide</MenuItem>
+              </TextField>
             </div>
           )}
         />
-      )}
-      {showThirdForm && secondCategory && (
-        <Controller
-          control={control}
-          name='generalInformation.productCategory3'
-          render={({ field }) => (
-            <div>
-              <label>Product Category 3:</label>
-              <select {...field}>
-                <option value=''>Select an option</option>
-                {thirdFormOptions[
-                  secondCategory as keyof typeof thirdFormOptions
-                ]?.map(option => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-            </div>
-          )}
-        />
-      )}
+
+        {showSecondForm && firstCategory && (
+          <Controller
+            control={control}
+            name="generalInformation.productCategory2"
+            render={({ field }) => (
+              <div className="w-1/3">
+                <TextField
+                  className="w-full"
+                  size="small"
+                  id="outlined-select-required"
+                  required
+                  select
+                  label="Produktkategori 2"
+                  slotProps={{
+                    inputLabel: {
+                      shrink: true,
+                    },
+                  }}
+                  {...field}
+                  onChange={(e) => {
+                    field.onChange(e);
+                    setShowThirdForm(true);
+                    setValue("generalInformation.productCategory3", "");
+                  }}
+                >
+                  {/* Assert that firstCategory is a key of secondFormOptions */}
+                  <MenuItem value="">Välj en kategori</MenuItem>
+                  {secondFormOptions[
+                    firstCategory as keyof typeof secondFormOptions
+                  ]?.map((option) => (
+                    <MenuItem key={option} value={option}>
+                      {option}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </div>
+            )}
+          />
+        )}
+        {showThirdForm && secondCategory && (
+          <Controller
+            control={control}
+            name="generalInformation.productCategory3"
+            render={({ field }) => (
+              <div className="w-1/3">
+                <TextField
+                  className="w-full"
+                  size="small"
+                  id="outlined-select-required"
+                  required
+                  select
+                  label="Produktkategori 3"
+                  slotProps={{
+                    inputLabel: {
+                      shrink: true,
+                    },
+                  }}
+                >
+                  {/* Assert that secondCategory is a key of thirdFormOptions */}
+                  <MenuItem value="">Välj en kategori</MenuItem>
+                  {thirdFormOptions[
+                    secondCategory as keyof typeof thirdFormOptions
+                  ]?.map((option) => (
+                    <MenuItem key={option} value={option}>
+                      {option}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </div>
+            )}
+          />
+        )}
+      </div>
     </>
   )
 }

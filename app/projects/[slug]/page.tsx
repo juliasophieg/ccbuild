@@ -1,7 +1,11 @@
 import { FC } from 'react'
-import Link from 'next/link'
+import NextLink from 'next/link' // Renamed to NextLink
 import { Button } from '@mui/material'
 import { ProductFormData } from '@/schemas'
+import Breadcrumbs from '@mui/material/Breadcrumbs'
+import Typography from '@mui/material/Typography'
+import Link from '@mui/material/Link'
+import HomeIcon from '@mui/icons-material/Home'
 
 type PageProps = {
   params: {
@@ -23,7 +27,7 @@ const Page: FC<PageProps> = async ({ params }) => {
 
   try {
     const res = await fetch(
-      `https://ccbuild-project.vercel.app/api/projects/${params.slug}`,
+      `http://localhost:3000/api/projects/${params.slug}`,
       {
         cache: 'no-store',
       },
@@ -45,7 +49,7 @@ const Page: FC<PageProps> = async ({ params }) => {
 
   try {
     const resProducts = await fetch(
-      `https://ccbuild-project.vercel.app/api/products/${project._id}`,
+      `http://localhost:3000/api/products/${project._id}`,
       {
         cache: 'no-store',
       },
@@ -64,27 +68,40 @@ const Page: FC<PageProps> = async ({ params }) => {
   }
 
   return (
-    <>
-      <div className='mb-8'>
+    <div className='mb-14'>
+      <div className='m-4'>
+        <Breadcrumbs maxItems={2} aria-label='breadcrumb'>
+          <Link underline='hover' color='inherit' href='#'>
+            <HomeIcon sx={{ mr: 0.5 }} fontSize='inherit' />
+          </Link>
+          <Link underline='hover' color='inherit' href='#'>
+            Fill
+          </Link>
+
+          <Typography sx={{ color: 'text.primary' }}>Produkter</Typography>
+        </Breadcrumbs>
+      </div>
+      <div className='mx-14 mb-8'>
         <h1 className='text-4xl font-bold'>{project.name}</h1>
-        <p className='mt-2 text-lg'>Date: {project.date}</p>
-        <p className='mt-2'>{project.description}</p>
       </div>
 
-      <div>
+      <div className='mx-14'>
         <h2 className='mb-6 text-3xl font-semibold'>
           Products for this Project
         </h2>
         {products.length > 0 ? (
           <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
             {products.map(product => (
-              <div
+              <NextLink
                 key={product._id}
-                className='flex aspect-square flex-col justify-between rounded-lg bg-white p-6 text-black shadow-lg'
+                href={`http://localhost:3000/products/${product._id}`}
+                passHref
               >
-                {product?.generalInformation?.productName ||
-                  'Product Name Not Available'}
-              </div>
+                <div className='flex aspect-square cursor-pointer flex-col justify-between rounded-lg bg-white p-6 text-black shadow-lg hover:shadow-2xl'>
+                  {product?.generalInformation?.productName ||
+                    'Product Name Not Available'}
+                </div>
+              </NextLink>
             ))}
           </div>
         ) : (
@@ -92,14 +109,15 @@ const Page: FC<PageProps> = async ({ params }) => {
         )}
       </div>
 
-      <Link
-        href={`https://ccbuild-project.vercel.app/projects/${params.slug}/product/create`}
+      <NextLink
+        href={`http://localhost:3000/projects/${params.slug}/product/create`}
+        className='mx-14 mb-14'
       >
         <Button variant='contained' color='primary' className='mt-8'>
           Create Product
         </Button>
-      </Link>
-    </>
+      </NextLink>
+    </div>
   )
 }
 

@@ -7,14 +7,12 @@ import Step1 from './steps/Step1'
 import Step2 from './steps/Step2'
 import Step3 from './steps/Step3'
 import Step4 from './steps/Step4'
-import Accordion from '@mui/material/Accordion'
 import AccordionActions from '@mui/material/AccordionActions'
-import AccordionSummary from '@mui/material/AccordionSummary'
-import AccordionDetails from '@mui/material/AccordionDetails'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import { useCategoryContext } from '../context/CategoryContext'
+import { Accordion, AccordionSummary, AccordionDetails } from './AccordionStyle'
 
 type ProductFormProps = {
   projectId: string
@@ -24,6 +22,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
   const [productId, setProductId] = useState<string | null>(null)
   const isCreatingProduct = useRef(false)
   const { setSelectedStep } = useCategoryContext()
+  const { selectedStep } = useCategoryContext()
 
   const [expanded, setExpanded] = useState<string | false>(false)
 
@@ -49,16 +48,13 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
       isCreatingProduct.current = true
       const createBlankProduct = async () => {
         try {
-          const response = await fetch(
-            'https://ccbuild-project.vercel.app/api/products',
-            {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({ projectId }),
+          const response = await fetch('http://localhost:3000/api/products', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
             },
-          )
+            body: JSON.stringify({ projectId }),
+          })
           if (response.ok) {
             const data = await response.json()
             setProductId(data.product._id)
@@ -103,7 +99,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
       console.log('Product data:', productData)
       console.log('date', typeof productData.pickup?.availableDate)
       const productResponse = await fetch(
-        `https://ccbuild-project.vercel.app/api/products/${productId}`,
+        `http://localhost:3000/api/products/${productId}`,
         {
           method: 'PATCH',
           headers: {
@@ -126,7 +122,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
 
             try {
               const logisticResponse = await fetch(
-                'https://ccbuild-project.vercel.app/api/productLogistics',
+                'http://localhost:3000/api/productLogistics',
                 {
                   method: 'POST',
                   headers: {
@@ -154,6 +150,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
             }
           }
         }
+        sessionStorage.removeItem('productId')
       } else {
         const errorData = await productResponse.json()
         console.error('Server Error:', errorData)
@@ -171,9 +168,9 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
     <div className='basis-4/5'>
       <FormProvider {...methodsForm1}>
         <form onSubmit={handleSubmitForm1(onSubmitForm1)}>
-          <Button onClick={toggleExpandAll} variant='contained'>
-            {expandAll ? 'Collapse All' : 'Expand All'}
-          </Button>
+          <h1 className='mx-4 mb-4 font-normal text-black'>
+            {selectedStep === 'Överblick' ? 'Överblick' : 'Ny produkt'}
+          </h1>
           <Accordion
             expanded={expandAll || expanded === 'Generell information'}
             onChange={handleChange('Generell information')}
@@ -183,10 +180,9 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
               aria-controls='panel1-content'
               id='panel1-header'
             >
-              <Typography sx={{ width: '33%', flexShrink: 0 }}>
-                Generell information
-              </Typography>
-              <Typography sx={{ color: 'text.secondary' }}>
+              <Typography
+                sx={{ width: '33%', flexShrink: 0, fontSize: '1.25rem' }}
+              >
                 Generell information
               </Typography>
             </AccordionSummary>
@@ -203,11 +199,10 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
               aria-controls='panel2-content'
               id='panel2-header'
             >
-              <Typography sx={{ width: '33%', flexShrink: 0 }}>
-                Egenskaper
-              </Typography>
-              <Typography sx={{ color: 'text.secondary' }}>
-                Egenskaper
+              <Typography
+                sx={{ width: '33%', flexShrink: 0, fontSize: '1.25rem' }}
+              >
+                Egenskaper{' '}
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
@@ -223,10 +218,9 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
               aria-controls='panel3-content'
               id='panel3-header'
             >
-              <Typography sx={{ width: '33%', flexShrink: 0 }}>
-                Marknadsplats
-              </Typography>
-              <Typography sx={{ color: 'text.secondary' }}>
+              <Typography
+                sx={{ width: '33%', flexShrink: 0, fontSize: '1.25rem' }}
+              >
                 Marknadsplats{' '}
               </Typography>
             </AccordionSummary>
@@ -243,11 +237,10 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
               aria-controls='panel4-content'
               id='panel4-header'
             >
-              <Typography sx={{ width: '33%', flexShrink: 0 }}>
-                Plats/Status/Antal
-              </Typography>
-              <Typography sx={{ color: 'text.secondary' }}>
-                Plats/Status/Antal
+              <Typography
+                sx={{ width: '33%', flexShrink: 0, fontSize: '1.25rem' }}
+              >
+                Plats/Status/Antal{' '}
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
@@ -268,11 +261,15 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
                 aria-controls='panel5-content'
                 id='panel5-header'
               >
-                <Typography sx={{ width: '33%', flexShrink: 0 }}>
-                  Överblick/Publicera
-                </Typography>
-                <Typography sx={{ color: 'text.secondary' }}>
-                  Överblick/Publicera
+                <Typography
+                  sx={{
+                    width: '33%',
+                    flexShrink: 0,
+                    fontSize: '1.25rem',
+                    fontWeight: '400',
+                  }}
+                >
+                  Överblick/Publicera{' '}
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
@@ -281,9 +278,11 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
               <AccordionActions></AccordionActions>
             </Accordion>
           )}
-          <Button type='submit' variant='contained'>
-            Submit
-          </Button>
+          <div className='flex w-full flex-row justify-end'>
+            <Button type='submit' variant='contained' sx={{ mt: 2 }}>
+              Spara
+            </Button>
+          </div>
         </form>
       </FormProvider>
     </div>
