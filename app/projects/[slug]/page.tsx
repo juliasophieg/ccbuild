@@ -27,7 +27,7 @@ const Page: FC<PageProps> = async ({ params }) => {
 
   try {
     const res = await fetch(
-      `http://localhost:3000/api/projects/${params.slug}`,
+      `https://ccbuild-project.vercel.app/api/projects/${params.slug}`,
       {
         cache: 'no-store',
       },
@@ -49,7 +49,7 @@ const Page: FC<PageProps> = async ({ params }) => {
 
   try {
     const resProducts = await fetch(
-      `http://localhost:3000/api/products/${project._id}`,
+      `https://ccbuild-project.vercel.app/api/products/${project._id}`,
       {
         cache: 'no-store',
       },
@@ -94,7 +94,7 @@ const Page: FC<PageProps> = async ({ params }) => {
             {products.map(product => (
               <NextLink
                 key={product._id}
-                href={`http://localhost:3000/products/${product._id}`}
+                href={`https://ccbuild-project.vercel.app/products/${product._id}`}
                 passHref
               >
                 <div className='flex aspect-square cursor-pointer flex-col justify-between rounded-lg bg-white p-6 text-black shadow-lg hover:shadow-2xl'>
@@ -110,7 +110,7 @@ const Page: FC<PageProps> = async ({ params }) => {
       </div>
 
       <NextLink
-        href={`http://localhost:3000/projects/${params.slug}/product/create`}
+        href={`https://ccbuild-project.vercel.app/projects/${params.slug}/product/create`}
         className='mx-14 mb-14'
       >
         <Button variant='contained' color='primary' className='mt-8'>

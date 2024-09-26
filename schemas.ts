@@ -139,6 +139,7 @@ export const ProductSchema = z.object({
 // PRODUCT LOGISTICS SCHEMA
 
 export const ProductLogisticSchema = z.object({
+  _id: objectIdSchema.optional(),
   pickup: z.object({
     availableDate: z.date().optional(),
     firstDeliveryDate: z.date().optional(),

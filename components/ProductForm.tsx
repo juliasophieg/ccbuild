@@ -48,13 +48,16 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
       isCreatingProduct.current = true
       const createBlankProduct = async () => {
         try {
-          const response = await fetch('http://localhost:3000/api/products', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
+          const response = await fetch(
+            'https://ccbuild-project.vercel.app/api/products',
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ projectId }),
             },
-            body: JSON.stringify({ projectId }),
-          })
+          )
           if (response.ok) {
             const data = await response.json()
             setProductId(data.product._id)
@@ -99,7 +102,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
       console.log('Product data:', productData)
       console.log('date', typeof productData.pickup?.availableDate)
       const productResponse = await fetch(
-        `http://localhost:3000/api/products/${productId}`,
+        `https://ccbuild-project.vercel.app/api/products/${productId}`,
         {
           method: 'PATCH',
           headers: {
@@ -122,7 +125,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
 
             try {
               const logisticResponse = await fetch(
-                'http://localhost:3000/api/productLogistics',
+                'https://ccbuild-project.vercel.app/api/productLogistics',
                 {
                   method: 'POST',
                   headers: {

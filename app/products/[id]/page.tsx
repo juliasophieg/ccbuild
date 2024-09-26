@@ -19,7 +19,7 @@ const ProductDetail: FC<PageProps> = async ({ params }) => {
 
   try {
     const res = await fetch(
-      `http://localhost:3000/api/products/information/${params.id}`,
+      `https://ccbuild-project.vercel.app/api/products/information/${params.id}`,
       {
         cache: 'no-store',
       },
@@ -37,7 +37,7 @@ const ProductDetail: FC<PageProps> = async ({ params }) => {
 
   try {
     const resVariations = await fetch(
-      `http://localhost:3000/api/productLogistics/${params.id}`,
+      `https://ccbuild-project.vercel.app/api/productLogistics/${params.id}`,
       {
         cache: 'no-store',
       },
