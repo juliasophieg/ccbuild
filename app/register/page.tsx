@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { UserSchema } from '@/schemas'
 import { useRouter } from 'next/navigation'
-import { Button, Box, TextField } from '@mui/material'
+import { Button, TextField } from '@mui/material'
 
 type RegisterForm = z.infer<typeof UserSchema>
 
