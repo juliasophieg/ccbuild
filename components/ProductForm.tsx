@@ -14,171 +14,172 @@ import Typography from '@mui/material/Typography'
 import { useCategoryContext } from '../context/CategoryContext'
 import { Accordion, AccordionSummary, AccordionDetails } from './AccordionStyle'
 
+
 type ProductFormProps = {
-  projectId: string
-}
+  projectId: string;
+};
 
 const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
-  const [productId, setProductId] = useState<string | null>(null)
-  const isCreatingProduct = useRef(false)
-  const { setSelectedStep } = useCategoryContext()
-  const { selectedStep } = useCategoryContext()
+  const [productId, setProductId] = useState<string | null>(null);
+  const isCreatingProduct = useRef(false);
+  const { setSelectedStep } = useCategoryContext();
+  const { selectedStep } = useCategoryContext();
 
-  const [expanded, setExpanded] = useState<string | false>(false)
+  const [expanded, setExpanded] = useState<string | false>(false);
 
-  const [expandAll, setExpandAll] = useState(false)
+  const [expandAll, setExpandAll] = useState(false);
 
   const methodsForm1 = useForm<ProductFormData>({
     resolver: zodResolver(ProductSchema),
-    mode: 'all',
+    mode: "all",
     defaultValues: {
       project: projectId,
       variations: [],
     },
-  })
+  });
 
-  const { handleSubmit: handleSubmitForm1 } = methodsForm1
+  const { handleSubmit: handleSubmitForm1 } = methodsForm1;
 
   useEffect(() => {
-    const existingProductId = sessionStorage.getItem('productId')
+    const existingProductId = sessionStorage.getItem("productId");
 
     if (existingProductId) {
-      setProductId(existingProductId)
+      setProductId(existingProductId);
     } else if (!isCreatingProduct.current) {
-      isCreatingProduct.current = true
+      isCreatingProduct.current = true;
       const createBlankProduct = async () => {
         try {
-          const response = await fetch('http://localhost:3000/api/products', {
-            method: 'POST',
+          const response = await fetch("http://localhost:3000/api/products", {
+            method: "POST",
             headers: {
-              'Content-Type': 'application/json',
+              "Content-Type": "application/json",
             },
             body: JSON.stringify({ projectId }),
-          })
+          });
           if (response.ok) {
-            const data = await response.json()
-            setProductId(data.product._id)
-            sessionStorage.setItem('productId', data.product._id)
-            console.log('Blank product created:', data.product._id)
-            isCreatingProduct.current = false
+            const data = await response.json();
+            setProductId(data.product._id);
+            sessionStorage.setItem("productId", data.product._id);
+            console.log("Blank product created:", data.product._id);
+            isCreatingProduct.current = false;
           } else {
-            const errorData = await response.json()
-            console.error('Error creating blank product:', errorData)
-            isCreatingProduct.current = false
+            const errorData = await response.json();
+            console.error("Error creating blank product:", errorData);
+            isCreatingProduct.current = false;
           }
         } catch (error) {
-          console.error('Network error:', error)
-          isCreatingProduct.current = false
+          console.error("Network error:", error);
+          isCreatingProduct.current = false;
         }
-      }
+      };
 
-      createBlankProduct()
+      createBlankProduct();
     }
-  }, [projectId])
+  }, [projectId]);
 
   const handleChange =
     (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
-      setExpanded(isExpanded ? panel : false)
-      setSelectedStep(isExpanded ? panel : '')
-    }
+      setExpanded(isExpanded ? panel : false);
+      setSelectedStep(isExpanded ? panel : "");
+    };
 
   const toggleExpandAll = () => {
-    setExpandAll(!expandAll)
-    setExpanded(!expandAll ? 'panel1' : false)
-  }
+    setExpandAll(!expandAll);
+    setExpanded(!expandAll ? "panel1" : false);
+  };
 
-  const onSubmitForm1: SubmitHandler<ProductFormData> = async data => {
+  const onSubmitForm1: SubmitHandler<ProductFormData> = async (data) => {
     if (!productId) {
-      console.error('Product ID is not available')
-      return
+      console.error("Product ID is not available");
+      return;
     }
 
-    const { variations, ...productData } = data
+    const { variations, ...productData } = data;
 
     try {
-      console.log('Product data:', productData)
-      console.log('date', typeof productData.pickup?.availableDate)
+      console.log("Product data:", productData);
+      console.log("date", typeof productData.pickup?.availableDate);
       const productResponse = await fetch(
         `http://localhost:3000/api/products/${productId}`,
         {
-          method: 'PATCH',
+          method: "PATCH",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify(productData),
-        },
-      )
+        }
+      );
 
       if (productResponse.ok) {
-        const result = await productResponse.json()
-        console.log('Product data updated:', result.message)
+        const result = await productResponse.json();
+        console.log("Product data updated:", result.message);
 
         if (variations && variations.length > 0) {
           for (const variation of variations) {
             const logisticData = {
               ...variation,
               productId: productId,
-            }
+            };
 
             try {
               const logisticResponse = await fetch(
-                'http://localhost:3000/api/productLogistics',
+                "http://localhost:3000/api/productLogistics",
                 {
-                  method: 'POST',
+                  method: "POST",
                   headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json",
                   },
                   body: JSON.stringify(logisticData),
-                },
-              )
+                }
+              );
 
               if (logisticResponse.ok) {
-                const logisticResult = await logisticResponse.json()
+                const logisticResult = await logisticResponse.json();
                 console.log(
-                  'Logistic data added for variation:',
-                  logisticResult,
-                )
+                  "Logistic data added for variation:",
+                  logisticResult
+                );
               } else {
-                const logisticError = await logisticResponse.json()
-                console.error('Error adding logistic data:', logisticError)
+                const logisticError = await logisticResponse.json();
+                console.error("Error adding logistic data:", logisticError);
               }
             } catch (logisticError) {
               console.error(
-                'Network Error while sending logistic data:',
-                logisticError,
-              )
+                "Network Error while sending logistic data:",
+                logisticError
+              );
             }
           }
         }
-        sessionStorage.removeItem('productId')
+        sessionStorage.removeItem("productId");
       } else {
-        const errorData = await productResponse.json()
-        console.error('Server Error:', errorData)
+        const errorData = await productResponse.json();
+        console.error("Server Error:", errorData);
       }
     } catch (error) {
-      console.error('Network Error while updating product:', error)
+      console.error("Network Error while updating product:", error);
     }
-  }
+  };
 
   if (!productId) {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
 
   return (
-    <div className='basis-4/5'>
+    <div className="basis-4/5">
       <FormProvider {...methodsForm1}>
         <form onSubmit={handleSubmitForm1(onSubmitForm1)}>
           <h1 className='mx-4 mb-4 font-normal text-black'>
             {selectedStep === 'Överblick' ? 'Överblick' : 'Ny produkt'}
           </h1>
           <Accordion
-            expanded={expandAll || expanded === 'Generell information'}
-            onChange={handleChange('Generell information')}
+            expanded={expandAll || expanded === "Generell information"}
+            onChange={handleChange("Generell information")}
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
-              aria-controls='panel1-content'
-              id='panel1-header'
+              aria-controls="panel1-content"
+              id="panel1-header"
             >
               <Typography
                 sx={{ width: '33%', flexShrink: 0, fontSize: '1.25rem' }}
@@ -191,18 +192,20 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
             </AccordionDetails>
           </Accordion>
           <Accordion
-            expanded={expandAll || expanded === 'Egenskaper'}
-            onChange={handleChange('Egenskaper')}
+            expanded={expandAll || expanded === "Egenskaper"}
+            onChange={handleChange("Egenskaper")}
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
-              aria-controls='panel2-content'
-              id='panel2-header'
+              aria-controls="panel2-content"
+              id="panel2-header"
             >
               <Typography
                 sx={{ width: '33%', flexShrink: 0, fontSize: '1.25rem' }}
               >
+
                 Egenskaper{' '}
+
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
@@ -210,18 +213,20 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
             </AccordionDetails>
           </Accordion>
           <Accordion
-            expanded={expandAll || expanded === 'Marknadsplats'}
-            onChange={handleChange('Marknadsplats')}
+            expanded={expandAll || expanded === "Marknadsplats"}
+            onChange={handleChange("Marknadsplats")}
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
-              aria-controls='panel3-content'
-              id='panel3-header'
+              aria-controls="panel3-content"
+              id="panel3-header"
             >
               <Typography
                 sx={{ width: '33%', flexShrink: 0, fontSize: '1.25rem' }}
               >
+
                 Marknadsplats{' '}
+
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
@@ -229,18 +234,20 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
             </AccordionDetails>
           </Accordion>
           <Accordion
-            expanded={expandAll || expanded === 'Plats/Status/Antal'}
-            onChange={handleChange('Plats/Status/Antal')}
+            expanded={expandAll || expanded === "Plats/Status/Antal"}
+            onChange={handleChange("Plats/Status/Antal")}
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
-              aria-controls='panel4-content'
-              id='panel4-header'
+              aria-controls="panel4-content"
+              id="panel4-header"
             >
               <Typography
                 sx={{ width: '33%', flexShrink: 0, fontSize: '1.25rem' }}
               >
+
                 Plats/Status/Antal{' '}
+
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
@@ -249,17 +256,17 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
             <AccordionActions></AccordionActions>
           </Accordion>
           {expandAll ? (
-            ''
+            ""
           ) : (
             <Accordion
-              expanded={expandAll || expanded === 'Överblick'}
-              onChange={handleChange('Överblick')}
+              expanded={expandAll || expanded === "Överblick"}
+              onChange={handleChange("Överblick")}
               onClick={toggleExpandAll}
             >
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
-                aria-controls='panel5-content'
-                id='panel5-header'
+                aria-controls="panel5-content"
+                id="panel5-header"
               >
                 <Typography
                   sx={{
@@ -269,7 +276,9 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
                     fontWeight: '400',
                   }}
                 >
+
                   Överblick/Publicera{' '}
+
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
@@ -278,15 +287,17 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
               <AccordionActions></AccordionActions>
             </Accordion>
           )}
+
           <div className='flex w-full flex-row justify-end'>
             <Button type='submit' variant='contained' sx={{ mt: 2 }}>
               Spara
             </Button>
           </div>
+
         </form>
       </FormProvider>
     </div>
-  )
-}
+  );
+};
 
-export default ProductForm
+export default ProductForm;

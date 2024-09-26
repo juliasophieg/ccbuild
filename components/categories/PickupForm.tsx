@@ -1,101 +1,125 @@
-'use client'
+"use client";
 
-import React from 'react'
-import { useFormContext } from 'react-hook-form'
-import { ProductFormData } from '@/schemas'
+import React from "react";
+import { useFormContext } from "react-hook-form";
+import { ProductFormData } from "@/schemas";
+import TextField from "@mui/material/TextField";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 const PickupForm: React.FC = React.memo(() => {
   const {
     register,
     formState: { errors },
-  } = useFormContext<ProductFormData>()
+  } = useFormContext<ProductFormData>();
 
   return (
-    <fieldset>
-      <legend>Pickup Information</legend>
-
-      <div>
-        <label htmlFor='availableDate'>Available Date:</label>
-        <input
-          id='availableDate'
-          type='date'
-          {...register('pickup.availableDate', {
-            setValueAs: value => new Date(value),
+    <fieldset className="flex flex-col gap-4">
+      <h3 className="text-lg">Upphämtning</h3>
+      {/* Available Date Field */}
+      <div className="flex gap-4">
+        <TextField
+          className="w-1/2"
+          label="Available Date"
+          type="date"
+          variant="outlined"
+          size="small"
+          id="availableDate"
+          {...register("pickup.availableDate", {
+            setValueAs: (value) => new Date(value),
           })}
-          aria-invalid={errors.pickup?.availableDate ? 'true' : 'false'}
+          aria-invalid={errors.pickup?.availableDate ? "true" : "false"}
+          error={!!errors.pickup?.availableDate}
+          helperText={errors.pickup?.availableDate?.message}
+          slotProps={{
+            inputLabel: { shrink: true },
+          }}
         />
-        {errors.pickup?.availableDate && (
-          <p className='error'>{errors.pickup.availableDate.message}</p>
-        )}
-      </div>
 
-      <div>
-        <label htmlFor='firstDeliveryDate'>First Delivery Date:</label>
-        <input
-          id='firstDeliveryDate'
-          type='date'
-          {...register('pickup.firstDeliveryDate', {
-            setValueAs: value => new Date(value),
+        {/* First Delivery Date Field */}
+        <TextField
+          className="w-1/2"
+          label="First Delivery Date"
+          type="date"
+          variant="outlined"
+          size="small"
+          id="firstDeliveryDate"
+          {...register("pickup.firstDeliveryDate", {
+            setValueAs: (value) => new Date(value),
           })}
-          aria-invalid={errors.pickup?.firstDeliveryDate ? 'true' : 'false'}
+          aria-invalid={errors.pickup?.firstDeliveryDate ? "true" : "false"}
+          error={!!errors.pickup?.firstDeliveryDate}
+          helperText={errors.pickup?.firstDeliveryDate?.message}
+          slotProps={{
+            inputLabel: { shrink: true },
+          }}
         />
-        {errors.pickup?.firstDeliveryDate && (
-          <p className='error'>{errors.pickup.firstDeliveryDate.message}</p>
-        )}
       </div>
-
-      <div>
-        <label htmlFor='canBeSent'>Can Be Sent:</label>
-        <input
-          id='canBeSent'
-          type='checkbox'
-          {...register('pickup.canBeSent')}
-          aria-invalid={errors.pickup?.canBeSent ? 'true' : 'false'}
+      <div className="flex gap-4">
+        {/* Can Be Sent Checkbox */}
+        <FormControlLabel
+          control={
+            <Checkbox
+              id="canBeSent"
+              {...register("pickup.canBeSent")}
+              aria-invalid={errors.pickup?.canBeSent ? "true" : "false"}
+            />
+          }
+          label="Can Be Sent"
         />
         {errors.pickup?.canBeSent && (
-          <p className='error'>{errors.pickup.canBeSent.message}</p>
+          <p className="error">{errors.pickup.canBeSent.message}</p>
         )}
-      </div>
 
-      <div>
-        <label htmlFor='canBePickedUp'>Can Be Picked Up:</label>
-        <input
-          id='canBePickedUp'
-          type='checkbox'
-          {...register('pickup.canBePickedUp')}
-          aria-invalid={errors.pickup?.canBePickedUp ? 'true' : 'false'}
+        {/* Can Be Picked Up Checkbox */}
+        <FormControlLabel
+          control={
+            <Checkbox
+              id="canBePickedUp"
+              {...register("pickup.canBePickedUp")}
+              aria-invalid={errors.pickup?.canBePickedUp ? "true" : "false"}
+            />
+          }
+          label="Can Be Picked Up"
         />
         {errors.pickup?.canBePickedUp && (
-          <p className='error'>{errors.pickup.canBePickedUp.message}</p>
+          <p className="error">{errors.pickup.canBePickedUp.message}</p>
         )}
       </div>
+      {/* Contact Person Field */}
+      <TextField
+        label="Contact Person"
+        variant="outlined"
+        size="small"
+        id="contactPerson"
+        {...register("pickup.contactPerson")}
+        aria-invalid={errors.pickup?.contactPerson ? "true" : "false"}
+        error={!!errors.pickup?.contactPerson}
+        helperText={errors.pickup?.contactPerson?.message}
+        slotProps={{
+          inputLabel: { shrink: true },
+        }}
+      />
 
-      <div>
-        <label htmlFor='contactPerson'>Contact Person:</label>
-        <input
-          id='contactPerson'
-          type='text'
-          {...register('pickup.contactPerson')}
-          aria-invalid={errors.pickup?.contactPerson ? 'true' : 'false'}
-        />
-        {errors.pickup?.contactPerson && (
-          <p className='error'>{errors.pickup.contactPerson.message}</p>
-        )}
-      </div>
-
-      <div>
-        <label htmlFor='description'>Description:</label>
-        <textarea
-          id='description'
-          {...register('pickup.description')}
-          aria-invalid={errors.pickup?.description ? 'true' : 'false'}
-        />
-        {errors.pickup?.description && (
-          <p className='error'>{errors.pickup.description.message}</p>
-        )}
-      </div>
+      {/* Description Field */}
+      <TextField
+        label="Description"
+        placeholder="T.ex. Ring på porttelefonen vid ankomst"
+        variant="outlined"
+        size="small"
+        id="description"
+        {...register("pickup.description")}
+        aria-invalid={errors.pickup?.description ? "true" : "false"}
+        error={!!errors.pickup?.description}
+        helperText={errors.pickup?.description?.message}
+        multiline
+        rows={2}
+        slotProps={{
+          inputLabel: { shrink: true },
+        }}
+      />
     </fieldset>
-  )
-})
+  );
+});
 
-export default PickupForm
+export default PickupForm;
