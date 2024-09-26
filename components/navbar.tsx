@@ -14,7 +14,7 @@ function Navbar() {
   }
 
   return (
-    <div className='flex w-screen flex-col items-center px-4 '>
+    <div className='flex w-screen flex-col items-center overflow-clip'>
       <div className='flex h-24 w-full max-w-[1280px] flex-row items-center justify-between'>
         <Link href='/'>
           <img
@@ -62,8 +62,8 @@ function Navbar() {
           </div>
         </div>
       </div>
-      <div className='bg-custom-blue h-14 w-screen'>
-        <div className='mx-auto flex h-full max-w-screen-xl flex-row items-center justify-between px-4'>
+      <div className='bg-custom-blue h-14 w-[100vw] overflow-clip'>
+        <div className='mx-auto flex h-full max-w-screen-xl flex-row items-center justify-between'>
           <div className='flex flex-row items-center'>
             {/* Navigation Links */}
             <Box sx={{ display: 'flex', gap: 4 }}>
@@ -126,7 +126,6 @@ function Navbar() {
             </Box>
           </div>
 
-          {/* Search Box */}
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <InputBase
               placeholder='Label'
