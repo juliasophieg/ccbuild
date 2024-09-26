@@ -19,18 +19,20 @@ export default function Product({ params }: PageProps) {
   return (
     <>
       <div className='bg-[#F5F5F5] text-blue-400'>
-        <Breadcrumbs maxItems={2} aria-label='breadcrumb'>
-          <Link underline='hover' color='inherit' href='#'>
-            <HomeIcon sx={{ mr: 0.5 }} fontSize='inherit' />
-          </Link>
-          <Link underline='hover' color='inherit' href='#'>
-            Fill
-          </Link>
+        <div className='m-4'>
+          <Breadcrumbs maxItems={2} aria-label='breadcrumb'>
+            <Link underline='hover' color='inherit' href='#'>
+              <HomeIcon sx={{ mr: 0.5 }} fontSize='inherit' />
+            </Link>
+            <Link underline='hover' color='inherit' href='#'>
+              Fill
+            </Link>
 
-          <Typography sx={{ color: 'text.primary' }}>
-            Skapa ny produkt
-          </Typography>
-        </Breadcrumbs>
+            <Typography sx={{ color: 'text.primary' }}>
+              Skapa ny produkt
+            </Typography>
+          </Breadcrumbs>
+        </div>
         <CategoryProvider>
           <div className='flex flex-row pt-24'>
             <ProgressBar />

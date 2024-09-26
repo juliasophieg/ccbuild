@@ -68,24 +68,24 @@ const Page: FC<PageProps> = async ({ params }) => {
   }
 
   return (
-    <>
-      <Breadcrumbs maxItems={2} aria-label='breadcrumb'>
-        <Link underline='hover' color='inherit' href='#'>
-          <HomeIcon sx={{ mr: 0.5 }} fontSize='inherit' />
-        </Link>
-        <Link underline='hover' color='inherit' href='#'>
-          Fill
-        </Link>
+    <div className='mb-14'>
+      <div className='m-4'>
+        <Breadcrumbs maxItems={2} aria-label='breadcrumb'>
+          <Link underline='hover' color='inherit' href='#'>
+            <HomeIcon sx={{ mr: 0.5 }} fontSize='inherit' />
+          </Link>
+          <Link underline='hover' color='inherit' href='#'>
+            Fill
+          </Link>
 
-        <Typography sx={{ color: 'text.primary' }}>Produkter</Typography>
-      </Breadcrumbs>
-      <div className='mb-8'>
+          <Typography sx={{ color: 'text.primary' }}>Produkter</Typography>
+        </Breadcrumbs>
+      </div>
+      <div className='mx-14 mb-8'>
         <h1 className='text-4xl font-bold'>{project.name}</h1>
-        <p className='mt-2 text-lg'>Date: {project.date}</p>
-        <p className='mt-2'>{project.description}</p>
       </div>
 
-      <div>
+      <div className='mx-14'>
         <h2 className='mb-6 text-3xl font-semibold'>
           Products for this Project
         </h2>
@@ -108,12 +108,13 @@ const Page: FC<PageProps> = async ({ params }) => {
 
       <NextLink
         href={`http://localhost:3000/projects/${params.slug}/product/create`}
+        className='mx-14 mb-14'
       >
         <Button variant='contained' color='primary' className='mt-8'>
           Create Product
         </Button>
       </NextLink>
-    </>
+    </div>
   )
 }
 

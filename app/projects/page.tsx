@@ -46,16 +46,18 @@ export default function Projects() {
 
   return (
     <>
-      <Breadcrumbs maxItems={2} aria-label='breadcrumb'>
-        <Link underline='hover' color='inherit' href='#'>
-          <HomeIcon sx={{ mr: 0.5 }} fontSize='inherit' />
-        </Link>
-        <Link underline='hover' color='inherit' href='#'>
-          Fill
-        </Link>
+      <div className='m-4'>
+        <Breadcrumbs maxItems={2} aria-label='breadcrumb'>
+          <Link underline='hover' color='inherit' href='#'>
+            <HomeIcon sx={{ mr: 0.5 }} fontSize='inherit' />
+          </Link>
+          <Link underline='hover' color='inherit' href='#'>
+            Fill
+          </Link>
 
-        <Typography sx={{ color: 'text.primary' }}>Projekt</Typography>
-      </Breadcrumbs>
+          <Typography sx={{ color: 'text.primary' }}>Projekt</Typography>
+        </Breadcrumbs>
+      </div>
       <div className='flex w-screen flex-col items-center px-4 '>
         <div className='flex w-full max-w-6xl flex-col py-7'>
           <h1 className='text-custom-blue'>Mina projekt</h1>
