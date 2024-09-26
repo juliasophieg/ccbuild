@@ -18,7 +18,7 @@ function Navbar() {
       <div className='flex h-24 w-full max-w-[1280px] flex-row items-center justify-between'>
         <Link href='/'>
           <img
-            src='logo.png'
+            src='/logo.png'
             alt='Logo'
             className='mr-4 h-auto w-[180px] align-middle'
           />

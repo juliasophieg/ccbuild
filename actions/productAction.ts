@@ -85,6 +85,23 @@ const getProductByProject = async (projectId: string) => {
   }
 }
 
+const getProductById = async (productId: string) => {
+  try {
+    const objectId = new mongoose.Types.ObjectId(productId)
+
+    const product = await Product.findById(objectId)
+
+    if (!product) {
+      throw new Error('Product not found')
+    }
+
+    return product
+  } catch (error) {
+    console.error('Error fetching product:', error)
+    throw new Error('Error fetching product')
+  }
+}
+
 const patchProduct = async (productId: string, productData: ProductData) => {
   console.log('productData !!!!!', productData)
   const parsedData = ProductSchema.safeParse(productData)
@@ -117,4 +134,10 @@ const patchProduct = async (productId: string, productData: ProductData) => {
   }
 }
 
-export { addProduct, getProduct, getProductByProject, patchProduct }
+export {
+  addProduct,
+  getProduct,
+  getProductByProject,
+  patchProduct,
+  getProductById,
+}

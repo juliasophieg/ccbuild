@@ -92,13 +92,16 @@ const Page: FC<PageProps> = async ({ params }) => {
         {products.length > 0 ? (
           <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
             {products.map(product => (
-              <div
+              <NextLink
                 key={product._id}
-                className='flex aspect-square flex-col justify-between rounded-lg bg-white p-6 text-black shadow-lg'
+                href={`http://localhost:3000/products/${product._id}`}
+                passHref
               >
-                {product?.generalInformation?.productName ||
-                  'Product Name Not Available'}
-              </div>
+                <div className='flex aspect-square cursor-pointer flex-col justify-between rounded-lg bg-white p-6 text-black shadow-lg hover:shadow-2xl'>
+                  {product?.generalInformation?.productName ||
+                    'Product Name Not Available'}
+                </div>
+              </NextLink>
             ))}
           </div>
         ) : (
