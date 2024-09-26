@@ -1,13 +1,16 @@
 'use client'
 
 import { Button } from '@mui/material'
-import Link from 'next/link'
+import NextLink from 'next/link'
 import { useEffect, useState } from 'react'
 import { z } from 'zod'
-import { ProjectSchema } from '@/schemas' // Make sure this is the correct import path
+import { ProjectSchema } from '@/schemas'
 import { infer as zInfer } from 'zod'
+import Breadcrumbs from '@mui/material/Breadcrumbs'
+import Typography from '@mui/material/Typography'
+import Link from '@mui/material/Link'
+import HomeIcon from '@mui/icons-material/Home'
 
-// Infer the project type from the Zod schema
 type Project = zInfer<typeof ProjectSchema>
 
 export default function Projects() {
@@ -20,11 +23,10 @@ export default function Projects() {
         const res = await fetch('/api/projects')
         const data = await res.json()
 
-        // Validate the data directly as an array of Project objects
         const projectsData = z.array(ProjectSchema).safeParse(data)
 
         if (projectsData.success) {
-          setProjects(projectsData.data) // Set the validated data
+          setProjects(projectsData.data)
         } else {
           setError('Invalid data format')
           console.error(projectsData.error)
@@ -44,14 +46,24 @@ export default function Projects() {
 
   return (
     <>
+      <Breadcrumbs maxItems={2} aria-label='breadcrumb'>
+        <Link underline='hover' color='inherit' href='#'>
+          <HomeIcon sx={{ mr: 0.5 }} fontSize='inherit' />
+        </Link>
+        <Link underline='hover' color='inherit' href='#'>
+          Fill
+        </Link>
+
+        <Typography sx={{ color: 'text.primary' }}>Projekt</Typography>
+      </Breadcrumbs>
       <div className='flex w-screen flex-col items-center px-4 '>
         <div className='flex w-full max-w-6xl flex-col py-7'>
           <h1 className='text-custom-blue'>Mina projekt</h1>
-          <Link href={`/projects/create`} className='self-end'>
+          <NextLink href={`/projects/create`} className='self-end'>
             <Button variant='outlined' color='primary' className='mb-5'>
               + Lägg till projekt
             </Button>
-          </Link>
+          </NextLink>
           <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4'>
             {projects.reverse().map(project => (
               <Link
