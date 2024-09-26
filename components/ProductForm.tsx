@@ -7,15 +7,12 @@ import Step1 from './steps/Step1'
 import Step2 from './steps/Step2'
 import Step3 from './steps/Step3'
 import Step4 from './steps/Step4'
-import Accordion from '@mui/material/Accordion'
 import AccordionActions from '@mui/material/AccordionActions'
-import AccordionSummary from '@mui/material/AccordionSummary'
-import AccordionDetails from '@mui/material/AccordionDetails'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
-import Textfield from '@mui/material/TextField'
 import { useCategoryContext } from '../context/CategoryContext'
+import { Accordion, AccordionSummary, AccordionDetails } from './AccordionStyle'
 
 type ProductFormProps = {
   projectId: string
@@ -171,9 +168,8 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
     <div className='basis-4/5'>
       <FormProvider {...methodsForm1}>
         <form onSubmit={handleSubmitForm1(onSubmitForm1)}>
-
-          <h1 className="text-black font-normal mb-4 mx-4">
-            {selectedStep === "Överblick" ? "Överblick" : "Ny produkt"}
+          <h1 className='mx-4 mb-4 font-normal text-black'>
+            {selectedStep === 'Överblick' ? 'Överblick' : 'Ny produkt'}
           </h1>
           <Accordion
             expanded={expandAll || expanded === 'Generell information'}
@@ -185,7 +181,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
               id='panel1-header'
             >
               <Typography
-                sx={{ width: "33%", flexShrink: 0, fontSize: "1.25rem" }}
+                sx={{ width: '33%', flexShrink: 0, fontSize: '1.25rem' }}
               >
                 Generell information
               </Typography>
@@ -204,10 +200,9 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
               id='panel2-header'
             >
               <Typography
-                sx={{ width: "33%", flexShrink: 0, fontSize: "1.25rem" }}
+                sx={{ width: '33%', flexShrink: 0, fontSize: '1.25rem' }}
               >
-                Egenskaper{" "}
-
+                Egenskaper{' '}
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
@@ -224,10 +219,9 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
               id='panel3-header'
             >
               <Typography
-                sx={{ width: "33%", flexShrink: 0, fontSize: "1.25rem" }}
+                sx={{ width: '33%', flexShrink: 0, fontSize: '1.25rem' }}
               >
-                Marknadsplats{" "}
-
+                Marknadsplats{' '}
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
@@ -244,10 +238,9 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
               id='panel4-header'
             >
               <Typography
-                sx={{ width: "33%", flexShrink: 0, fontSize: "1.25rem" }}
+                sx={{ width: '33%', flexShrink: 0, fontSize: '1.25rem' }}
               >
-                Plats/Status/Antal{" "}
-
+                Plats/Status/Antal{' '}
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
@@ -270,14 +263,13 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
               >
                 <Typography
                   sx={{
-                    width: "33%",
+                    width: '33%',
                     flexShrink: 0,
-                    fontSize: "1.25rem",
-                    fontWeight: "400",
+                    fontSize: '1.25rem',
+                    fontWeight: '400',
                   }}
                 >
-                  Överblick/Publicera{" "}
-
+                  Överblick/Publicera{' '}
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
