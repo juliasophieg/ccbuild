@@ -5,10 +5,7 @@ import { useFormContext } from 'react-hook-form'
 import { useCategoryContext } from '@/context/CategoryContext'
 
 const DoorForm: React.FC = () => {
-  const {
-    register,
-    formState: { errors },
-  } = useFormContext()
+  const { register } = useFormContext()
 
   return (
     <div>
@@ -154,10 +151,7 @@ const DoorForm: React.FC = () => {
 }
 
 const WindowForm: React.FC = () => {
-  const {
-    register,
-    formState: { errors },
-  } = useFormContext()
+  const { register } = useFormContext()
 
   return (
     <div>
@@ -214,10 +208,7 @@ const WindowForm: React.FC = () => {
 }
 
 const GallerForm: React.FC = () => {
-  const {
-    register,
-    formState: { errors },
-  } = useFormContext()
+  const { register } = useFormContext()
 
   return (
     <div>
