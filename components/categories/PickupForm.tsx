@@ -25,7 +25,7 @@ const PickupForm: React.FC = React.memo(() => {
       <div className="flex gap-4">
         <TextField
           className="w-1/2"
-          label="Available Date"
+          label="Datum tillgänlig"
           type="date"
           variant="outlined"
           size="small"
@@ -44,7 +44,7 @@ const PickupForm: React.FC = React.memo(() => {
         {/* First Delivery Date Field */}
         <TextField
           className="w-1/2"
-          label="First Delivery Date"
+          label="Datum första möjliga leverans"
           type="date"
           variant="outlined"
           size="small"
@@ -70,7 +70,7 @@ const PickupForm: React.FC = React.memo(() => {
               aria-invalid={errors.pickup?.canBeSent ? "true" : "false"}
             />
           }
-          label="Can Be Sent"
+          label="Kan skickas"
         />
         {errors.pickup?.canBeSent && (
           <p className="error">{errors.pickup.canBeSent.message}</p>
@@ -85,7 +85,7 @@ const PickupForm: React.FC = React.memo(() => {
               aria-invalid={errors.pickup?.canBePickedUp ? "true" : "false"}
             />
           }
-          label="Can Be Picked Up"
+          label="Kan hämtas"
         />
         {errors.pickup?.canBePickedUp && (
           <p className="error">{errors.pickup.canBePickedUp.message}</p>
@@ -93,7 +93,7 @@ const PickupForm: React.FC = React.memo(() => {
       </div>
       {/* Contact Person Field */}
       <TextField
-        label="Contact Person"
+        label="Kontaktperson"
         variant="outlined"
         size="small"
         id="contactPerson"
@@ -108,7 +108,7 @@ const PickupForm: React.FC = React.memo(() => {
 
       {/* Description Field */}
       <TextField
-        label="Description"
+        label="Beskrivning"
         placeholder="T.ex. Ring på porttelefonen vid ankomst"
         variant="outlined"
         size="small"

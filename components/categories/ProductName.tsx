@@ -44,7 +44,7 @@ const GeneralForm: React.FC = React.memo(() => {
             variant="outlined"
             size="small"
             required
-            defaultValue="Projekt 1" // LÄGG TILL NUVARANDE PROJEKT
+            defaultValue="Projekt" // LÄGG TILL NUVARANDE PROJEKT
             disabled
             id="projectName outlined-required"
             slotProps={{
@@ -95,10 +95,10 @@ const GeneralForm: React.FC = React.memo(() => {
           )}
         </div>
       </div>
-      <div className="border border-dotted  w-64">
-        <UploadFileIcon />
-        <p>Klicka för att ladda upp eller dra</p>
-        <p></p>
+      <div className="flex flex-col justify-center items-center border border-dotted  w-64 p-2">
+        <UploadFileIcon sx={{ color: "blue" }} />
+        <p>Ladda upp eller dra hit filer</p>
+        <p className="text-xs text-gray-500">SVG, PNG, JPG or GIF (max. 3MB)</p>
       </div>
     </fieldset>
   );
