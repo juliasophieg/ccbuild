@@ -5,6 +5,8 @@ import { useFormContext } from "react-hook-form";
 import { ProductFormData } from "@/schemas";
 import DynamicForm from "../DynamicForm";
 import TextField from "@mui/material/TextField";
+import UploadFileIcon from "@mui/icons-material/UploadFile";
+
 const GeneralForm: React.FC = React.memo(() => {
   const {
     register,
@@ -93,7 +95,11 @@ const GeneralForm: React.FC = React.memo(() => {
           )}
         </div>
       </div>
-      <div className="border border-dotted  w-64">Ladda upp bild</div>
+      <div className="border border-dotted  w-64">
+        <UploadFileIcon />
+        <p>Klicka för att ladda upp eller dra</p>
+        <p></p>
+      </div>
     </fieldset>
   );
 });
