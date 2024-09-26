@@ -278,9 +278,11 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
               <AccordionActions></AccordionActions>
             </Accordion>
           )}
-          <Button type='submit' variant='contained'>
-            Submit
-          </Button>
+          <div className='flex w-full flex-row justify-end'>
+            <Button type='submit' variant='contained' sx={{ mt: 2 }}>
+              Spara
+            </Button>
+          </div>
         </form>
       </FormProvider>
     </div>
