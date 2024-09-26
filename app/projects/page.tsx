@@ -17,7 +17,9 @@ export default function Projects() {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const res = await fetch('/api/projects')
+        const res = await fetch(
+          'https://ccbuild-project.vercel.app/api/projects',
+        )
         const data = await res.json()
 
         // Validate the data directly as an array of Project objects
