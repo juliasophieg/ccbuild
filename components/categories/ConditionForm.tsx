@@ -4,7 +4,6 @@ import React from "react";
 import { useFormContext } from "react-hook-form";
 import { ProductFormData } from "@/schemas";
 import {
-  TextField,
   Select,
   MenuItem,
   FormControl,
