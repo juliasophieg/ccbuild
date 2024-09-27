@@ -292,10 +292,11 @@ const Step4: React.FC = () => {
             open={open === index}
             onClose={handleCloseDialog}
             fullWidth
-            maxWidth='sm'
+            maxWidth='xl'
           >
             <DialogTitle>Edit Variation Details</DialogTitle>
             <DialogContent>
+              <h2>Upphämtning</h2>
               <Controller
                 control={control}
                 name={`variations.${index}.pickup.firstDeliveryDate`}
@@ -307,7 +308,7 @@ const Step4: React.FC = () => {
                     type='date'
                     variant='outlined'
                     InputLabelProps={{ shrink: true }}
-                    fullWidth
+                    sx={{ width: 2 / 4, p: 1 }}
                     margin='normal'
                   />
                 )}
@@ -323,11 +324,12 @@ const Step4: React.FC = () => {
                     type='date'
                     variant='outlined'
                     InputLabelProps={{ shrink: true }}
-                    fullWidth
+                    sx={{ width: 2 / 4, p: 1 }}
                     margin='normal'
                   />
                 )}
               />
+              <h2>Plats</h2>
               <Controller
                 control={control}
                 name={`variations.${index}.location.location`}
@@ -337,7 +339,7 @@ const Step4: React.FC = () => {
                     {...field}
                     label='Location'
                     variant='outlined'
-                    fullWidth
+                    sx={{ width: 1 / 3, p: 1 }}
                   />
                 )}
               />
@@ -350,7 +352,7 @@ const Step4: React.FC = () => {
                     {...field}
                     label='House'
                     variant='outlined'
-                    fullWidth
+                    sx={{ width: 1 / 3, p: 1 }}
                   />
                 )}
               />
@@ -363,10 +365,11 @@ const Step4: React.FC = () => {
                     {...field}
                     label='Room'
                     variant='outlined'
-                    fullWidth
+                    sx={{ width: 1 / 3, p: 1 }}
                   />
                 )}
               />
+
               <Controller
                 control={control}
                 name={`variations.${index}.accesability`}
@@ -377,7 +380,7 @@ const Step4: React.FC = () => {
                     label='Accesability'
                     select
                     variant='outlined'
-                    fullWidth
+                    sx={{ width: 1 / 2, p: 1 }}
                     value={field.value || ''}
                   >
                     <MenuItem value='Lätt Åtkomlig'>Lätt Åtkomlig</MenuItem>
@@ -400,7 +403,7 @@ const Step4: React.FC = () => {
                     label='Dismantling'
                     select
                     variant='outlined'
-                    fullWidth
+                    sx={{ width: 1 / 2, p: 1 }}
                   >
                     <MenuItem value='Enkel att demontera/demontering krävs ej'>
                       Enkel att demontera/demontering krävs ej
@@ -414,6 +417,7 @@ const Step4: React.FC = () => {
                   </TextField>
                 )}
               />
+              <h2>Beslut</h2>
               <Controller
                 control={control}
                 name={`variations.${index}.decision.location1`}
@@ -423,8 +427,7 @@ const Step4: React.FC = () => {
                     {...field}
                     label='Decision Location 1'
                     variant='outlined'
-                    fullWidth
-                    margin='normal'
+                    sx={{ width: 1 / 4, p: 1 }}
                   />
                 )}
               />
@@ -437,8 +440,7 @@ const Step4: React.FC = () => {
                     {...field}
                     label='Decision Location 2'
                     variant='outlined'
-                    fullWidth
-                    margin='normal'
+                    sx={{ width: 1 / 4, p: 1 }}
                   />
                 )}
               />
@@ -451,8 +453,7 @@ const Step4: React.FC = () => {
                     {...field}
                     label='Decision Location 3'
                     variant='outlined'
-                    fullWidth
-                    margin='normal'
+                    sx={{ width: 1 / 4, p: 1 }}
                   />
                 )}
               />
@@ -465,15 +466,18 @@ const Step4: React.FC = () => {
                     {...field}
                     label='Decision Location 4'
                     variant='outlined'
-                    fullWidth
-                    margin='normal'
+                    sx={{ width: 1 / 4, p: 1 }}
                   />
                 )}
               />
             </DialogContent>
             <DialogActions>
-              <Button onClick={handleCloseDialog} color='primary'>
-                Close
+              <Button
+                onClick={handleCloseDialog}
+                variant='contained'
+                sx={{ mt: 2 }}
+              >
+                Spara
               </Button>
             </DialogActions>
           </Dialog>
