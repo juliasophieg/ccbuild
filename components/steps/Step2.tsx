@@ -10,7 +10,6 @@ const Step2: React.FC = React.memo(() => {
   return (
     <div className="step flex flex-col gap-8">
       <PropertiesForm />
-      <SpecialForm />
       <DimensionsForm />
       <SpecialForm />
       <ProductInformationForm />

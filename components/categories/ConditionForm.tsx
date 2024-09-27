@@ -3,7 +3,14 @@
 import React from "react";
 import { useFormContext } from "react-hook-form";
 import { ProductFormData } from "@/schemas";
-import TextField from "@mui/material/TextField";
+import {
+  TextField,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+  FormHelperText,
+} from "@mui/material";
 import StarSharpIcon from "@mui/icons-material/StarSharp";
 
 const ConditionForm: React.FC = React.memo(() => {
@@ -19,44 +26,64 @@ const ConditionForm: React.FC = React.memo(() => {
         Skick
       </h3>
       <div className="flex gap-4 w-full">
-        <TextField
+        <FormControl
           className="w-1/2"
-          label="Estetiskt skick"
-          required
-          variant="outlined"
           size="small"
-          type="number"
-          id="functionalConditionNumber"
-          {...register("condition.functionalCondition")}
-          aria-invalid={
-            errors.condition?.functionalCondition ? "true" : "false"
-          }
           error={!!errors.condition?.functionalCondition}
-          helperText={errors.condition?.functionalCondition?.message}
-          slotProps={{
-            inputLabel: { shrink: true },
-          }}
-        />
+          required
+        >
+          <InputLabel id="functionalConditionNumber-label">
+            Estetiskt skick
+          </InputLabel>
+          <Select
+            labelId="functionalConditionNumber-label"
+            id="functionalConditionNumber"
+            label="Estetiskt skick"
+            {...register("condition.functionalCondition")}
+            aria-invalid={
+              errors.condition?.functionalCondition ? "true" : "false"
+            }
+          >
+            <MenuItem value={1}>Skada går ej att åtgärda</MenuItem>
+            <MenuItem value={2}>Skada svår att åtgärda</MenuItem>
+            <MenuItem value={3}>Skada kan åtgärdas av proffs</MenuItem>
+            <MenuItem value={4}>Skada kan åtgärdas av lekman</MenuItem>
+            <MenuItem value={5}>Inga skador</MenuItem>
+          </Select>
+          <FormHelperText>
+            {errors.condition?.functionalCondition?.message}
+          </FormHelperText>
+        </FormControl>
 
-        {/* Functional Condition - Text */}
-        <TextField
+        {/* Dropdown for Functional Condition (Text) */}
+        <FormControl
           className="w-1/2"
-          label="Functional Condition (Text)"
-          required
-          variant="outlined"
           size="small"
-          type="text"
-          id="functionalConditionText"
-          {...register("condition.functionalCondition")}
-          aria-invalid={
-            errors.condition?.functionalCondition ? "true" : "false"
-          }
           error={!!errors.condition?.functionalCondition}
-          helperText={errors.condition?.functionalCondition?.message}
-          slotProps={{
-            inputLabel: { shrink: true },
-          }}
-        />
+          required
+        >
+          <InputLabel id="functionalConditionText-label">
+            Functional Condition (Text)
+          </InputLabel>
+          <Select
+            labelId="functionalConditionText-label"
+            id="functionalConditionText"
+            label="Functional Condition (Text)"
+            {...register("condition.functionalCondition")}
+            aria-invalid={
+              errors.condition?.functionalCondition ? "true" : "false"
+            }
+          >
+            <MenuItem value={1}>Skada går ej att åtgärda</MenuItem>
+            <MenuItem value={2}>Skada svår att åtgärda</MenuItem>
+            <MenuItem value={3}>Skada kan åtgärdas av proffs</MenuItem>
+            <MenuItem value={4}>Skada kan åtgärdas av lekman</MenuItem>
+            <MenuItem value={5}>Inga skador</MenuItem>
+          </Select>
+          <FormHelperText>
+            {errors.condition?.functionalCondition?.message}
+          </FormHelperText>
+        </FormControl>
       </div>
     </fieldset>
   );
