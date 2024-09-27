@@ -262,21 +262,7 @@ const DoorForm: React.FC = () => {
       </div>
       <div className="flex flex-row gap-4">
         <TextField
-          className="w-1/3"
-          label="Färg"
-          variant="outlined"
-          size="small"
-          id="color"
-          slotProps={{
-            inputLabel: {
-              shrink: true,
-            },
-          }}
-          {...register("specialProperties.color")}
-        />
-
-        <TextField
-          className="w-1/3"
+          className="w-1/2"
           select
           label="Brandgastäthet Sa/S200"
           variant="outlined"
@@ -297,7 +283,7 @@ const DoorForm: React.FC = () => {
         </TextField>
 
         <TextField
-          className="w-1/3"
+          className="w-1/2"
           label="Karmdjup (mm)"
           variant="outlined"
           size="small"
