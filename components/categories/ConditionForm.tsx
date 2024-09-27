@@ -43,11 +43,11 @@ const ConditionForm: React.FC = React.memo(() => {
               errors.condition?.functionalCondition ? "true" : "false"
             }
           >
-            <MenuItem value={1}>Skada går ej att åtgärda</MenuItem>
-            <MenuItem value={2}>Skada svår att åtgärda</MenuItem>
-            <MenuItem value={3}>Skada kan åtgärdas av proffs</MenuItem>
-            <MenuItem value={4}>Skada kan åtgärdas av lekman</MenuItem>
-            <MenuItem value={5}>Inga skador</MenuItem>
+            <MenuItem value="1">Skada går ej att åtgärda</MenuItem>
+            <MenuItem value="2">Skada svår att åtgärda</MenuItem>
+            <MenuItem value="3">Skada kan åtgärdas av proffs</MenuItem>
+            <MenuItem value="4">Skada kan åtgärdas av lekman</MenuItem>
+            <MenuItem value="5">Inga skador</MenuItem>
           </Select>
           <FormHelperText>
             {errors.condition?.functionalCondition?.message}
@@ -62,7 +62,7 @@ const ConditionForm: React.FC = React.memo(() => {
           required
         >
           <InputLabel id="functionalConditionText-label">
-            Functional Condition (Text)
+            Funktionellt skick
           </InputLabel>
           <Select
             labelId="functionalConditionText-label"
@@ -73,11 +73,11 @@ const ConditionForm: React.FC = React.memo(() => {
               errors.condition?.functionalCondition ? "true" : "false"
             }
           >
-            <MenuItem value={1}>Skada går ej att åtgärda</MenuItem>
-            <MenuItem value={2}>Skada svår att åtgärda</MenuItem>
-            <MenuItem value={3}>Skada kan åtgärdas av proffs</MenuItem>
-            <MenuItem value={4}>Skada kan åtgärdas av lekman</MenuItem>
-            <MenuItem value={5}>Inga skador</MenuItem>
+            <MenuItem value="1">Skada går ej att åtgärda</MenuItem>
+            <MenuItem value="2">Skada svår att åtgärda</MenuItem>
+            <MenuItem value="3">Skada kan åtgärdas av proffs</MenuItem>
+            <MenuItem value="4">Skada kan åtgärdas av lekman</MenuItem>
+            <MenuItem value="5">Inga skador</MenuItem>
           </Select>
           <FormHelperText>
             {errors.condition?.functionalCondition?.message}

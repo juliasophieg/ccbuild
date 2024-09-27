@@ -1,5 +1,5 @@
-import mongoose from 'mongoose'
-import { optional } from 'zod'
+import mongoose from "mongoose";
+import { optional } from "zod";
 
 const productSchema = new mongoose.Schema({
   generalInformation: {
@@ -41,18 +41,18 @@ const productSchema = new mongoose.Schema({
     accessibility: {
       type: String,
       enum: [
-        'Lätt Åtkomlig',
-        'Åtkomlig men planering och specialverktyg kan krävas',
-        'Begränsad åtkomlighet',
+        "Lätt Åtkomlig",
+        "Åtkomlig men planering och specialverktyg kan krävas",
+        "Begränsad åtkomlighet",
       ],
       required: false,
     },
     dismantling: {
       type: String,
       enum: [
-        'Enkel att demontera/demontering krävs ej',
-        'Demonterbar men specialverktyg kan krävas',
-        'Begränsad demonterbarhet',
+        "Enkel att demontera/demontering krävs ej",
+        "Demonterbar men specialverktyg kan krävas",
+        "Begränsad demonterbarhet",
       ],
       required: false,
     },
@@ -60,9 +60,7 @@ const productSchema = new mongoose.Schema({
 
   condition: {
     aestheticCondition: {
-      type: Number,
-      min: 1,
-      max: 5,
+      type: String,
       required: false,
     },
     functionalCondition: {
@@ -89,7 +87,7 @@ const productSchema = new mongoose.Schema({
   dimensions: {
     measurementUnit: {
       type: String,
-      enum: ['mm', 'cm', 'm', 'in', 'ft'],
+      enum: ["mm", "cm", "m", "in", "ft"],
       required: false,
     },
     width: {
@@ -106,7 +104,7 @@ const productSchema = new mongoose.Schema({
     },
     weightUnit: {
       type: String,
-      enum: ['kg', 'g', 'lbs'],
+      enum: ["kg", "g", "lbs"],
       required: false,
     },
     weightPerUnit: {
@@ -225,10 +223,10 @@ const productSchema = new mongoose.Schema({
 
   project: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Project',
+    ref: "Project",
     required: true,
   },
-})
+});
 
 export default mongoose.models.Product ||
-  mongoose.model('Product', productSchema)
+  mongoose.model("Product", productSchema);
