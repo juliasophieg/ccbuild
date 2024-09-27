@@ -18,7 +18,7 @@ export default function Product({ params }: PageProps) {
 
   return (
     <>
-      <div className="bg-[#F5F5F5] text-blue-400">
+      <div className="bg-[#F5F5F5] text-custom-blue">
         <div className="m-4">
           <Breadcrumbs maxItems={2} aria-label="breadcrumb">
             <Link underline="hover" color="inherit" href="#">
