@@ -3,15 +3,8 @@
 import React from "react";
 import { useFormContext } from "react-hook-form";
 import { ProductFormData } from "@/schemas";
-import {
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
-  FormHelperText,
-} from "@mui/material";
+import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
-
 import StarSharpIcon from "@mui/icons-material/StarSharp";
 
 const ConditionForm: React.FC = React.memo(() => {
