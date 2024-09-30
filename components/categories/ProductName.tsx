@@ -14,10 +14,11 @@ const GeneralForm: React.FC = React.memo(() => {
   } = useFormContext<ProductFormData>();
 
   return (
-    <fieldset className="flex justify-between">
-      <div className="flex flex-col gap-4">
+    <fieldset className="flex justify-between gap-4">
+      <div className="flex flex-col gap-4 w-full">
         <div className="flex flex-row gap-4">
           <TextField
+            className="w-1/3"
             label="Produktnamn"
             variant="outlined"
             size="small"
@@ -40,6 +41,7 @@ const GeneralForm: React.FC = React.memo(() => {
             </p>
           )}
           <TextField
+            className="w-1/3"
             label="Projektnamn"
             variant="outlined"
             size="small"
@@ -55,6 +57,7 @@ const GeneralForm: React.FC = React.memo(() => {
             type="text"
           />
           <TextField
+            className="w-1/3"
             label="Produkt-ID"
             variant="outlined"
             size="small"
@@ -95,7 +98,7 @@ const GeneralForm: React.FC = React.memo(() => {
           )}
         </div>
       </div>
-      <div className="flex flex-col justify-center items-center w-64 p-2 border border-dashed border-[rgba(0,0,0,0.12)] rounded">
+      <div className="flex flex-col justify-center items-center w-80 p-2 border border-dashed border-[rgba(0,0,0,0.12)] rounded">
         <UploadFileIcon sx={{ color: "#2196F3" }} />
         <p>Ladda upp eller dra hit filer</p>
         <p className="text-xs text-gray-500">SVG, PNG, JPG or GIF (max. 3MB)</p>

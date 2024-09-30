@@ -15,7 +15,7 @@ function Navbar() {
 
   return (
     <div className="flex w-screen flex-col items-center overflow-clip bg-white">
-      <div className="flex h-24 w-full max-w-[1280px] flex-row items-center justify-between">
+      <div className="flex h-24 w-full max-w-[1280px] flex-row items-center justify-between px-4">
         <Link href="/">
           <img
             src="/logo.png"
@@ -62,7 +62,7 @@ function Navbar() {
           </div>
         </div>
       </div>
-      <div className="bg-custom-blue h-14 w-[100vw] overflow-clip">
+      <div className="bg-custom-blue h-14 w-[100vw] overflow-clip px-4">
         <div className="mx-auto flex h-full max-w-screen-xl flex-row items-center justify-between">
           <div className="flex flex-row items-center">
             {/* Navigation Links */}

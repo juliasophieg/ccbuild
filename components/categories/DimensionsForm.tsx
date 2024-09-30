@@ -39,7 +39,7 @@ const DimensionsForm: React.FC = React.memo(() => {
             inputLabel: { shrink: true },
           }}
         >
-          <MenuItem value="">Select Unit</MenuItem>
+          <MenuItem value="">Välj enhet</MenuItem>
           <MenuItem value="mm">mm</MenuItem>
           <MenuItem value="cm">cm</MenuItem>
           <MenuItem value="m">m</MenuItem>
@@ -115,7 +115,7 @@ const DimensionsForm: React.FC = React.memo(() => {
           required
           className="w-1/4"
           select
-          label="Weight Unit"
+          label="Viktenhet"
           variant="outlined"
           size="small"
           id="weightUnit"
@@ -127,7 +127,7 @@ const DimensionsForm: React.FC = React.memo(() => {
             inputLabel: { shrink: true },
           }}
         >
-          <MenuItem value="">Select Unit</MenuItem>
+          <MenuItem value="">Välj enhet</MenuItem>
           <MenuItem value="kg">kg</MenuItem>
           <MenuItem value="g">g</MenuItem>
           <MenuItem value="lbs">lbs</MenuItem>
@@ -137,7 +137,7 @@ const DimensionsForm: React.FC = React.memo(() => {
         <TextField
           required
           className="w-3/4"
-          label="Weight per Unit"
+          label="Vikt per enhet"
           variant="outlined"
           size="small"
           type="number"

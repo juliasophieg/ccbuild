@@ -23,7 +23,7 @@ const AddressForm: React.FC = React.memo(() => {
         {/* Address Field */}
         <TextField
           className="w-1/3"
-          label="Address"
+          label="Adress"
           variant="outlined"
           size="small"
           id="address"
@@ -39,7 +39,7 @@ const AddressForm: React.FC = React.memo(() => {
         {/* Postal Code Field */}
         <TextField
           className="w-1/3"
-          label="Postal Code"
+          label="Postkod"
           variant="outlined"
           size="small"
           id="postalCode"
@@ -55,7 +55,7 @@ const AddressForm: React.FC = React.memo(() => {
         {/* City Field */}
         <TextField
           className="w-1/3"
-          label="City"
+          label="Stad"
           variant="outlined"
           size="small"
           id="city"

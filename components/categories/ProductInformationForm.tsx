@@ -23,7 +23,7 @@ const ProductInformationForm: React.FC = React.memo(() => {
         {/* Manufacturer */}
         <TextField
           className="w-1/3"
-          label="Manufacturer"
+          label="Tillverkare"
           variant="outlined"
           size="small"
           id="manufacturer"
@@ -41,7 +41,7 @@ const ProductInformationForm: React.FC = React.memo(() => {
         {/* Article Number */}
         <TextField
           className="w-1/3"
-          label="Article Number"
+          label="Artikelnummer"
           variant="outlined"
           size="small"
           id="articleNumber"
@@ -59,7 +59,7 @@ const ProductInformationForm: React.FC = React.memo(() => {
         {/* Manufacturing Year */}
         <TextField
           className="w-1/3"
-          label="Manufacturing Year"
+          label="Tillverkningsår"
           variant="outlined"
           size="small"
           type="number"
@@ -134,7 +134,7 @@ const ProductInformationForm: React.FC = React.memo(() => {
         {/* Purchase Year */}
         <TextField
           className="w-1/3"
-          label="Purchase Year"
+          label="Inköpsår"
           placeholder="YYYY"
           variant="outlined"
           size="small"

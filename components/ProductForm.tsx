@@ -204,6 +204,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
             {selectedStep === "Överblick" ? "Överblick" : "Ny produkt"}
           </h1>
           <Accordion
+            className="py-2"
             expanded={expandAll || expanded === "Generell information"}
             onChange={handleChange("Generell information")}
           >
@@ -222,12 +223,17 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
               <Step1 />
             </AccordionDetails>
             <AccordionActions className="p-4">
-              <Button onClick={handleNext} variant="contained">
-                Nästa
-              </Button>
+              {expandAll ? (
+                ""
+              ) : (
+                <Button onClick={handleNext} variant="contained">
+                  Nästa
+                </Button>
+              )}
             </AccordionActions>
           </Accordion>
           <Accordion
+            className="py-2"
             expanded={expandAll || expanded === "Egenskaper"}
             onChange={handleChange("Egenskaper")}
           >
@@ -246,12 +252,17 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
               <Step2 />
             </AccordionDetails>
             <AccordionActions className="p-4">
-              <Button onClick={handleNext} variant="contained">
-                Nästa
-              </Button>
+              {expandAll ? (
+                ""
+              ) : (
+                <Button onClick={handleNext} variant="contained">
+                  Nästa
+                </Button>
+              )}
             </AccordionActions>
           </Accordion>
           <Accordion
+            className="py-2"
             expanded={expandAll || expanded === "Marknadsplats"}
             onChange={handleChange("Marknadsplats")}
           >
@@ -270,12 +281,17 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
               <Step3 />
             </AccordionDetails>
             <AccordionActions className="p-4">
-              <Button onClick={handleNext} variant="contained">
-                Nästa
-              </Button>
+              {expandAll ? (
+                ""
+              ) : (
+                <Button onClick={handleNext} variant="contained">
+                  Nästa
+                </Button>
+              )}
             </AccordionActions>
           </Accordion>
           <Accordion
+            className="py-1"
             expanded={expandAll || expanded === "Plats/Status/Antal"}
             onChange={handleChange("Plats/Status/Antal")}
           >
@@ -294,9 +310,13 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
               <Step4 />
             </AccordionDetails>
             <AccordionActions className="p-4">
-              <Button onClick={handleNext} variant="contained">
-                Nästa
-              </Button>
+              {expandAll ? (
+                ""
+              ) : (
+                <Button onClick={handleNext} variant="contained">
+                  Nästa
+                </Button>
+              )}
             </AccordionActions>
             <AccordionActions></AccordionActions>
           </Accordion>
@@ -304,6 +324,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ projectId }) => {
             ""
           ) : (
             <Accordion
+              className="py-2"
               expanded={expandAll || expanded === "Överblick"}
               onChange={handleChange("Överblick")}
               onClick={toggleExpandAll}
